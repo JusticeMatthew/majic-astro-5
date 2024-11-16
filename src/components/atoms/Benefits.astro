@@ -1,0 +1,118 @@
+---
+import { benefits } from "@/constants";
+---
+
+<div
+  id="benefits"
+  class="container relative z-20 mt-20 grid w-screen grid-cols-1 p-0 max-md:pb-24 md:grid-cols-3">
+  {
+    benefits[0].map(({ maskId, title, content }) => (
+      <div
+        id={maskId}
+        class="mask z-50 col-span-1 w-full bg-light-purple pl-12 text-dark-purple max-md:[&:nth-child(3)]:pb-24">
+        <div class="relative mt-44 md:mb-24">
+          <figure class="absolute h-[2.15rem] w-1 rounded-lg bg-blurple" />
+          <div class="ml-6">
+            <p class="text-level-1 mb-3 font-semibold">{title}</p>
+            <p class="max-w-[45ch] text-balance">{content}</p>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+  {
+    benefits[1].map(({ maskId, title, content }) => (
+      <div
+        id={maskId}
+        class="mask2 z-50 col-span-1 w-full bg-light-purple pl-12 text-dark-purple max-md:hidden">
+        <div class="relative mb-28 mt-24">
+          <figure class="absolute h-[2.15rem] w-1 rounded-lg bg-blurple" />
+          <div class="ml-6">
+            <p class="text-level-1 mb-3 font-semibold">{title}</p>
+            <p class="max-w-[45ch] text-balance">{content}</p>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  #benefits {
+    grid-template-rows: repeat(2, minmax(0, auto));
+  }
+
+  #benefits::before {
+    height: 100%;
+    width: 100vw;
+    left: -99vw;
+    background-color: #bbbbff;
+    content: "";
+    position: absolute;
+  }
+
+  #benefits::after {
+    height: 100%;
+    width: 100vw;
+    right: -99vw;
+    background-color: #bbbbff;
+    content: "";
+    position: absolute;
+  }
+
+  .mask {
+    mask-position: 3rem 7rem !important;
+  }
+
+  .mask2 {
+    mask-position: 3rem 2rem !important;
+  }
+
+  #mask1 {
+    mask:
+      url("/icons/wand.svg") left top/contain no-repeat,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    mask-size: 40px;
+  }
+
+  #mask2 {
+    mask:
+      url("/icons/seo.svg") left top/contain no-repeat,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    mask-size: 40px;
+  }
+
+  #mask3 {
+    mask:
+      url("/icons/camera.svg") left top/contain no-repeat,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    mask-size: 38px;
+  }
+
+  #mask4 {
+    mask:
+      url("/icons/bag.svg") left top/contain no-repeat,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    mask-size: 35px;
+  }
+
+  #mask5 {
+    mask:
+      url("/icons/robot.svg") left top/contain no-repeat,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    mask-size: 50px;
+  }
+
+  #mask6 {
+    mask:
+      url("/icons/scroll.svg") left top/contain no-repeat,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+    mask-size: 45px;
+  }
+</style>

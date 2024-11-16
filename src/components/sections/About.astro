@@ -1,0 +1,46 @@
+---
+import { Benefits, Button } from "@/components";
+---
+
+<script>
+  import lottie from "lottie-web";
+
+  const lottieContainer = document.getElementById(
+    "lottieContainer",
+  ) as HTMLElement;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    lottie.loadAnimation({
+      container: lottieContainer,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      path: "/animations/workingV2.json",
+    });
+  });
+</script>
+
+<section id="about" class="mb-section mt-60 w-full">
+  <div
+    class="container tablet:flex-row flex flex-col-reverse justify-between gap-40">
+    <div
+      class="max-table:items-center max-tablet:justify-center max-tablet:text-center mb-28 flex flex-col">
+      <h3
+        id="aboutEl"
+        class="text-level-5 mb-6 max-w-[15ch] text-balance font-calistoga drop-shadow">
+        Running your own business is tough enough
+      </h3>
+      <p
+        id="aboutEl"
+        class="relative mb-12 mt-6 max-w-[50ch] text-pretty text-light-gray">
+        That&apos;s why Majic wants to provide a one-stop shop for businesses
+        who need worry free web design & development services at a fair rate.
+      </p>
+      <Button floating id="aboutEl" class="px-20 py-3">
+        See our affordable pricing
+      </Button>
+    </div>
+    <figure id="lottieContainer" class="translate-y-4"></figure>
+  </div>
+  <Benefits />
+</section>

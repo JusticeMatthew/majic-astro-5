@@ -1,0 +1,77 @@
+---
+import { navLinks } from "@/constants";
+import { Button } from "@/components";
+---
+
+<div
+  id="header-wrapper"
+  class="max-container:px-0 container:px-7 container:pt-4 sticky top-0 z-50 mx-auto -mb-16 flex items-center px-4">
+  <header
+    class="transition-[color, box-shadow, backdrop-filter, background-image] container:rounded-lg flex w-full items-center justify-between px-6 py-4 duration-300">
+    <a href="/" class="flex cursor-pointer items-center gap-3">
+      <figure
+        id="logo"
+        class="transition-[color, box-shadow, backdrop-filter, background-image] h-11 w-11 duration-300">
+      </figure>
+      <h1 class="font-calistoga">
+        <span class="majic text-2xl">Majic&nbsp;</span>
+        <span class="font-inter text-lg">
+          | Beautiful Web <span class="hidden sm:inline">Solutions</span>
+        </span>
+      </h1>
+    </a>
+    <nav class="flex gap-3">
+      {
+        navLinks.map(({ href, label }) => (
+          <a
+            href={href}
+            class="cursor-pointer rounded-lg bg-gradient-to-r from-blurple/30 to-blurple/30 bg-[length:100%_0%] bg-bottom bg-no-repeat px-3 py-2 text-lg transition-[background-size] hover:bg-[length:100%_100%]">
+            {label}
+          </a>
+        ))
+      }
+      <Button class="px-3">Contact Us</Button>
+    </nav>
+  </header>
+</div>
+
+<style>
+  #header-wrapper {
+    max-width: clamp(16rem, 100%, 94rem);
+  }
+
+  html[data-is-top="true"] header {
+    background-color: rgba(248, 250, 252, 0) !important;
+    color: rgba(248, 250, 252, 0.9);
+
+    & #burger {
+      background-color: rgba(248, 250, 252, 0.8);
+    }
+
+    & #logo {
+      background-image: url("/images/logo-light.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      opacity: 90;
+    }
+  }
+
+  html[data-is-top="false"] header {
+    background-color: rgba(248, 250, 252, 1) !important;
+    color: #18183b;
+    box-shadow:
+      0 20px 25px -5px rgb(0 0 0 / 0.1),
+      0 8px 10px -6px rgb(0 0 0 / 0.1);
+
+    & #burger {
+      background-color: #0d111c;
+    }
+
+    & #logo {
+      background-image: url("/images/logo.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      opacity: 90;
+    }
+  }
+</style>
