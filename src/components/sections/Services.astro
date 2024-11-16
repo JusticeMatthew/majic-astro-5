@@ -11,7 +11,7 @@ import { Packages } from "@/components";
   ) as HTMLElement;
   const flashingText = document.getElementById("flashing-text") as HTMLElement;
 
-  document.addEventListener("DOMContentLoaded", () => {
+  window.addEventListener("DOMContentLoaded", () => {
     const anim = lottie_light.loadAnimation({
       container: lottieContainer,
       renderer: "svg",
