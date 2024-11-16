@@ -3,15 +3,15 @@ import { Benefits, Button } from "@/components";
 ---
 
 <script>
-  import lottie from "lottie-web";
+  import lottie_light from "lottie-web";
   import { inView, animate, stagger } from "motion";
 
   const lottieContainer = document.getElementById(
-    "lottieContainer",
+    "lottie-container:about",
   ) as HTMLElement;
 
   document.addEventListener("DOMContentLoaded", () => {
-    lottie.loadAnimation({
+    lottie_light.loadAnimation({
       container: lottieContainer,
       renderer: "svg",
       loop: true,
@@ -49,13 +49,13 @@ import { Benefits, Button } from "@/components";
         See our affordable pricing
       </Button>
     </div>
-    <figure id="lottieContainer"></figure>
+    <figure id="lottie-container:about"></figure>
   </div>
   <Benefits />
 </section>
 
 <style>
-  #lottieContainer {
+  #lottie-container\:about {
     transform: translateY(-2rem);
   }
 </style>
