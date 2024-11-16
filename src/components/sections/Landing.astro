@@ -7,7 +7,7 @@ import { Button } from "@/components";
 
   animate(
     "#landingEl",
-    { opacity: [0, 1] },
+    { opacity: 1 },
     { duration: 1, delay: stagger(0.05, { startDelay: 0.3 }) },
   );
 </script>
@@ -37,3 +37,9 @@ import { Button } from "@/components";
     </Button>
   </div>
 </section>
+
+<style>
+  #landingEl {
+    opacity: 0;
+  }
+</style>
