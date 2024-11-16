@@ -4,7 +4,7 @@ import { benefits } from "@/constants";
 
 <div
   id="benefits"
-  class="container relative z-20 mt-20 grid w-screen grid-cols-1 p-0 max-md:pb-24 md:grid-cols-3">
+  class="container relative z-20 grid w-screen grid-cols-1 p-0 max-md:pb-24 md:grid-cols-3">
   {
     benefits[0].map(({ maskId, title, content }) => (
       <div
@@ -13,8 +13,8 @@ import { benefits } from "@/constants";
         <div class="relative mt-44 md:mb-24">
           <figure class="absolute h-[2.15rem] w-1 rounded-lg bg-blurple" />
           <div class="ml-6">
-            <p class="text-level-1 mb-3 font-semibold">{title}</p>
-            <p class="max-w-[45ch] text-balance">{content}</p>
+            <p class="mb-3 text-level-1 font-semibold">{title}</p>
+            <p class="max-w-[40ch] text-pretty">{content}</p>
           </div>
         </div>
       </div>
@@ -28,8 +28,8 @@ import { benefits } from "@/constants";
         <div class="relative mb-28 mt-24">
           <figure class="absolute h-[2.15rem] w-1 rounded-lg bg-blurple" />
           <div class="ml-6">
-            <p class="text-level-1 mb-3 font-semibold">{title}</p>
-            <p class="max-w-[45ch] text-balance">{content}</p>
+            <p class="mb-3 text-level-1 font-semibold">{title}</p>
+            <p class="max-w-[40ch] text-pretty">{content}</p>
           </div>
         </div>
       </div>
@@ -45,7 +45,7 @@ import { benefits } from "@/constants";
   #benefits::before {
     height: 100%;
     width: 100vw;
-    left: -99vw;
+    left: -100vw;
     background-color: #bbbbff;
     content: "";
     position: absolute;
@@ -54,7 +54,7 @@ import { benefits } from "@/constants";
   #benefits::after {
     height: 100%;
     width: 100vw;
-    right: -99vw;
+    right: -100vw;
     background-color: #bbbbff;
     content: "";
     position: absolute;
