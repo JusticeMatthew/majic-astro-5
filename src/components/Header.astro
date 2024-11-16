@@ -4,7 +4,7 @@ import { Button } from "@/components";
 ---
 
 <script>
-  import { animate } from "motion";
+  import { animate } from "motion/mini";
 
   animate("#header-wrapper", { opacity: [0, 1] }, { duration: 0.5, delay: 1 });
 </script>
@@ -36,7 +36,7 @@ import { Button } from "@/components";
           </a>
         ))
       }
-      <Button class="px-3">Contact Us</Button>
+      <Button href="/contact" class="px-3 py-0">Contact Us</Button>
     </nav>
   </header>
 </div>

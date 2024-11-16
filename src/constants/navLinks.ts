@@ -1,16 +1,16 @@
 const navLinks = [
   {
-    href: '',
-    label: 'Home',
+    href: "/",
+    label: "Home",
   },
   {
-    href: 'services',
-    label: 'Services',
+    href: "services",
+    label: "Services",
   },
   {
-    href: 'clients',
-    label: 'Our Work',
+    href: "clients",
+    label: "Our Work",
   },
-]
+];
 
-export default navLinks
+export default navLinks;

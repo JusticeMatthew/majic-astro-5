@@ -2,7 +2,7 @@
 import type { HTMLTag, Polymorphic } from "astro/types";
 
 interface ButtonProps {
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "dark";
   floating?: boolean;
 }
 
@@ -22,12 +22,14 @@ const {
 const buttonStyles = {
   primary: "bg-primary-gradient text-light",
   secondary: "font-medium text-light bg-none",
+  dark: "bg-dark-purple hover:bg-dark",
 }[variant];
 
 const figureStyles = {
   primary: "bg-secondary-gradient",
   secondary:
     "bg-blurple opacity-15 backdrop-blur-lg group-hover:bg-blurple group-hover:opacity-40",
+  dark: "bg-none",
 }[variant];
 ---
 
@@ -56,7 +58,7 @@ const figureStyles = {
   </figure>
   <span
     class:list={[
-      "nowrap relative z-20 block h-full w-full place-content-center rounded-lg font-medium transition-all duration-100 group-hover:text-light",
+      "nowrap relative z-20 block h-full w-full place-content-center rounded-lg py-3 font-medium transition-all duration-100 group-hover:text-light",
       { "group-hover:bg-none": variant === "secondary" },
       { "group-hover:bg-dark": variant === "primary" },
       classList,

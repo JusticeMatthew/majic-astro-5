@@ -1,5 +1,5 @@
 ---
-import { Packages } from "@/components";
+import { Packages, Button } from "@/components";
 ---
 
 <script>
@@ -39,13 +39,13 @@ import { Packages } from "@/components";
 <section
   id="services"
   class="container relative mb-section flex flex-col justify-center">
-  <figure id="lottie-container:services"></figure>
+  <figure id="lottie-container:services" class="max-container:hidden"></figure>
   <h3
     id="servicesEl"
     class="relative z-10 mb-6 max-w-[20ch] font-calistoga text-level-5 drop-shadow">
-    Let's cast a spell of <span id="flashing-text" class="drop-shadow-xl"
-      >success</span
-    > for your online journey
+    Let's cast a spell of
+    <span id="flashing-text" class="drop-shadow-xl">success</span> for your online
+    journey
   </h3>
   <p id="servicesEl" class="my-6 max-w-[65ch] text-pretty text-light-gray">
     Majic goes above and beyond to provide the most complete digital service to
@@ -55,6 +55,24 @@ import { Packages } from "@/components";
   </p>
   <p id="servicesEl" class="mb-16 mt-6 block font-bold">We take care of it.</p>
   <Packages />
+  <div
+    class="flex w-full flex-col items-center justify-center rounded-lg bg-[#94ADFF] p-8 text-center text-dark-purple selection:bg-dark-purple selection:text-light sm:p-16">
+    <h2 class="text-balance font-calistoga text-level-5">
+      Need something more specific?
+    </h2>
+    <p class="mb-8 mt-6 max-w-prose text-pretty font-medium">
+      Get in touch for a personalized quote or
+      <a
+        href="/services"
+        class="inline underline decoration-2 underline-offset-[5px] duration-300 hover:decoration-wavy">
+        check out our services page</a
+      >
+      to see everything we offer, from 3D modeling to logo design and beyond!
+    </p>
+    <Button variant="dark" class="px-20">
+      <span class="flashing-text text-level-1 font-semibold">Contact us</span>
+    </Button>
+  </div>
 </section>
 
 <style>
@@ -65,9 +83,5 @@ import { Packages } from "@/components";
     left: 55rem;
     transform: scaleX(-1);
     transform: rotate(260deg);
-  }
-
-  #servicesEl {
-    opacity: 0;
   }
 </style>

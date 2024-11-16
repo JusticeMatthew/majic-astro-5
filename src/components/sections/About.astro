@@ -31,12 +31,12 @@ import { Benefits, Button } from "@/components";
 
 <section id="about" class="mb-section mt-60 w-full">
   <div
-    class="container flex flex-col-reverse justify-between gap-40 tablet:flex-row">
+    class="container flex flex-col-reverse justify-between gap-12 tablet:flex-row tablet:gap-40">
     <div
-      class="max-table:items-center mb-28 flex flex-col max-tablet:justify-center max-tablet:text-center">
+      class="mx-auto mb-28 flex flex-col justify-center max-tablet:items-center max-tablet:text-center">
       <h3
         id="aboutEl"
-        class="mb-6 w-[11ch] text-balance font-calistoga text-level-5 drop-shadow">
+        class="mx-auto mb-6 w-[11ch] text-balance font-calistoga text-level-5 drop-shadow">
         Running your own business is tough enough
       </h3>
       <p
@@ -45,22 +45,14 @@ import { Benefits, Button } from "@/components";
         That&apos;s why Majic wants to provide a one-stop shop for businesses
         who need worry free web design & development services at a fair rate.
       </p>
-      <Button floating id="aboutEl" class="px-20 py-3">
+      <Button floating id="aboutEl" class="px-20">
         See our affordable pricing
       </Button>
     </div>
-    <figure id="lottie-container:about"></figure>
+    <figure
+      id="lottie-container:about"
+      class="mx-auto h-min max-w-[16rem] sm:max-w-[28rem] tablet:max-w-[40rem] tablet:-translate-y-8">
+    </figure>
   </div>
   <Benefits />
 </section>
-
-<style>
-  #lottie-container\:about {
-    transform: translateY(-2rem);
-    max-width: 40rem;
-  }
-
-  #aboutEl {
-    opacity: 0;
-  }
-</style>

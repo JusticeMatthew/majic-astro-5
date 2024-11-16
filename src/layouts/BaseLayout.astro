@@ -2,6 +2,7 @@
 import "@/styles/globals.css";
 import Header from "@/components/Header.astro";
 import GradientBG from "@/components/GradientBG.astro";
+import { ClientRouter } from "astro:transitions";
 import { ScrollObserver } from "astro-scroll-observer";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -11,7 +12,7 @@ const ogDescription =
 
 <html
   lang="en"
-  class="subpixel-antialiased selection:bg-blurple selection:text-dark">
+  class="overflow-x-clip subpixel-antialiased selection:bg-blurple selection:text-dark">
   <head>
     <meta charset="utf-8" />
     <meta name="generator" content={Astro.generator} />
@@ -44,6 +45,7 @@ const ogDescription =
       type="font/woff2"
       href="/fonts/Calistoga.woff2"
     />
+    <ClientRouter />
     <ScrollObserver />
   </head>
 

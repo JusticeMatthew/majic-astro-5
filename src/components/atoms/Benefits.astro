@@ -14,7 +14,9 @@ import { benefits } from "@/constants";
           <figure class="absolute h-[2.15rem] w-1 rounded-lg bg-blurple" />
           <div class="ml-6">
             <p class="mb-3 text-level-1 font-semibold">{title}</p>
-            <p class="max-w-[40ch] text-pretty">{content}</p>
+            <p class="max-w-[30ch] text-pretty sm:max-w-prose tablet:max-w-[40ch]">
+              {content}
+            </p>
           </div>
         </div>
       </div>

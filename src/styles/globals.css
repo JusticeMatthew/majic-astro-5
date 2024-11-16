@@ -3,19 +3,41 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter.woff2') format('woff2');
+  font-family: "Inter";
+  src: url("/fonts/Inter.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Calistoga';
-  src: url('/fonts/Calistoga.woff2') format('woff2');
+  font-family: "Calistoga";
+  src: url("/fonts/Calistoga.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+}
+
+@layer components {
+  .flashing-text {
+    background: linear-gradient(90deg, #735bdc, #00a7e1, #ff64f5, #735cdd) 0 0 /
+      500% 100%;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .flashing-text {
+      animation: move-bg 8s linear infinite;
+    }
+
+    @keyframes move-bg {
+      to {
+        background-position: 500% 0;
+      }
+    }
+  }
 }
 
 :root {
@@ -63,22 +85,8 @@ label {
   padding: 0 1rem;
 }
 
-.flashing-text {
-  background: linear-gradient(90deg, #735bdc, #00a7e1, #ff64f5, #735cdd) 0 0 /
-    500% 100%;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .flashing-text {
-    animation: move-bg 8s linear infinite;
-  }
-
-  @keyframes move-bg {
-    to {
-      background-position: 500% 0;
-    }
-  }
+#landingEl,
+#aboutEl,
+#servicesEl {
+  opacity: 0;
 }

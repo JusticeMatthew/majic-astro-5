@@ -3,7 +3,8 @@ import { Button } from "@/components";
 ---
 
 <script>
-  import { animate, stagger } from "motion";
+  import { stagger } from "motion";
+  import { animate } from "motion/mini";
 
   animate(
     "#landingEl",
@@ -13,33 +14,30 @@ import { Button } from "@/components";
 </script>
 
 <section
-  class="container flex min-h-[100dvh] flex-col items-center justify-center text-center">
+  class="container flex min-h-[100lvh] flex-col items-center justify-center text-center">
   <h2
     id="landingEl"
-    class="z-10 my-6 text-pretty font-calistoga text-level-6 drop-shadow">
-    We build beautiful websites for
-    <span class="flashing-text drop-shadow-xl">amazing</span> businesses
+    class="z-10 my-4 text-pretty font-calistoga text-level-6 drop-shadow sm:my-6">
+    We build <span class="max-sm:flashing-text">beautiful</span> websites <span
+      class="max-sm:hidden"
+      >for
+      <span class="flashing-text drop-shadow-xl">amazing</span> businesses</span
+    >
   </h2>
   <p
     id="landingEl"
-    class="z-10 my-6 max-w-[65ch] text-balance font-inter text-light-gray">
-    We help local businesses find new customers online and grow their digital
+    class="z-10 my-4 max-w-[30ch] text-balance font-inter text-light-gray sm:my-6 sm:max-w-[65ch]">
+    Majic helps companies find new customers online and grow their digital
     presence through stand-out websites & tailored design services.
     <span class="hidden sm:inline">
       With our affordable prices and enchanting style we&apos;ll create a
       memorable experience for your audience.
     </span>
   </p>
-  <div id="landingEl" class="mt-6 flex flex-col gap-6 sm:flex-row">
-    <Button floating class="px-12 py-3">Connect with us today</Button>
+  <div id="landingEl" class="mt-6 flex flex-col items-center gap-6 sm:flex-row">
+    <Button floating class="px-12">Connect with us today</Button>
     <Button floating variant="secondary" class="px-12 py-3">
       More about Majic
     </Button>
   </div>
 </section>
-
-<style>
-  #landingEl {
-    opacity: 0;
-  }
-</style>
