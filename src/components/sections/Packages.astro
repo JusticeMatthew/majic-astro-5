@@ -6,17 +6,17 @@ import { pricingPlans } from "@/constants";
 <script>
   import lottie_light from "lottie-web";
 
-  const lottiePersonal = document.getElementById(
-    "lottie-container:packages-Personal",
-  ) as HTMLElement;
-  const lottieBusiness = document.getElementById(
-    "lottie-container:packages-Business",
-  ) as HTMLElement;
-  const lottieCommerce = document.getElementById(
-    "lottie-container:packages-Commerce",
-  ) as HTMLElement;
+  document.addEventListener("astro:page-load", () => {
+    const lottiePersonal = document.getElementById(
+      "lottie-container:packages-Personal",
+    ) as HTMLElement;
+    const lottieBusiness = document.getElementById(
+      "lottie-container:packages-Business",
+    ) as HTMLElement;
+    const lottieCommerce = document.getElementById(
+      "lottie-container:packages-Commerce",
+    ) as HTMLElement;
 
-  document.addEventListener("DOMContentLoaded", () => {
     lottie_light.loadAnimation({
       container: lottiePersonal,
       renderer: "svg",
@@ -55,17 +55,21 @@ import { pricingPlans } from "@/constants";
             ]}>
             {plan.recommended && (
               <div class="absolute -top-5 left-0 flex w-full justify-center text-center text-light">
-                <p class="w-fit rounded-full bg-secondary-gradient px-14 py-1 font-medium">
+                <p class="z-10 w-fit rounded-full bg-secondary-gradient px-14 py-1 ring-[3px] ring-blurple">
                   Most Popular
                 </p>
+                <figure class="absolute -top-1 mx-auto h-[44px] w-60 rounded-full bg-blurple blur-lg" />
               </div>
             )}
             <div>
-              <figure id={`lottie-container:packages-${plan.name}`} />
+              <figure
+                id={`lottie-container:packages-${plan.name}`}
+                class="mx-auto h-96 w-96"
+              />
               <p class="mt-8 w-full text-center font-calistoga text-level-2">
                 {plan.name}
               </p>
-              <p class="mt-2 text-balance text-center text-min font-medium text-dark/80">
+              <p class="mt-2 text-balance text-center text-min text-dark/80">
                 {plan.blurb}
               </p>
               <div class="my-14 px-12">
@@ -81,7 +85,7 @@ import { pricingPlans } from "@/constants";
               <p class="w-full text-center font-calistoga text-level-2">
                 {plan.price}
               </p>
-              <p class="mt-2 w-full text-center text-min font-medium text-dark/80">
+              <p class="mt-2 w-full text-center text-min text-dark/80">
                 {plan.monthly}
               </p>
             </div>
@@ -91,13 +95,3 @@ import { pricingPlans } from "@/constants";
     </div>
   </div>
 </section>
-
-<style>
-  #lottie-container\:packages-Personal,
-  #lottie-container\:packages-Business,
-  #lottie-container\:packages-Commerce {
-    width: 24rem;
-    height: 24rem;
-    margin: 0 auto;
-  }
-</style>

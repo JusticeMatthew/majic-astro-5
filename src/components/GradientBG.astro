@@ -1,5 +1,5 @@
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("astro:page-load", () => {
     const interBubble = document.querySelector<HTMLDivElement>(".interactive")!;
     let curX = 0;
     let curY = 0;
@@ -27,7 +27,7 @@
 </script>
 
 <div
-  class="gradient-bg fixed left-0 top-0 z-0 opacity-60"
+  class="gradient-bg sticky left-0 top-0 z-0 opacity-60"
   transition:persist="bgGlow">
   <div class="gradients-container">
     <div class="g1"></div>

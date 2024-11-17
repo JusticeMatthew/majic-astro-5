@@ -1,11 +1,28 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { Landing, About, Services } from "@/components";
+import GradientBG from "@/components/GradientBG.astro";
+import { Landing, About, Services, Examples, Stars } from "@/components";
 ---
 
 <BaseLayout>
-  <Landing />
-  <About />
-  <Services />
-  <h1 class="min-h-[100dvh]">Astro</h1>
+  <div class="relative">
+    <div class="absolute inset-0">
+      <GradientBG />
+    </div>
+    <div class="relative">
+      <Landing />
+      <About />
+      <Services />
+    </div>
+  </div>
+  <div class="relative">
+    <div
+      class="absolute z-10 h-screen w-screen bg-gradient-to-b from-[#20204e] to-[#140d1c]">
+      <Examples />
+    </div>
+    <div class="absolute inset-0 top-0">
+      <Stars />
+    </div>
+  </div>
+  <div class="relative min-h-[100dvh] w-screen bg-dark-purple">Astro</div>
 </BaseLayout>

@@ -4,6 +4,7 @@ import type { HTMLTag, Polymorphic } from "astro/types";
 interface ButtonProps {
   variant?: "primary" | "secondary" | "dark";
   floating?: boolean;
+  header?: boolean;
 }
 
 type Props<Tag extends Extract<HTMLTag, "a" | "button"> = "a"> = Polymorphic<{
@@ -16,12 +17,13 @@ const {
   class: classList,
   variant = "primary",
   floating = false,
+  header = false,
   ...attrs
 } = Astro.props;
 
 const buttonStyles = {
   primary: "bg-primary-gradient text-light",
-  secondary: "font-medium text-light bg-none",
+  secondary: "text-light bg-none",
   dark: "bg-dark-purple hover:bg-dark",
 }[variant];
 
@@ -58,9 +60,10 @@ const figureStyles = {
   </figure>
   <span
     class:list={[
-      "nowrap relative z-20 block h-full w-full place-content-center rounded-lg py-3 font-medium transition-all duration-100 group-hover:text-light",
+      "nowrap relative z-20 block h-full w-full place-content-center rounded-lg transition-all duration-100 group-hover:text-light",
       { "group-hover:bg-none": variant === "secondary" },
       { "group-hover:bg-dark": variant === "primary" },
+      `${header ? "py-0" : "py-3"}`,
       classList,
     ]}>
     <slot name="icon" />

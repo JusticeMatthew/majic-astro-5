@@ -6,12 +6,14 @@ import { Packages, Button } from "@/components";
   import lottie_light from "lottie-web";
   import { inView, animate, stagger } from "motion";
 
-  const lottieContainer = document.getElementById(
-    "lottie-container:services",
-  ) as HTMLElement;
-  const flashingText = document.getElementById("flashing-text") as HTMLElement;
+  document.addEventListener("astro:page-load", () => {
+    const lottieContainer = document.getElementById(
+      "lottie-container:services",
+    ) as HTMLElement;
+    const flashingText = document.getElementById(
+      "flashing-text",
+    ) as HTMLElement;
 
-  document.addEventListener("DOMContentLoaded", () => {
     const anim = lottie_light.loadAnimation({
       container: lottieContainer,
       renderer: "svg",
@@ -36,9 +38,7 @@ import { Packages, Button } from "@/components";
   });
 </script>
 
-<section
-  id="services"
-  class="container relative mb-section flex flex-col justify-center">
+<section id="services" class="container relative flex flex-col justify-center">
   <figure id="lottie-container:services" class="max-container:hidden"></figure>
   <h3
     id="servicesEl"
@@ -57,10 +57,10 @@ import { Packages, Button } from "@/components";
   <Packages />
   <div
     class="flex w-full flex-col items-center justify-center rounded-lg bg-[#94ADFF] p-8 text-center text-dark-purple selection:bg-dark-purple selection:text-light sm:p-16">
-    <h2 class="text-balance font-calistoga text-level-5">
+    <h2 class="text-balance font-calistoga text-level-4">
       Need something more specific?
     </h2>
-    <p class="mb-8 mt-6 max-w-prose text-pretty font-medium">
+    <p class="mb-8 mt-6 max-w-prose text-pretty">
       Get in touch for a personalized quote or
       <a
         href="/services"

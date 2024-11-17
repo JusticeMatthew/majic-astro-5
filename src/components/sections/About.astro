@@ -6,11 +6,11 @@ import { Benefits, Button } from "@/components";
   import lottie_light from "lottie-web";
   import { inView, animate, stagger } from "motion";
 
-  const lottieContainer = document.getElementById(
-    "lottie-container:about",
-  ) as HTMLElement;
+  document.addEventListener("astro:page-load", () => {
+    const lottieContainer = document.getElementById(
+      "lottie-container:about",
+    ) as HTMLElement;
 
-  document.addEventListener("DOMContentLoaded", () => {
     lottie_light.loadAnimation({
       container: lottieContainer,
       renderer: "svg",
@@ -18,14 +18,14 @@ import { Benefits, Button } from "@/components";
       autoplay: true,
       path: "/animations/workingV2.json",
     });
-  });
 
-  inView("#about", () => {
-    animate(
-      "#aboutEl",
-      { opacity: [0, 1], x: [-50, 0] },
-      { duration: 1, delay: stagger(0.05, { startDelay: 0.3 }) },
-    );
+    inView("#about", () => {
+      animate(
+        "#aboutEl",
+        { opacity: [0, 1], x: [-50, 0] },
+        { duration: 1, delay: stagger(0.05, { startDelay: 0.3 }) },
+      );
+    });
   });
 </script>
 

@@ -11,7 +11,8 @@ import { Button } from "@/components";
 
 <div
   id="header-wrapper"
-  class="sticky top-0 z-50 mx-auto -mb-16 flex items-center px-4 max-container:px-0 container:px-7 container:pt-4">
+  transition:persist
+  class="sticky top-0 z-50 mx-auto -mb-24 flex items-center px-4 max-container:px-0 container:px-7 container:pt-4">
   <header
     class="transition-[color, box-shadow, backdrop-filter, background-image] flex w-full items-center justify-between px-6 py-4 duration-300 container:rounded-lg">
     <a href="/" class="flex cursor-pointer items-center gap-3">
@@ -20,8 +21,8 @@ import { Button } from "@/components";
         class="transition-[color, box-shadow, backdrop-filter, background-image] h-11 w-11 duration-300">
       </figure>
       <h1 class="font-calistoga">
-        <span class="majic text-2xl">Majic&nbsp;</span>
-        <span class="font-inter text-lg">
+        <span class="text-2xl">Majic&nbsp;</span>
+        <span class="font-inter">
           | Beautiful Web <span class="hidden sm:inline">Solutions</span>
         </span>
       </h1>
@@ -31,12 +32,12 @@ import { Button } from "@/components";
         navLinks.map(({ href, label }) => (
           <a
             href={href}
-            class="cursor-pointer rounded-lg bg-gradient-to-r from-blurple/30 to-blurple/30 bg-[length:100%_0%] bg-bottom bg-no-repeat px-3 py-2 text-lg transition-[background-size] hover:bg-[length:100%_100%]">
+            class="cursor-pointer rounded-lg bg-gradient-to-r from-blurple/30 to-blurple/30 bg-[length:100%_0%] bg-bottom bg-no-repeat px-3 py-2 transition-[background-size] hover:bg-[length:100%_100%]">
             {label}
           </a>
         ))
       }
-      <Button href="/contact" class="px-3 py-0">Contact Us</Button>
+      <Button href="/contact" class="px-3 py-0" header>Contact Us</Button>
     </nav>
   </header>
 </div>

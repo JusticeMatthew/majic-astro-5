@@ -6,11 +6,13 @@ import { Button } from "@/components";
   import { stagger } from "motion";
   import { animate } from "motion/mini";
 
-  animate(
-    "#landingEl",
-    { opacity: 1 },
-    { duration: 1, delay: stagger(0.05, { startDelay: 0.3 }) },
-  );
+  document.addEventListener("astro:page-load", () => {
+    animate(
+      "#landingEl",
+      { opacity: 1 },
+      { duration: 1, delay: stagger(0.05, { startDelay: 0.3 }) },
+    );
+  });
 </script>
 
 <section
