@@ -1,10 +1,30 @@
-<section class="container mt-section flex flex-col items-center justify-center">
+---
+import { clients } from "@/constants";
+---
+
+<section
+  class="container z-30 mt-section flex flex-col items-center justify-center">
   <h3
-    class="max-w-[18ch] text-balance text-center font-calistoga text-level-5 drop-shadow">
+    class="mb-24 max-w-[18ch] text-balance text-center font-calistoga text-level-5 drop-shadow">
     <span id="examplesEl">Our clients are the stars</span>
     <span id="examplesEl"
       >we just help them <span class="flashing-text drop-shadow-xl">shine</span
       ></span
     >
   </h3>
+  <div id="grid" class="z-30 grid grid-cols-5 gap-6">
+    {
+      clients.map(({ title, subtitle, content, styles, site }) => (
+        <a
+          href={site}
+          style={styles}
+          target="_blank"
+          class="rounded-lg bg-opacity-50 bg-cover bg-top px-12 py-10 drop-shadow-lg first:col-span-2 [&:nth-child(2)]:col-span-3 [&:nth-child(3)]:col-span-3">
+          <p class="font-calistoga text-level-3 drop-shadow">{title}</p>
+          <p class="mb-52 text-level-1 drop-shadow">{subtitle}</p>
+          <p class="pretty max-w-[55ch] drop-shadow">{content}</p>
+        </a>
+      ))
+    }
+  </div>
 </section>

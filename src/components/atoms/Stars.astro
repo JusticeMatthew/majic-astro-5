@@ -3,14 +3,14 @@
     const totalStars = 100;
     const container = document.getElementById("stars-container")!;
 
-    function randomBetween(min: number, max: number) {
+    function randomNumber(min: number, max: number) {
       return Math.random() * (max - min) + min;
     }
 
     function setStarOpacity(pos: number) {
       let opacity = 1;
 
-      if (pos <= 50) {
+      if (pos <= 35) {
         opacity = pos / 200;
       }
 
@@ -21,10 +21,10 @@
       const star = document.createElement("figure");
       star.id = "star";
 
-      star.style.top = `${randomBetween(0, 100)}vh`;
-      star.style.left = `${randomBetween(0, 100)}vw`;
-      star.style.animationDuration = `${randomBetween(2, 5)}s`;
-      star.style.animationDelay = `${randomBetween(0, 5)}s`;
+      star.style.top = `${randomNumber(0, 150)}vh`;
+      star.style.left = `${randomNumber(0, 150)}vw`;
+      star.style.animationDuration = `${randomNumber(2, 5)}s`;
+      star.style.animationDelay = `${randomNumber(0, 5)}s`;
 
       const pos = parseInt(star.style.top.split(".")[0]);
       star.style.setProperty("--dynamic-opacity", `${setStarOpacity(pos)}`);
@@ -40,7 +40,7 @@
   #stars-container {
     position: relative !important;
     width: 100%;
-    height: 100vh;
+    height: 150vh !important;
     overflow: hidden;
     z-index: 10;
   }
@@ -61,7 +61,7 @@
       opacity: var(--dynamic-opacity);
     }
     50% {
-      opacity: 0.5;
+      opacity: 0.3;
     }
   }
 </style>

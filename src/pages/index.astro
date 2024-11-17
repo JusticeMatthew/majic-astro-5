@@ -16,13 +16,16 @@ import { Landing, About, Services, Examples, Stars } from "@/components";
     </div>
   </div>
   <div class="relative">
-    <div
-      class="absolute z-10 h-screen w-screen bg-gradient-to-b from-[#20204e] to-[#140d1c]">
+    <figure
+      class="absolute inset-0 z-10 h-[150vh] w-screen bg-gradient-to-b from-[#20204e] to-[#231731]">
+    </figure>
+    <div class="absolute z-20 w-full">
       <Examples />
+      <!-- <figure class="absolute z-10 h-screen w-screen bg-[#231731]"></figure> -->
+      <!-- <div class="relative z-20 min-h-[100dvh] w-screen">Astro</div> -->
     </div>
     <div class="absolute inset-0 top-0">
       <Stars />
     </div>
   </div>
-  <div class="relative min-h-[100dvh] w-screen bg-dark-purple">Astro</div>
 </BaseLayout>
