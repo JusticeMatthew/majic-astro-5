@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import { Benefits, Button } from "@/components";
 ---
 
@@ -29,7 +30,7 @@ import { Benefits, Button } from "@/components";
   });
 </script>
 
-<section id="about" class="mb-section mt-60 w-full">
+<section id="about" class="mb-section mt-60 w-full pb-12">
   <div
     class="container flex flex-col-reverse justify-between gap-12 tablet:flex-row tablet:gap-40">
     <div
@@ -45,13 +46,14 @@ import { Benefits, Button } from "@/components";
         That&apos;s why Majic wants to provide a one-stop shop for businesses
         who need worry free web design & development services at a fair rate.
       </p>
-      <Button floating id="aboutEl" class="px-20">
+      <Button floating id="aboutEl" class="pl-6">
         See our affordable pricing
+        <Icon name="right-arrow" class="ml-32 mr-5 inline" />
       </Button>
     </div>
     <figure
       id="lottie-container:about"
-      class="mx-auto h-min max-w-[16rem] sm:max-w-[28rem] tablet:max-w-[40rem] tablet:-translate-y-8">
+      class="mx-auto h-min max-w-[16rem] sm:max-w-[28rem] tablet:max-w-[40rem]">
     </figure>
   </div>
   <Benefits />

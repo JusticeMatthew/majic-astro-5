@@ -1,12 +1,50 @@
 ---
 import { Image } from "astro:assets";
+import { navLinks } from "@/constants";
 import mailbox from "@/assets/mailbox.svg";
-import ground from "@/assets/ground.svg";
 ---
 
 <div
-  class="bg-dark-bg relative flex w-screen flex-col items-center justify-center">
-  <Image src={mailbox} alt="mailbox" width={120} class="z-30 mt-20" />
-  <Image src={ground} alt="mailbox" class="z-30 -mb-10 -mt-3 min-w-[120vw]" />
-  <footer class="z-40 h-40 w-screen bg-black"></footer>
+  class="relative flex w-screen flex-col items-center justify-center bg-dark-bg pt-40">
+  <Image src={mailbox} alt="mailbox" width={120} class="z-30 -translate-y-10" />
+  <figure
+    id="background"
+    class="absolute top-20 z-30 h-[20rem] w-screen bg-black">
+  </figure>
+  <footer class="z-40 min-h-52 w-screen bg-black">
+    <div
+      class="container flex h-full flex-col justify-between opacity-75 sm:flex-row md:px-32">
+      <div
+        class="flex min-h-full justify-between max-sm:mb-6 max-sm:flex-wrap max-sm:items-end sm:flex-col">
+        <span>
+          <p class="font-calistoga text-level-2">Majic</p>
+          <p>Beautiful Web Solutions</p>
+        </span>
+        <p>© 2024 Majic Design LLC</p>
+      </div>
+      <div class="grid grid-cols-3 pb-6">
+        <nav class="col-span-1 flex flex-col">
+          <p class="mb-1 text-level-1">Links</p>
+          {
+            navLinks.map(({ href, label }) => (
+              <a href={href} class="p-1 underline-offset-4 hover:underline">
+                {label}
+              </a>
+            ))
+          }
+        </nav>
+        <span class="col-span-2">
+          <p class="mb-1 text-level-1">Contact</p>
+          <p class="p-1 text-content">386-601-9344</p>
+          <p class="p-1 text-content">info@majicwebdesign.com</p>
+        </span>
+      </div>
+    </div>
+  </footer>
 </div>
+
+<style>
+  #background {
+    clip-path: ellipse(100% 50% at 50% 100%);
+  }
+</style>

@@ -54,7 +54,7 @@
   --step-8: clamp(4.2998rem, 2.244rem + 9.9676vi, 11.2149rem);
 
   /* Section Spacing*/
-  --space-section: clamp(10rem, 6.2838rem + 18.018vi, 22.5rem);
+  --space-section: clamp(9rem, 7.1495rem + 8.972vw, 15rem);
 }
 
 body {

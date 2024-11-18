@@ -43,8 +43,6 @@ export default {
       backgroundImage: {
         "primary-gradient": "linear-gradient(to right, #735CDD, #00A7E1)",
         "secondary-gradient": "linear-gradient(to right, #6732c2, #4d76d6)",
-        "parallax-gradient":
-          "linear-gradient(to right, #735CDD, #00A7E1, #735CDD)",
       },
     },
   },
