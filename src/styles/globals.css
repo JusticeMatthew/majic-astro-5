@@ -34,7 +34,7 @@
 
     @keyframes move-bg {
       to {
-        background-position: 500% 0;
+        background-position: -500%;
       }
     }
   }

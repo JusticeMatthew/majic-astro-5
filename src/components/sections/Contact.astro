@@ -1,14 +1,16 @@
 ---
-import { Button } from "@/components";
-import { Image } from "astro:assets";
 import logo from "@/assets/logo.svg";
+import { Image } from "astro:assets";
+import { Button } from "@/components";
 import ContactForm from "@/components/molecules/ContactForm.tsx";
 ---
 
 <section class="bg-dark-bg w-screen">
   <div class="container flex flex-col">
-    <h3 class="mb-16 font-calistoga text-level-5">
-      Ready to see Majic can do for you?
+    <h3 class="z-30 mb-16 font-calistoga text-level-5 drop-shadow">
+      Ready to see <span class="flashing-text drop-shadow-xl"
+        >Majic<span class="text-light drop-shadow"> can do for </span>you</span
+      >?
     </h3>
     <div
       class="relative z-30 flex min-h-20 w-full flex-col justify-evenly overflow-clip rounded-lg bg-light px-8 text-dark max-sm:items-center sm:px-16">
