@@ -1,0 +1,12 @@
+---
+import { Image } from "astro:assets";
+import mailbox from "@/assets/mailbox.svg";
+import ground from "@/assets/ground.svg";
+---
+
+<div
+  class="bg-dark-bg relative flex w-screen flex-col items-center justify-center">
+  <Image src={mailbox} alt="mailbox" width={120} class="z-30 mt-20" />
+  <Image src={ground} alt="mailbox" class="z-30 -mb-10 -mt-3 min-w-[120vw]" />
+  <footer class="z-40 h-40 w-screen bg-black"></footer>
+</div>

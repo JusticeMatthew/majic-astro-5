@@ -8,3 +8,4 @@ export { default as Packages } from "./sections/Packages.astro";
 export { default as Examples } from "./sections/Examples.astro";
 export { default as Contact } from "./sections/Contact.astro";
 export { default as ContactForm } from "./molecules/ContactForm.tsx";
+export { default as Footer } from "./molecules/Footer.astro";

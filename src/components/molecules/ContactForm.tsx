@@ -20,11 +20,11 @@ export default function ContactForm({
   }));
 
   const styles = {
-    inputContainer: "mb-6",
+    inputContainer: "mb-6 md:last:mb-0",
     input:
       "mt-2 h-12 w-full rounded-lg bg-slate-200 p-3 focus:outline-none sm:h-14 ring-blurple focus-within:ring-4 hover:ring-4",
     textArea:
-      "mt-2 h-56 w-full resize-none rounded-lg bg-slate-200 p-3 focus:outline-none sm:h-72 ring-blurple focus-within:ring-4 hover:ring-4",
+      "mt-2 h-[13.5rem] w-full resize-none rounded-lg bg-slate-200 p-3 focus:outline-none sm:h-[17.8rem] ring-blurple focus-within:ring-4 hover:ring-4",
   };
 
   return (
@@ -34,8 +34,8 @@ export default function ContactForm({
         e.stopPropagation();
         form.handleSubmit();
       }}
-      class="z-30 mb-14 flex w-full flex-col text-dark">
-      <div class="flex min-h-96 w-full flex-col sm:flex-row sm:gap-16 md:gap-16">
+      class="h- z-30 mb-14 flex w-full flex-col text-dark">
+      <div class="flex w-full flex-col md:flex-row md:gap-14">
         <div class="w-full">
           <div class={styles.inputContainer}>
             <label>
@@ -107,7 +107,7 @@ export default function ContactForm({
           </label>
         </div>
       </div>
-      <div class="flex w-full justify-center">{children}</div>
+      <div class="mt-14 flex w-full justify-center">{children}</div>
     </form>
   );
 }
