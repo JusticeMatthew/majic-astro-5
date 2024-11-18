@@ -1,6 +1,8 @@
 ---
 import { navLinks } from "@/constants";
 import { Button } from "@/components";
+import { Icon } from "astro-icon/components";
+import MobileNav from "@/components/molecules/MobileNav.tsx";
 ---
 
 <script>
@@ -15,6 +17,7 @@ import { Button } from "@/components";
   class="fixed top-0 z-50 flex w-screen items-center justify-center px-4 max-container:px-0 container:px-7 container:pt-4">
   <header
     id="header"
+    transition:persist
     class="transition-[color, box-shadow, backdrop-filter, background-image] flex w-full items-center justify-between px-6 py-4 duration-300 container:rounded-lg">
     <a href="/" class="flex cursor-pointer items-center gap-3">
       <figure
@@ -28,7 +31,17 @@ import { Button } from "@/components";
         </span>
       </h1>
     </a>
-    <nav class="flex gap-3">
+    <MobileNav client:only="solid-js">
+      <Icon name="burger" class="text-3xl" />
+      <Icon name="close" class="m-4 text-4xl text-dark" />
+      <Button
+        href="/contact"
+        class="px-7 text-level-2 text-light"
+        variant="dark">
+        Contact Us
+      </Button>
+    </MobileNav>
+    <nav class="flex gap-3 max-md:hidden">
       {
         navLinks.map(({ href, label }) => (
           <a

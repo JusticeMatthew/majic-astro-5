@@ -34,7 +34,7 @@ export default function ContactForm({
         e.stopPropagation();
         form.handleSubmit();
       }}
-      class="h- z-30 mb-14 flex w-full flex-col text-dark">
+      class="z-30 mb-14 flex w-full flex-col text-dark">
       <div class="flex w-full flex-col md:flex-row md:gap-14">
         <div class="w-full">
           <div class={styles.inputContainer}>
