@@ -12,7 +12,7 @@ const examples = [
     title: "B&C Pest Control",
     subtitle: "Florida’s Pest Control Experts",
     content:
-      "An expertly crafted website for a trusted pest control service, blending modern aesthetics with practical solutions.",
+      "A fresh look for a trusted pest control service, blending modern aesthetics with practical solutions.",
     site: "https://bandcpestcontrol.com/",
     background: "bg-[#18181B]",
     poster: bandcBg,
