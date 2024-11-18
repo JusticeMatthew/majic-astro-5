@@ -4,7 +4,7 @@
     const fadingContainer = document.getElementById("fading-stars-container")!;
     const normalContainer = document.getElementById("normal-stars-container")!;
 
-    function randomNumber(min: number, max: number) {
+    function randomNumberFromRange(min: number, max: number) {
       return Math.random() * (max - min) + min;
     }
 
@@ -22,10 +22,10 @@
       const star = document.createElement("figure");
       star.id = "star";
 
-      star.style.top = `${randomNumber(0, 100)}%`;
-      star.style.left = `${randomNumber(0, 100)}%`;
-      star.style.animationDuration = `${randomNumber(2, 5)}s`;
-      star.style.animationDelay = `${randomNumber(0, 5)}s`;
+      star.style.top = `${randomNumberFromRange(0, 100)}%`;
+      star.style.left = `${randomNumberFromRange(0, 100)}%`;
+      star.style.animationDuration = `${randomNumberFromRange(2, 5)}s`;
+      star.style.animationDelay = `${randomNumberFromRange(0, 5)}s`;
 
       const pos = parseInt(star.style.top.split(".")[0]);
       star.style.setProperty("--dynamic-opacity", `${setStarOpacity(pos)}`);
@@ -37,10 +37,10 @@
       const star = document.createElement("figure");
       star.id = "star";
 
-      star.style.top = `${randomNumber(0, 100)}%`;
-      star.style.left = `${randomNumber(0, 100)}%`;
-      star.style.animationDuration = `${randomNumber(2, 5)}s`;
-      star.style.animationDelay = `${randomNumber(0, 5)}s`;
+      star.style.top = `${randomNumberFromRange(0, 100)}%`;
+      star.style.left = `${randomNumberFromRange(0, 100)}%`;
+      star.style.animationDuration = `${randomNumberFromRange(2, 5)}s`;
+      star.style.animationDelay = `${randomNumberFromRange(0, 5)}s`;
 
       normalContainer.appendChild(star);
     }
