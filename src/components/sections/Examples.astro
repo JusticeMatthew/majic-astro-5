@@ -1,11 +1,37 @@
 ---
 import { clients } from "@/constants";
+import { Button } from "@/components";
 ---
+
+<script>
+  import { animate, inView, stagger } from "motion";
+
+  document.addEventListener("astro:page-load", () => {
+    const sequence = [
+      [
+        "#examplesEl",
+        { y: [30, 0], opacity: [0, 1] },
+        { duration: 0.5, delay: stagger(0.05, { startDelay: 0.3 }) },
+      ],
+      [
+        "#clientEl",
+        { opacity: [0, 1] },
+        { duration: 0.5, delay: stagger(0.05) },
+      ],
+    ];
+
+    inView("#examples", () => {
+      // @ts-expect-error
+      animate(sequence);
+    });
+  });
+</script>
 
 <section
   id="examples"
-  class="container z-30 mt-section flex flex-col items-center justify-center">
+  class="container z-30 my-section flex flex-col items-center justify-center">
   <h3
+    id="examplesEl"
     class="mb-24 max-w-[18ch] text-balance text-center font-calistoga text-level-5 drop-shadow">
     <span id="examplesEl">Our clients are the stars</span>
     <span id="examplesEl"
@@ -17,6 +43,7 @@ import { clients } from "@/constants";
     {
       clients.map(({ title, subtitle, content, styles, site }) => (
         <a
+          id="clientEl"
           href={site}
           style={styles}
           target="_blank"
@@ -27,5 +54,28 @@ import { clients } from "@/constants";
         </a>
       ))
     }
+    <div
+      id="clientEl"
+      class="relative col-span-2 flex h-auto flex-col rounded-lg bg-secondary-gradient px-12 py-10 drop-shadow-lg">
+      <p class="z-30 font-calistoga text-level-3 drop-shadow">Learn More</p>
+      <p class="z-30 mb-52 text-level-1 drop-shadow">
+        Reach Out and Let Your Website Shine
+      </p>
+      <div class="z-30 flex flex-row">
+        <p class="pretty max-w-[40ch] drop-shadow">
+          Get in touch to capture your brand's essence and engage your audience.
+        </p>
+        <Button
+          href="/contact"
+          variant="dark"
+          floating
+          class="whitespace-nowrap px-8">
+          Contact
+        </Button>
+      </div>
+      <figure
+        class="bg-dark-bg/50 absolute left-0 top-0 z-20 h-full w-full rounded-lg">
+      </figure>
+    </div>
   </div>
 </section>

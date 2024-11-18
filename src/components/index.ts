@@ -6,3 +6,4 @@ export { default as About } from "./sections/About.astro";
 export { default as Services } from "./sections/Services.astro";
 export { default as Packages } from "./sections/Packages.astro";
 export { default as Examples } from "./sections/Examples.astro";
+export { default as Contact } from "./sections/Contact.astro";

@@ -38,6 +38,7 @@ export default {
         "dark-purple": "#20204e",
         light: "#F8FAFC",
         dark: "#0D111C",
+        "dark-bg": "#231731",
       },
       backgroundImage: {
         "primary-gradient": "linear-gradient(to right, #735CDD, #00A7E1)",

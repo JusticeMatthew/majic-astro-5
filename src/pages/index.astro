@@ -1,7 +1,14 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import GradientBG from "@/components/GradientBG.astro";
-import { Landing, About, Services, Examples, Stars } from "@/components";
+import GradientBG from "@/components/atoms/GradientBG.astro";
+import {
+  Landing,
+  About,
+  Services,
+  Examples,
+  Contact,
+  Stars,
+} from "@/components";
 ---
 
 <BaseLayout>
@@ -17,15 +24,13 @@ import { Landing, About, Services, Examples, Stars } from "@/components";
   </div>
   <div class="relative">
     <figure
-      class="absolute inset-0 z-10 h-[150vh] w-screen bg-gradient-to-b from-[#20204e] to-[#231731]">
+      class="to-dark-bg via-dark-bg absolute inset-0 z-10 h-[150vh] w-screen bg-gradient-to-b from-dark-purple via-80%">
     </figure>
-    <div class="absolute z-20 w-full">
-      <Examples />
-      <!-- <figure class="absolute z-10 h-screen w-screen bg-[#231731]"></figure> -->
-      <!-- <div class="relative z-20 min-h-[100dvh] w-screen">Astro</div> -->
-    </div>
     <div class="absolute inset-0 top-0">
-      <Stars />
+      <Stars>
+        <Examples slot="examples" />
+        <Contact slot="contact" />
+      </Stars>
     </div>
   </div>
 </BaseLayout>

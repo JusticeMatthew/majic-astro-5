@@ -1,9 +1,8 @@
 ---
 import "@/styles/globals.css";
-import Header from "@/components/Header.astro";
-import GradientBG from "@/components/GradientBG.astro";
 import { ClientRouter } from "astro:transitions";
 import { ScrollObserver } from "astro-scroll-observer";
+import Header from "@/components/molecules/Header.astro";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogDescription =

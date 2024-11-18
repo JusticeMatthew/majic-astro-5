@@ -1,7 +1,8 @@
 <script>
   document.addEventListener("astro:page-load", () => {
     const totalStars = 100;
-    const container = document.getElementById("stars-container")!;
+    const fadingContainer = document.getElementById("fading-stars-container")!;
+    const normalContainer = document.getElementById("normal-stars-container")!;
 
     function randomNumber(min: number, max: number) {
       return Math.random() * (max - min) + min;
@@ -21,26 +22,44 @@
       const star = document.createElement("figure");
       star.id = "star";
 
-      star.style.top = `${randomNumber(0, 150)}vh`;
-      star.style.left = `${randomNumber(0, 150)}vw`;
+      star.style.top = `${randomNumber(0, 100)}%`;
+      star.style.left = `${randomNumber(0, 100)}%`;
       star.style.animationDuration = `${randomNumber(2, 5)}s`;
       star.style.animationDelay = `${randomNumber(0, 5)}s`;
 
       const pos = parseInt(star.style.top.split(".")[0]);
       star.style.setProperty("--dynamic-opacity", `${setStarOpacity(pos)}`);
 
-      container.appendChild(star);
+      fadingContainer.appendChild(star);
+    }
+
+    for (let i = 0; i < totalStars; i++) {
+      const star = document.createElement("figure");
+      star.id = "star";
+
+      star.style.top = `${randomNumber(0, 100)}%`;
+      star.style.left = `${randomNumber(0, 100)}%`;
+      star.style.animationDuration = `${randomNumber(2, 5)}s`;
+      star.style.animationDelay = `${randomNumber(0, 5)}s`;
+
+      normalContainer.appendChild(star);
     }
   });
 </script>
 
-<div id="stars-container"></div>
+<div id="fading-stars-container">
+  <slot name="examples" />
+</div>
+<div id="normal-stars-container">
+  <slot name="contact" />
+</div>
 
 <style is:global>
-  #stars-container {
+  #fading-stars-container,
+  #normal-stars-container {
     position: relative !important;
     width: 100%;
-    height: 150vh !important;
+    height: fit-content !important;
     overflow: hidden;
     z-index: 10;
   }
