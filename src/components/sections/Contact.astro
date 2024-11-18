@@ -1,7 +1,31 @@
+---
+import { Button } from "@/components";
+import { Image } from "astro:assets";
+import logo from "@/assets/logo.svg";
+import ContactForm from "@/components/molecules/ContactForm.tsx";
+---
+
 <section class="bg-dark-bg w-screen">
   <div class="container flex flex-col">
     <h3 class="mb-16 font-calistoga text-level-5">
       Ready to see Majic can do for you?
     </h3>
+    <div
+      class="relative z-30 flex min-h-20 w-full flex-col justify-evenly overflow-clip rounded-lg bg-light px-8 text-dark max-sm:items-center sm:px-16">
+      <p class="mb-4 mt-14 font-calistoga text-level-3">Send us a message</p>
+      <p class="mb-14 max-w-prose">
+        Connect with us today and let Majic illuminate the path to online
+        greatness and amaze your visitors with every click.
+      </p>
+      <ContactForm client:only="solid-js">
+        <Button as="button" type="submit" floating class="px-48">Send</Button>
+      </ContactForm>
+      <Image
+        src={logo}
+        alt=""
+        width={800}
+        class="right-50 absolute -right-16 top-12 -rotate-[20deg] opacity-30"
+      />
+    </div>
   </div>
 </section>
