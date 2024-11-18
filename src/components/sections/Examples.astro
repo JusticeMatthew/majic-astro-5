@@ -1,6 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import { clients } from "@/constants";
 import { Button } from "@/components";
+import logoLight from "@/assets/logo-light.svg";
 ---
 
 <script>
@@ -56,14 +58,20 @@ import { Button } from "@/components";
     }
     <div
       id="clientEl"
-      class="relative col-span-2 flex h-auto flex-col rounded-lg bg-secondary-gradient px-12 py-10 drop-shadow-lg">
+      class="relative col-span-2 flex h-auto flex-col overflow-clip rounded-lg bg-secondary-gradient px-12 py-10 drop-shadow-lg">
+      <Image
+        src={logoLight}
+        alt="majic logo"
+        width={240}
+        class="absolute -right-12 top-28 z-30 rotate-[60deg] -scale-x-[1] opacity-60"
+      />
       <p class="z-30 font-calistoga text-level-3 drop-shadow">Learn More</p>
       <p class="z-30 mb-52 text-level-1 drop-shadow">
         Reach Out and Let Your Website Shine
       </p>
       <div class="z-30 flex flex-row">
         <p class="pretty max-w-[40ch] drop-shadow">
-          Get in touch to capture your brand's essence and engage your audience.
+          Get in touch to elevate your online presence and engage your audience.
         </p>
         <Button
           href="/contact"
