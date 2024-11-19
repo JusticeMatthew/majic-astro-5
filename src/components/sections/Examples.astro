@@ -1,8 +1,9 @@
 ---
 import { Image } from "astro:assets";
-import { clients } from "@/constants";
-import { Button } from "@/components";
-import logoLight from "@/assets/logo-light.svg";
+import { clients } from "$/constants";
+import { Button } from "$/components";
+import { Icon } from "astro-icon/components";
+import logoLight from "$/assets/logo-light.svg";
 ---
 
 <script>
@@ -41,7 +42,9 @@ import logoLight from "@/assets/logo-light.svg";
       ></span
     >
   </h3>
-  <div id="grid" class="z-30 grid grid-cols-5 gap-6">
+  <div
+    id="grid"
+    class="z-30 grid grid-cols-1 gap-6 tablet:grid-cols-2 container:grid-cols-5">
     {
       clients.map(({ title, subtitle, content, styles, site }) => (
         <a
@@ -49,7 +52,7 @@ import logoLight from "@/assets/logo-light.svg";
           href={site}
           style={styles}
           target="_blank"
-          class="rounded-lg bg-opacity-50 bg-cover bg-top px-12 py-10 drop-shadow-lg first:col-span-2 [&:nth-child(2)]:col-span-3 [&:nth-child(3)]:col-span-3">
+          class="col-span-1 rounded-lg bg-opacity-50 bg-cover bg-top px-8 py-10 drop-shadow-lg sm:px-12 container:first:col-span-2 container:[&:nth-child(2)]:col-span-3 container:[&:nth-child(3)]:col-span-3">
           <p class="font-calistoga text-level-3 drop-shadow">{title}</p>
           <p class="mb-52 text-level-1 drop-shadow">{subtitle}</p>
           <p class="pretty max-w-[55ch] drop-shadow">{content}</p>
@@ -58,7 +61,7 @@ import logoLight from "@/assets/logo-light.svg";
     }
     <div
       id="clientEl"
-      class="relative col-span-2 flex h-auto flex-col overflow-clip rounded-lg bg-secondary-gradient px-12 py-10 drop-shadow-lg">
+      class="relative col-span-1 flex h-auto flex-col overflow-clip rounded-lg bg-secondary-gradient px-8 py-10 drop-shadow-lg sm:px-12 container:col-span-2">
       <Image
         src={logoLight}
         alt=""
@@ -67,22 +70,27 @@ import logoLight from "@/assets/logo-light.svg";
       />
       <p class="z-30 font-calistoga text-level-3 drop-shadow">Learn More</p>
       <p class="z-30 mb-52 text-level-1 drop-shadow">
-        Reach Out and Let Your Website Shine
+        Let's Make Your Business Shine
       </p>
-      <div class="z-30 flex flex-row">
-        <p class="pretty max-w-[40ch] drop-shadow">
-          Get in touch to elevate your online presence and engage your audience.
+      <div
+        class="z-30 flex flex-col gap-4 sm:flex-row sm:justify-between sm:gap-0">
+        <p class="pretty max-w-[25ch] drop-shadow">
+          Get in touch to elevate your online presence with Majic.
         </p>
         <Button
           href="/contact"
           variant="dark"
           floating
-          class="whitespace-nowrap px-8">
+          class="whitespace-nowrap pl-4 sm:px-6 tablet:px-12">
           Contact
+          <Icon
+            name="plane"
+            class="ml-28 mr-4 inline sm:ml-32 sm:mr-0 tablet:hidden"
+          />
         </Button>
       </div>
       <figure
-        class="bg-dark-bg/50 absolute left-0 top-0 z-20 h-full w-full rounded-lg">
+        class="absolute left-0 top-0 z-20 h-full w-full rounded-lg bg-dark-bg/50">
       </figure>
     </div>
   </div>

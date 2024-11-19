@@ -1,6 +1,9 @@
 ---
+import { pricingPlans } from "$/constants";
 import { Icon } from "astro-icon/components";
-import { pricingPlans } from "@/constants";
+import MobilePackages from "$/components/molecules/MobilePackages.tsx";
+
+const mobileLottieStyles = "w-48 h-48 sm:w-60 sm:h-60 tablet:h-80 tablet:w-80";
 ---
 
 <script>
@@ -17,7 +20,7 @@ import { pricingPlans } from "@/constants";
       "lottie-container:packages-Commerce",
     ) as HTMLElement;
 
-    lottie_light.loadAnimation({
+    const personalAnimation = lottie_light.loadAnimation({
       container: lottiePersonal,
       renderer: "svg",
       loop: true,
@@ -25,7 +28,7 @@ import { pricingPlans } from "@/constants";
       path: "/animations/personalPlan.json",
     });
 
-    lottie_light.loadAnimation({
+    const businessAnimation = lottie_light.loadAnimation({
       container: lottieBusiness,
       renderer: "svg",
       loop: true,
@@ -33,19 +36,30 @@ import { pricingPlans } from "@/constants";
       path: "/animations/businessPlan.json",
     });
 
-    lottie_light.loadAnimation({
+    const commerceAnimation = lottie_light.loadAnimation({
       container: lottieCommerce,
       renderer: "svg",
       loop: true,
       autoplay: true,
       path: "/animations/commercePlan.json",
     });
+
+    window.addEventListener("astro:before-swap", () => {
+      personalAnimation.destroy();
+      businessAnimation.destroy();
+      commerceAnimation.destroy();
+    });
   });
 </script>
 
 <section class="h-[min(auto, 60vh)] relative mb-6 flex flex-col items-center">
   <div class="flex w-full flex-col justify-between">
-    <div class="mt-8 hidden grid-cols-3 gap-6 tablet:grid">
+    <MobilePackages client:only="solid-js">
+      <figure class={mobileLottieStyles}></figure>
+      <figure class={mobileLottieStyles}></figure>
+      <figure class={mobileLottieStyles}></figure>
+    </MobilePackages>
+    <div class="mt-8 hidden grid-cols-3 gap-6 container:grid">
       {
         pricingPlans.map((plan) => (
           <div

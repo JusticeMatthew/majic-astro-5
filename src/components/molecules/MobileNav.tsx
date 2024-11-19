@@ -1,4 +1,4 @@
-import { navLinks } from "@/constants";
+import { navLinks } from "$/constants";
 import { children as resolveChildren, createSignal } from "solid-js";
 
 interface MobileNavProps {
@@ -22,12 +22,12 @@ export default function MobileNav(props: MobileNavProps) {
   };
 
   return (
-    <div class="md:hidden">
+    <div class="relative tablet:hidden">
       <button onClick={handleMenuToggle} class="p-3 active:scale-95">
         {astro.menuIcon}
       </button>
       <aside
-        class={`${menuOpen() ? "right-0" : "-right-[100vh]"} fixed top-0 h-screen w-screen transition-all duration-300`}>
+        class={`${menuOpen() ? "right-0" : "-right-[115vh]"} fixed top-0 h-screen w-screen transition-all duration-300`}>
         <div class="flex h-full w-full justify-end bg-gradient-to-l from-dark-bg to-transparent backdrop-blur">
           <figure onClick={handleMenuToggle} class="w-full"></figure>
           <nav class="flex h-full min-w-52 flex-col bg-light-purple">

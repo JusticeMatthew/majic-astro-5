@@ -1,5 +1,5 @@
 ---
-import { Packages, Button } from "@/components";
+import { Packages, Button } from "$/components";
 ---
 
 <script>
@@ -35,13 +35,18 @@ import { Packages, Button } from "@/components";
       );
       animate(lottieContainer, { opacity: [0, 1] }, { delay: 1.5 });
     });
+
+    window.addEventListener("astro:before-swap", () => {
+      anim.destroy();
+    });
   });
 </script>
 
 <section
   id="services"
   class="container relative flex flex-col justify-center pb-12">
-  <figure id="lottie-container:services" class="max-container:hidden"></figure>
+  <figure id="lottie-container:services" class="invisible container:visible">
+  </figure>
   <h3
     id="servicesEl"
     class="relative z-10 mb-6 max-w-[20ch] font-calistoga text-level-5 drop-shadow">

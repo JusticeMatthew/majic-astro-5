@@ -12,6 +12,7 @@ export default {
     extend: {
       screens: {
         tablet: "1025px",
+        packages: "900",
         container: "1400px",
       },
       margin: {

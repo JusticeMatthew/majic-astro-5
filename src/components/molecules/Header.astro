@@ -1,8 +1,8 @@
 ---
-import { navLinks } from "@/constants";
-import { Button } from "@/components";
+import { navLinks } from "$/constants";
+import { Button } from "$/components";
 import { Icon } from "astro-icon/components";
-import MobileNav from "@/components/molecules/MobileNav.tsx";
+import MobileNav from "$/components/molecules/MobileNav.tsx";
 ---
 
 <script>
@@ -14,7 +14,7 @@ import MobileNav from "@/components/molecules/MobileNav.tsx";
 <div
   id="header-wrapper"
   transition:persist
-  class="fixed top-0 z-50 flex w-screen items-center justify-center px-4 max-container:px-0 container:px-7 container:pt-4">
+  class="fixed top-0 z-50 flex w-screen items-center justify-center px-0 container:px-7 container:pt-4">
   <header
     id="header"
     transition:persist
@@ -38,10 +38,10 @@ import MobileNav from "@/components/molecules/MobileNav.tsx";
         href="/contact"
         class="px-7 text-level-2 text-light"
         variant="dark">
-        Contact Us
+        Contact
       </Button>
     </MobileNav>
-    <nav class="flex gap-3 max-md:hidden">
+    <nav class="hidden gap-3 tablet:flex">
       {
         navLinks.map(({ href, label }) => (
           <a

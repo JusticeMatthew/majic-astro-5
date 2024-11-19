@@ -1,6 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
-import { Benefits, Button } from "@/components";
+import { Benefits, Button } from "$/components";
 ---
 
 <script>
@@ -12,7 +12,7 @@ import { Benefits, Button } from "@/components";
       "lottie-container:about",
     ) as HTMLElement;
 
-    lottie_light.loadAnimation({
+    const workingAnimation = lottie_light.loadAnimation({
       container: lottieContainer,
       renderer: "svg",
       loop: true,
@@ -27,6 +27,10 @@ import { Benefits, Button } from "@/components";
         { duration: 1, delay: stagger(0.05, { startDelay: 0.3 }) },
       );
     });
+
+    window.addEventListener("astro:before-swap", () => {
+      workingAnimation.destroy();
+    });
   });
 </script>
 
@@ -34,7 +38,7 @@ import { Benefits, Button } from "@/components";
   <div
     class="container flex flex-col-reverse justify-between gap-12 tablet:flex-row tablet:gap-40">
     <div
-      class="mx-auto mb-28 flex flex-col justify-center max-tablet:items-center max-tablet:text-center">
+      class="mx-auto mb-28 flex flex-col items-center text-center tablet:items-start tablet:justify-center tablet:text-left">
       <h3
         id="aboutEl"
         class="mx-auto mb-6 w-[11ch] text-balance font-calistoga text-level-5 drop-shadow">
