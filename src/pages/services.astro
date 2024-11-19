@@ -1,7 +1,13 @@
 ---
 import BaseLayout from "$/layouts/BaseLayout.astro";
+import { GradientBG } from "$/components";
 ---
 
 <BaseLayout>
-  <h1 class="min-h-[100dvh]">Services</h1>
+  <div class="relative">
+    <div class="absolute inset-0">
+      <GradientBG />
+    </div>
+    <div class="relative">Services</div>
+  </div>
 </BaseLayout>

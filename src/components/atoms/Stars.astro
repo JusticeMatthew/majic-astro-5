@@ -18,38 +18,42 @@
       return opacity;
     }
 
-    for (let i = 0; i < totalStars; i++) {
-      const star = document.createElement("figure");
-      star.id = "star";
+    if (fadingContainer) {
+      for (let i = 0; i < totalStars; i++) {
+        const star = document.createElement("figure");
+        star.id = "star";
 
-      star.style.top = `${randomNumberFromRange(0, 100)}%`;
-      star.style.left = `${randomNumberFromRange(0, 100)}%`;
-      star.style.animationDuration = `${randomNumberFromRange(2, 5)}s`;
-      star.style.animationDelay = `${randomNumberFromRange(0, 5)}s`;
+        star.style.top = `${randomNumberFromRange(0, 100)}%`;
+        star.style.left = `${randomNumberFromRange(0, 100)}%`;
+        star.style.animationDuration = `${randomNumberFromRange(2, 5)}s`;
+        star.style.animationDelay = `${randomNumberFromRange(0, 5)}s`;
 
-      const pos = parseInt(star.style.top.split(".")[0]);
-      star.style.setProperty("--dynamic-opacity", `${setStarOpacity(pos)}`);
+        const pos = parseInt(star.style.top.split(".")[0]);
+        star.style.setProperty("--dynamic-opacity", `${setStarOpacity(pos)}`);
 
-      fadingContainer.appendChild(star);
+        fadingContainer.appendChild(star);
+      }
     }
 
-    for (let i = 0; i < totalStars; i++) {
-      const star = document.createElement("figure");
-      star.id = "star";
+    if (normalContainer) {
+      for (let i = 0; i < totalStars; i++) {
+        const star = document.createElement("figure");
+        star.id = "star";
 
-      star.style.top = `${randomNumberFromRange(0, 100)}%`;
-      star.style.left = `${randomNumberFromRange(0, 100)}%`;
-      star.style.animationDuration = `${randomNumberFromRange(2, 5)}s`;
-      star.style.animationDelay = `${randomNumberFromRange(0, 5)}s`;
+        star.style.top = `${randomNumberFromRange(0, 100)}%`;
+        star.style.left = `${randomNumberFromRange(0, 100)}%`;
+        star.style.animationDuration = `${randomNumberFromRange(2, 5)}s`;
+        star.style.animationDelay = `${randomNumberFromRange(0, 5)}s`;
 
-      normalContainer.appendChild(star);
+        normalContainer.appendChild(star);
+      }
     }
   });
 </script>
 
 <div id="fading-stars-container">
   <figure
-    class="to-dark-bg via-dark-bg absolute inset-0 h-full w-screen bg-gradient-to-b from-dark-purple via-80%">
+    class="absolute inset-0 h-full w-screen bg-gradient-to-b from-dark-purple via-dark-bg via-80% to-dark-bg">
   </figure>
   <slot name="examples" />
 </div>

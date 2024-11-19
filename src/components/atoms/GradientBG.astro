@@ -26,9 +26,7 @@
   });
 </script>
 
-<div
-  class="gradient-bg sticky left-0 top-0 z-0 opacity-60"
-  transition:persist="bgGlow">
+<div class="gradient-bg sticky left-0 top-0 z-0 opacity-60" transition:persist>
   <div class="gradients-container">
     <div class="g1"></div>
     <div class="g2"></div>
@@ -99,6 +97,7 @@
   .gradients-container {
     filter: url("/images/gradients.svg#goo") blur(40px);
     width: 100%;
+    height: 100%;
     transition: all;
     transition-duration: 0.5s;
   }
@@ -112,7 +111,7 @@
   }
 
   html[data-is-top="true"] .gradients-container {
-    height: 110%;
+    height: 110% !important;
   }
 
   .g1 {

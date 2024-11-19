@@ -1,6 +1,4 @@
 ---
-import BaseLayout from "$/layouts/BaseLayout.astro";
-import GradientBG from "$/components/atoms/GradientBG.astro";
 import {
   Landing,
   About,
@@ -8,11 +6,13 @@ import {
   Examples,
   Contact,
   Stars,
+  GradientBG,
   Footer,
 } from "$/components";
+import BaseLayout from "$/layouts/BaseLayout.astro";
 ---
 
-<BaseLayout>
+<BaseLayout title="Dev | Majic Web Design">
   <div class="relative">
     <div class="absolute inset-0">
       <GradientBG />

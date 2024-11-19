@@ -7,42 +7,31 @@ import {
 import lottie_light from "lottie-web";
 import { pricingPlans } from "$/constants";
 
-interface MobilePackagesProps {
-  children: HTMLElement[];
-}
-
 type PlanName = "Personal" | "Business" | "Commerce";
 
-export default function MobilePackages(props: MobilePackagesProps) {
-  const resolved = resolveChildren(() => props.children);
-  const childElement = resolved() as HTMLElement;
-  const lottieArray = Array.from(childElement.children);
+export default function MobilePackages() {
   const [activePlan, setActivePlan] = createSignal<PlanName>("Business");
-  const animationCache = new Map();
 
   createEffect(() => {
-    const activeIndex = pricingPlans.findIndex((p) => p.name === activePlan());
-    const currentChild = lottieArray[activeIndex];
+    const lottieTarget = document.getElementById(
+      `solid-lottie-${activePlan()}`,
+    ) as HTMLElement;
 
-    if (!animationCache.has(activePlan())) {
-      animationCache.set(activePlan(), currentChild);
+    const animation = lottie_light.loadAnimation({
+      container: lottieTarget,
+      renderer: "svg",
+      loop: true,
+      autoplay: true,
+      path: `/animations/${activePlan().toLowerCase()}Plan.json`,
+    });
 
-      const animation = lottie_light.loadAnimation({
-        container: currentChild,
-        renderer: "svg",
-        loop: true,
-        autoplay: true,
-        path: `/animations/${activePlan().toLowerCase()}Plan.json`,
-      });
-
-      window.addEventListener("astro:before-swap", () => {
-        animation.destroy();
-      });
-    }
+    window.addEventListener("astro:before-swap", () => {
+      animation.destroy();
+    });
   });
 
   return (
-    <div class="relative mt-16 flex h-auto w-full flex-col justify-between rounded-b-lg bg-light py-4 pl-4 pr-6 text-dark shadow sm:px-20 sm:py-8 md:px-32 container:hidden">
+    <div class="relative mt-16 flex h-auto w-full flex-col justify-between rounded-b-lg bg-light py-4 pl-4 pr-6 text-dark shadow sm:py-8 container:hidden">
       <div class="absolute -top-12 left-0 flex h-12 w-full items-center rounded-t-lg bg-light/60 text-center">
         {pricingPlans.map(({ name }) => (
           <div
@@ -58,28 +47,59 @@ export default function MobilePackages(props: MobilePackagesProps) {
           </div>
         ))}
       </div>
-      <div class="flex flex-row justify-between tablet:px-28 tablet:container:px-32">
-        {pricingPlans.map(({ name, price, monthly, recommended }, index) => (
+      <div class="flex w-full flex-col">
+        {pricingPlans.map(({ name, price, monthly, recommended, services }) => (
           <Show when={activePlan() === name}>
             {
               <>
-                {lottieArray[index]}
-                <div class="relative ml-4 flex flex-col items-center justify-center">
+                <div class="relative flex w-full flex-row justify-around pl-4 sm:px-16 sm:py-8 md:px-32 tablet:px-44">
                   {recommended && (
-                    <div class="absolute left-0 top-1 flex w-full justify-center text-center text-light">
-                      <p class="z-10 w-fit whitespace-nowrap rounded-full bg-secondary-gradient px-6 py-1 text-min md:px-10">
+                    <div class="absolute bottom-3 left-0 hidden w-full justify-center text-center text-light sm:top-1 sm:flex">
+                      <p class="z-10 h-fit w-fit text-nowrap rounded-full bg-secondary-gradient px-4 py-1 text-min sm:px-6 md:px-10">
                         Most Popular
                       </p>
-                      <figure class="absolute -top-1 mx-auto h-[34px] w-36 rounded-full bg-blurple blur md:w-44" />
+                      <figure class="absolute -top-1 mx-auto h-[34px] w-32 rounded-full bg-blurple blur sm:w-36 md:w-44" />
                     </div>
                   )}
-                  <p class="font-calistoga text-level-3">{name}</p>
-                  <p class="w-full text-center font-calistoga text-level-2">
-                    {price}
-                  </p>
-                  <p class="mt-2 w-full text-center text-min text-dark/80">
-                    {monthly}
-                  </p>
+                  <div class="relative mx-4 flex flex-col items-center justify-start sm:justify-center">
+                    {recommended && (
+                      <div class="absolute bottom-3 left-0 flex w-full justify-center text-center text-light sm:top-1 sm:hidden">
+                        <p class="z-10 h-fit w-fit text-nowrap rounded-full bg-secondary-gradient px-4 py-1 text-min sm:px-6 md:px-10">
+                          Most Popular
+                        </p>
+                        <figure class="absolute -top-1 mx-auto h-[34px] w-32 rounded-full bg-blurple blur sm:w-36 md:w-44" />
+                      </div>
+                    )}
+                    <p class="pt-6 font-calistoga text-level-2 sm:pt-0 sm:text-level-3">
+                      {name}
+                    </p>
+                    <p class="w-full text-center font-calistoga text-level-1 sm:text-level-2">
+                      {price}
+                    </p>
+                    <p class="mt-2 w-full text-nowrap text-center text-min text-dark/80">
+                      {monthly}
+                    </p>
+                  </div>
+                  <figure
+                    id={`solid-lottie-${name}`}
+                    class="h-44 w-44 sm:h-60 sm:w-60 tablet:h-80 tablet:w-80"></figure>
+                </div>
+                <div class="mt-10 flex w-full flex-col items-center px-6 sm:mt-8">
+                  <div class="grid w-fit grid-cols-1 gap-x-4 md:grid-cols-2">
+                    {services.map((service) => (
+                      <div class="mb-6 flex">
+                        <img
+                          src="/icons/check-icon.svg"
+                          alt=""
+                          width={20}
+                          height={20}
+                        />
+                        <p class="ml-6 inline text-min sm:text-content">
+                          {service}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </>
             }
