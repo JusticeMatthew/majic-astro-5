@@ -26,6 +26,8 @@ export default function ContactForm({
       if (!error) {
         setSending(false);
         form.reset();
+      } else {
+        console.log(error);
       }
     },
   }));
