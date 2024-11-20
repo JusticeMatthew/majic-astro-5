@@ -5,8 +5,22 @@ import { Button } from "$/components";
 import ContactForm from "$/components/molecules/ContactForm.tsx";
 ---
 
+<script>
+  import { animate, inView } from "motion";
+
+  document.addEventListener("astro:page-load", () => {
+    inView("#contactEl", () => {
+      animate(
+        "#contactEl",
+        { y: [30, 0], opacity: [0, 1] },
+        { duration: 0.5, delay: 0.3 },
+      );
+    });
+  });
+</script>
+
 <section class="w-screen bg-dark-bg">
-  <div class="container flex flex-col">
+  <div id="contactEl" class="container flex flex-col">
     <h3 class="z-30 mb-16 text-center font-calistoga text-level-5 drop-shadow">
       Ready to see <span class="flashing-text drop-shadow-xl"
         >Majic<span class="text-light drop-shadow"> can do for </span>you</span

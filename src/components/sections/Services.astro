@@ -6,6 +6,15 @@ import { Packages, Button } from "$/components";
   import lottie_light from "lottie-web";
   import { inView, animate, stagger } from "motion";
 
+  const sequence = [
+    [
+      "#servicesEl",
+      { opacity: [0, 1], x: [-50, 0] },
+      { duration: 1, delay: stagger(0.05, { startDelay: 0.3 }) },
+    ],
+    ["#packagesEl", { opacity: [0, 1] }, { duration: 1, delay: 0.3 }],
+  ];
+
   document.addEventListener("astro:page-load", () => {
     const lottieContainer = document.getElementById(
       "lottie-container:services",
@@ -28,11 +37,8 @@ import { Packages, Button } from "$/components";
         setTimeout(() => flashingText.classList.add("flashing-text"), 200);
       }, 1500);
 
-      animate(
-        "#servicesEl",
-        { opacity: [0, 1], x: [-50, 0] },
-        { duration: 1, delay: stagger(0.05, { startDelay: 0.3 }) },
-      );
+      // @ts-expect-error
+      animate(sequence);
       animate(lottieContainer, { opacity: [0, 1] }, { delay: 1.5 });
     });
 

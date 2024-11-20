@@ -89,6 +89,8 @@ label {
 #landingEl,
 #aboutEl,
 #servicesEl,
-#examplesEl {
+#examplesEl,
+#packagesEl,
+#contactEl {
   opacity: 0;
 }

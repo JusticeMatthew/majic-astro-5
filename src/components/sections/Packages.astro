@@ -52,7 +52,9 @@ const mobileLottieStyles = "w-44 h-44 sm:w-60 sm:h-60 tablet:h-80 tablet:w-80";
   });
 </script>
 
-<section class="h-[min(auto, 60vh)] relative mb-6 flex flex-col items-center">
+<section
+  id="packagesEl"
+  class="h-[min(auto, 60vh)] relative mb-6 flex flex-col items-center">
   <div class="flex w-full flex-col justify-between">
     <MobilePackages client:only="solid-js" />
     <div class="mt-8 hidden grid-cols-3 gap-6 container:grid">
