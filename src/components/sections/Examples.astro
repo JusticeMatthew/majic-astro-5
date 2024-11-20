@@ -46,13 +46,16 @@ import logoLight from "$/assets/logo-light.svg";
     id="grid"
     class="z-30 grid grid-cols-1 gap-6 tablet:grid-cols-2 container:grid-cols-5">
     {
-      clients.map(({ title, subtitle, content, styles, site }) => (
+      clients.map(({ title, subtitle, content, styles, site, background }) => (
         <a
           id="clientEl"
           href={site}
           style={styles}
           target="_blank"
-          class="col-span-1 rounded-lg bg-opacity-50 bg-cover bg-top px-8 py-10 drop-shadow-lg sm:px-12 container:first:col-span-2 container:[&:nth-child(2)]:col-span-3 container:[&:nth-child(3)]:col-span-3">
+          class="group relative col-span-1 overflow-clip rounded-lg bg-opacity-50 bg-cover bg-top px-8 py-10 ring-1 ring-inset ring-dark-bg drop-shadow-lg transition-all duration-500 hover:-translate-y-2 hover:bg-[top_left_1rem] sm:px-12 container:first:col-span-2 container:[&:nth-child(2)]:col-span-3 container:[&:nth-child(3)]:col-span-3">
+          <figure
+            class={`absolute -left-4 top-[1px] z-20 h-[99.5%] w-6 rounded-l-lg ${background} transition-all duration-500 group-hover:translate-x-4`}
+          />
           <p class="font-calistoga text-level-3 drop-shadow">{title}</p>
           <p class="mb-52 text-level-1 drop-shadow">{subtitle}</p>
           <p class="pretty max-w-[55ch] drop-shadow">{content}</p>
@@ -61,12 +64,12 @@ import logoLight from "$/assets/logo-light.svg";
     }
     <div
       id="clientEl"
-      class="relative col-span-1 flex h-auto flex-col overflow-clip rounded-lg bg-secondary-gradient px-8 py-10 drop-shadow-lg sm:px-12 container:col-span-2">
+      class="group relative col-span-1 flex h-auto flex-col overflow-clip rounded-lg bg-secondary-gradient px-8 py-10 drop-shadow-lg transition-all duration-500 hover:-translate-y-2 sm:px-12 container:col-span-2">
       <Image
         src={logoLight}
         alt=""
         width={240}
-        class="absolute -right-8 top-24 z-30 rotate-[95deg] -scale-x-[1] opacity-60"
+        class="absolute -right-8 top-24 z-30 rotate-[95deg] -scale-x-[1] opacity-60 transition-all duration-500 group-hover:translate-x-4"
       />
       <p class="z-30 font-calistoga text-level-3 drop-shadow">Learn More</p>
       <p class="z-30 mb-52 text-level-1 drop-shadow">

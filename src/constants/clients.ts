@@ -14,7 +14,7 @@ const examples = [
     content:
       "A fresh look for a trusted pest control service, blending modern aesthetics with practical solutions.",
     site: "https://bandcpestcontrol.com/",
-    background: "bg-[#18181B]",
+    background: "bg-[#314224]",
     poster: bandcBg,
     styles: `background-image: linear-gradient(to right, #314224 40%, rgba(49, 66, 36, .8) 70%, transparent), url(${bandcBg.src})`,
   },
@@ -24,7 +24,7 @@ const examples = [
     content:
       "The website for fan-based interactions with the popular card game Dawncaster. Create cards, vote on designs, and much, much more!",
     site: "https://www.dawnforge.app/",
-    background: "bg-[#ff64f5]",
+    background: "bg-[#3f0624]",
     styles: `background-image: linear-gradient(to right, #3f0624 30%, rgba(63, 6, 36, .8) 60%, transparent), url(${dawnforgeBg.src})`,
   },
   {
@@ -33,7 +33,7 @@ const examples = [
     content:
       "Showcasing the stunning portfolio of a talented local photography team with sleek design and seamless performance.",
     site: "https://tandt-v2.vercel.app/",
-    background: "bg-[#4A3D87]",
+    background: "bg-[#2e4b6b]",
     styles: `background-image: linear-gradient(to right, #2e4b6b 30%, rgba(46, 75, 107, .8) 60%, transparent), url(${tandtBg.src})`,
   },
 ];
