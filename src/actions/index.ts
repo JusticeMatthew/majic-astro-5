@@ -1,9 +1,9 @@
 import { z } from "astro:schema";
 import { Resend } from "resend";
 import { RESEND_API_KEY } from "astro:env/server";
-import { defineAction, ActionError } from "astro:actions";
+import { defineAction } from "astro:actions";
 
-const resend = new Resend(RESEND_API_KEY);
+const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
 export const server = {
   sendEmail: defineAction({
@@ -14,8 +14,8 @@ export const server = {
       message: z.string(),
       company: z.string().optional(),
     }),
-    handler: async ({ name, email, message, company }) => {
-      const { data, error } = await resend.emails.send({
+    handler: async ({ name, email, message, company = "No company" }) => {
+      const { error } = await resend.emails.send({
         from: "Majic Website <info@majicwebdesign.com>",
         to: ["matthewajustice@gmail.com"],
         subject: "POTENTIAL MAJIC CLIENT",
