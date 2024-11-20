@@ -1,5 +1,8 @@
-import { createSignal } from "solid-js";
+import { z } from "astro:schema";
+import { actions } from "astro:actions";
+import { createSignal, createEffect } from "solid-js";
 import { createForm } from "@tanstack/solid-form";
+import { zodValidator } from "@tanstack/zod-form-adapter";
 
 export default function ContactForm({
   children,
@@ -7,6 +10,7 @@ export default function ContactForm({
   children: HTMLButtonElement;
 }) {
   const [sending, setSending] = createSignal(false);
+
   const form = createForm(() => ({
     defaultValues: {
       name: "",
@@ -14,18 +18,37 @@ export default function ContactForm({
       company: "",
       message: "",
     },
+    validatorAdapters: zodValidator(),
     onSubmit: async ({ value }) => {
-      console.log("Success", value);
+      setSending(true);
+      const { error } = await actions.sendEmail(value);
+
+      if (!error) {
+        setSending(false);
+        form.reset();
+      }
     },
   }));
 
-  const styles = {
-    inputContainer: "mb-6 md:last:mb-0",
-    input:
-      "mt-2 h-12 w-full rounded-lg bg-slate-200 p-3 focus:outline-none sm:h-14 ring-blurple focus-within:ring-4 hover:ring-4",
-    textArea:
-      "mt-2 h-[13.5rem] w-full resize-none rounded-lg bg-slate-200 p-3 focus:outline-none sm:h-[17.8rem] ring-blurple focus-within:ring-4 hover:ring-4",
-  };
+  createEffect(() => {
+    const submitButton = document.getElementById(
+      "form-submit-button",
+    ) as HTMLButtonElement;
+
+    form.useStore(({ fieldMeta }) => {
+      const formErrors = Object.values(fieldMeta).flatMap(
+        (field) => field.errors,
+      ).length;
+
+      if (formErrors > 0) {
+        submitButton.disabled = true;
+      } else {
+        submitButton.disabled = false;
+      }
+    });
+  });
+
+  const inputContainerStyles = "mb-6 md:last:mb-0";
 
   return (
     <form
@@ -37,48 +60,92 @@ export default function ContactForm({
       class="z-30 mb-14 flex w-full flex-col text-dark">
       <div class="flex w-full flex-col md:flex-row md:gap-14">
         <div class="w-full">
-          <div class={styles.inputContainer}>
+          <div class={inputContainerStyles}>
             <label>
               Name
               <form.Field
                 name="name"
+                validatorAdapter={zodValidator()}
+                validators={{
+                  onChange: z.string().min(1, "We need to know your name"),
+                }}
                 children={(field) => (
-                  <input
-                    class={styles.input}
-                    name={field().name}
-                    value={field().state.value}
-                    onBlur={field().handleBlur}
-                    onInput={(e) => field().handleChange(e.target.value)}
-                  />
+                  <div class="relative">
+                    <input
+                      classList={{
+                        "mt-2 h-12 w-full rounded-lg bg-slate-200 p-3 focus:outline-none sm:h-14 ":
+                          true,
+                        "ring-blurple focus-within:ring-4 hover:ring-4": field()
+                          .state.meta.errors.length
+                          ? false
+                          : true,
+                        "ring-4 ring-red-700 focus-within:ring-4": field().state
+                          .meta.errors.length
+                          ? true
+                          : false,
+                      }}
+                      name={field().name}
+                      value={field().state.value}
+                      onBlur={field().handleBlur}
+                      onInput={(e) => field().handleChange(e.target.value)}
+                    />
+                    {field().state.meta.errors && (
+                      <span class="absolute -top-5 left-16 text-min text-red-700">
+                        {field().state.meta.errors}
+                      </span>
+                    )}
+                  </div>
                 )}
               />
             </label>
           </div>
-          <div class={styles.inputContainer}>
+          <div class={inputContainerStyles}>
             <label>
               Email
               <form.Field
                 name="email"
+                validatorAdapter={zodValidator()}
+                validators={{
+                  onChange: z.string().email("We need a valid email"),
+                }}
                 children={(field) => (
-                  <input
-                    class={styles.input}
-                    name={field().name}
-                    value={field().state.value}
-                    onBlur={field().handleBlur}
-                    onInput={(e) => field().handleChange(e.target.value)}
-                  />
+                  <div class="relative">
+                    <input
+                      classList={{
+                        "mt-2 h-12 w-full rounded-lg bg-slate-200 p-3 focus:outline-none sm:h-14":
+                          true,
+                        "ring-blurple focus-within:ring-4 hover:ring-4": field()
+                          .state.meta.errors.length
+                          ? false
+                          : true,
+                        "ring-4 ring-red-700 focus-within:ring-4": field().state
+                          .meta.errors.length
+                          ? true
+                          : false,
+                      }}
+                      name={field().name}
+                      value={field().state.value}
+                      onBlur={field().handleBlur}
+                      onInput={(e) => field().handleChange(e.target.value)}
+                    />
+                    {field().state.meta.errors && (
+                      <span class="absolute -top-5 left-16 text-min text-red-700">
+                        {field().state.meta.errors}
+                      </span>
+                    )}
+                  </div>
                 )}
               />
             </label>
           </div>
-          <div class={styles.inputContainer}>
+          <div class={inputContainerStyles}>
             <label>
               Company
               <form.Field
                 name="company"
                 children={(field) => (
                   <input
-                    class={styles.input}
+                    class="mt-2 h-12 w-full rounded-lg bg-slate-200 p-3 ring-blurple focus-within:ring-4 hover:ring-4 focus:outline-none sm:h-14"
                     name={field().name}
                     value={field().state.value}
                     onBlur={field().handleBlur}
@@ -94,14 +161,36 @@ export default function ContactForm({
             Message
             <form.Field
               name="message"
+              validatorAdapter={zodValidator()}
+              validators={{
+                onChange: z.string().min(1, "Let us know how we can help"),
+              }}
               children={(field) => (
-                <textarea
-                  class={styles.textArea}
-                  name={field().name}
-                  value={field().state.value}
-                  onBlur={field().handleBlur}
-                  onInput={(e) => field().handleChange(e.target.value)}
-                />
+                <div class="relative">
+                  <textarea
+                    classList={{
+                      "mt-2 h-[13.5rem] w-full resize-none rounded-lg bg-slate-200 p-3 focus:outline-none sm:h-[17.8rem]":
+                        true,
+                      "ring-blurple focus-within:ring-4 hover:ring-4": field()
+                        .state.meta.errors.length
+                        ? false
+                        : true,
+                      "ring-4 ring-red-700 focus-within:ring-4": field().state
+                        .meta.errors.length
+                        ? true
+                        : false,
+                    }}
+                    name={field().name}
+                    value={field().state.value}
+                    onBlur={field().handleBlur}
+                    onInput={(e) => field().handleChange(e.target.value)}
+                  />
+                  {field().state.meta.errors && (
+                    <span class="absolute -top-5 left-24 text-min text-red-700">
+                      {field().state.meta.errors}
+                    </span>
+                  )}
+                </div>
               )}
             />
           </label>
