@@ -40,11 +40,7 @@ export default function ContactForm({
         (field) => field.errors,
       ).length;
 
-      if (formErrors > 0) {
-        submitButton.disabled = true;
-      } else {
-        submitButton.disabled = false;
-      }
+      submitButton.disabled = formErrors > 0;
     });
   });
 
