@@ -9,9 +9,7 @@
     function move() {
       curX += (tgX - curX) / 10;
       curY += (tgY - curY) / 10;
-      interBubble.style.transform = `translate(${Math.round(
-        curX,
-      )}px, ${Math.round(curY)}px)`;
+      interBubble.style.transform = `translate(${curX}px, ${curY}px)`;
       requestAnimationFrame(move);
     }
 
