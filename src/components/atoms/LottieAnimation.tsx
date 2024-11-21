@@ -22,6 +22,10 @@ export default function LottieAnimation({
       autoplay: true,
       path: `/animations/${selector}.json`,
     });
+
+    return () => {
+      animation.destroy();
+    };
   });
   return <figure id={`lottie-container:${selector}`} class={styles}></figure>;
 }
