@@ -28,7 +28,7 @@ export const server = {
       });
 
       if (error) {
-        return error;
+        return error.message;
       }
     },
   }),
