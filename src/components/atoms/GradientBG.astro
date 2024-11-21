@@ -1,31 +1,3 @@
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const interBubble = document.querySelector<HTMLDivElement>(".interactive")!;
-    let curX = 0;
-    let curY = 0;
-    let tgX = 0;
-    let tgY = 0;
-
-    function move() {
-      curX += (tgX - curX) / 10;
-      curY += (tgY - curY) / 10;
-      interBubble.style.transform = `translate(${curX}px, ${curY}px)`;
-      requestAnimationFrame(move);
-    }
-
-    let lastUpdate = 0;
-    window.addEventListener("mousemove", (event) => {
-      const now = performance.now();
-      if (now - lastUpdate < 16) return;
-      tgX = event.clientX;
-      tgY = event.clientY;
-      lastUpdate = now;
-    });
-
-    move();
-  });
-</script>
-
 <div class="gradient-bg sticky left-0 top-0 z-0 opacity-60" transition:persist>
   <div class="gradients-container">
     <div class="g1"></div>

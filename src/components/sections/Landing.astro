@@ -2,23 +2,6 @@
 import { Button } from "$/components";
 ---
 
-<script>
-  import { stagger } from "motion";
-  import { animate } from "motion/mini";
-
-  document.addEventListener("astro:page-load", () => {
-    const landingContent = document.getElementById("landingEl")!;
-
-    if (landingContent) {
-      animate(
-        "#landingEl",
-        { opacity: 1 },
-        { duration: 1, delay: stagger(0.05) },
-      );
-    }
-  });
-</script>
-
 <section
   class="container flex min-h-[100lvh] flex-col items-center justify-center text-center">
   <h2

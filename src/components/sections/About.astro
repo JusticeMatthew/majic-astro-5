@@ -3,37 +3,6 @@ import { Icon } from "astro-icon/components";
 import { Benefits, Button } from "$/components";
 ---
 
-<script>
-  import lottie_light from "lottie-web";
-  import { inView, animate, stagger } from "motion";
-
-  document.addEventListener("astro:page-load", () => {
-    const lottieContainer = document.getElementById(
-      "lottie-container:about",
-    ) as HTMLElement;
-
-    // const workingAnimation = lottie_light.loadAnimation({
-    //   container: lottieContainer,
-    //   renderer: "svg",
-    //   loop: true,
-    //   autoplay: true,
-    //   path: "/animations/workingV2.json",
-    // });
-
-    inView("#about", () => {
-      animate(
-        "#aboutEl",
-        { opacity: [0, 1], x: [-50, 0] },
-        { duration: 1, delay: stagger(0.05, { startDelay: 0.3 }) },
-      );
-    });
-
-    window.addEventListener("astro:before-swap", () => {
-      workingAnimation.destroy();
-    });
-  });
-</script>
-
 <section id="about" class="mb-section mt-60 w-full pb-12">
   <div
     class="container flex flex-col-reverse justify-between gap-12 tablet:flex-row tablet:gap-40">
