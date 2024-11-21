@@ -12,9 +12,7 @@
       interBubble.style.transform = `translate(${Math.round(
         curX,
       )}px, ${Math.round(curY)}px)`;
-      requestAnimationFrame(() => {
-        move();
-      });
+      requestAnimationFrame(move);
     }
 
     window.addEventListener("mousemove", (event) => {
