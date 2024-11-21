@@ -20,29 +20,29 @@ const mobileLottieStyles = "w-44 h-44 sm:w-60 sm:h-60 tablet:h-80 tablet:w-80";
       "lottie-container:packages-Commerce",
     ) as HTMLElement;
 
-    const personalAnimation = lottie_light.loadAnimation({
-      container: lottiePersonal,
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      path: "/animations/personalPlan.json",
-    });
+    // const personalAnimation = lottie_light.loadAnimation({
+    //   container: lottiePersonal,
+    //   renderer: "svg",
+    //   loop: true,
+    //   autoplay: true,
+    //   path: "/animations/personalPlan.json",
+    // });
 
-    const businessAnimation = lottie_light.loadAnimation({
-      container: lottieBusiness,
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      path: "/animations/businessPlan.json",
-    });
+    // const businessAnimation = lottie_light.loadAnimation({
+    //   container: lottieBusiness,
+    //   renderer: "svg",
+    //   loop: true,
+    //   autoplay: true,
+    //   path: "/animations/businessPlan.json",
+    // });
 
-    const commerceAnimation = lottie_light.loadAnimation({
-      container: lottieCommerce,
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      path: "/animations/commercePlan.json",
-    });
+    // const commerceAnimation = lottie_light.loadAnimation({
+    //   container: lottieCommerce,
+    //   renderer: "svg",
+    //   loop: true,
+    //   autoplay: true,
+    //   path: "/animations/commercePlan.json",
+    // });
 
     window.addEventListener("astro:before-swap", () => {
       personalAnimation.destroy();
