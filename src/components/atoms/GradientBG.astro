@@ -15,9 +15,13 @@
       requestAnimationFrame(move);
     }
 
+    let lastUpdate = 0;
     window.addEventListener("mousemove", (event) => {
+      const now = performance.now();
+      if (now - lastUpdate < 16) return;
       tgX = event.clientX;
       tgY = event.clientY;
+      lastUpdate = now;
     });
 
     move();
