@@ -3,6 +3,8 @@ import { Resend } from "resend";
 import { RESEND_API_KEY } from "astro:env/server";
 import { defineAction } from "astro:actions";
 
+const resend = new Resend(RESEND_API_KEY);
+
 export const server = {
   sendEmail: defineAction({
     accept: "json",
@@ -10,10 +12,9 @@ export const server = {
       name: z.string(),
       email: z.string(),
       message: z.string(),
-      company: z.string().optional(),
+      company: z.string(),
     }),
-    handler: async ({ name, email, message, company = "No company" }) => {
-      const resend = new Resend(RESEND_API_KEY);
+    handler: async ({ name, email, message, company }) => {
       const { error } = await resend.emails.send({
         from: "Majic Website <info@majicwebdesign.com>",
         to: ["matthewajustice@gmail.com"],
