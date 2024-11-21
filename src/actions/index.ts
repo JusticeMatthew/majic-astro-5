@@ -1,7 +1,7 @@
 import { z } from "astro:schema";
 import { Resend } from "resend";
 import { RESEND_API_KEY } from "astro:env/server";
-import { defineAction } from "astro:actions";
+import { defineAction, ActionError } from "astro:actions";
 
 const resend = new Resend(RESEND_API_KEY);
 
@@ -12,10 +12,10 @@ export const server = {
       name: z.string(),
       email: z.string(),
       message: z.string(),
-      company: z.string(),
+      company: z.string().optional(),
     }),
     handler: async ({ name, email, message, company }) => {
-      const { error } = await resend.emails.send({
+      const { data, error } = await resend.emails.send({
         from: "Majic Website <info@majicwebdesign.com>",
         to: ["matthewajustice@gmail.com"],
         subject: "POTENTIAL MAJIC CLIENT",
@@ -28,7 +28,10 @@ export const server = {
       });
 
       if (error) {
-        return error.message;
+        throw new ActionError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: error.message,
+        });
       }
     },
   }),

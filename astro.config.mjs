@@ -10,11 +10,6 @@ import icon from "astro-icon";
 export default defineConfig({
   site: "http://majicwebdesign.netlify.app",
   integrations: [tailwind(), icon(), solidJs(), sitemap()],
-  vite: {
-    build: {
-      sourcemap: true,
-    },
-  },
   env: {
     schema: {
       RESEND_API_KEY: envField.string({ context: "server", access: "secret" }),
