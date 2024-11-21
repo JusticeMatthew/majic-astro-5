@@ -8,7 +8,13 @@ import MobileNav from "$/components/molecules/MobileNav.tsx";
 <script>
   import { animate } from "motion/mini";
 
-  animate("#header-wrapper", { opacity: [0, 1] }, { duration: 0.5, delay: 1 });
+  document.addEventListener("astro:page-load", () => {
+    animate(
+      "#header-wrapper",
+      { opacity: [0, 1] },
+      { duration: 0.5, delay: 1 },
+    );
+  });
 </script>
 
 <div
