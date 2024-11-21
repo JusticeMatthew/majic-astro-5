@@ -85,3 +85,12 @@ label {
   margin: 0 auto;
   padding: 0 1rem;
 }
+
+#landingEl,
+#aboutEl,
+#servicesEl,
+#examplesEl,
+#packagesEl,
+#contactEl {
+  opacity: 0;
+}

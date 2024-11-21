@@ -6,6 +6,30 @@ import { Icon } from "astro-icon/components";
 import logoLight from "$/assets/logo-light.svg";
 ---
 
+<script>
+  import { animate, inView, stagger } from "motion";
+
+  document.addEventListener("astro:page-load", () => {
+    const sequence = [
+      [
+        "#examplesEl",
+        { y: [30, 0], opacity: [0, 1] },
+        { duration: 0.5, delay: stagger(0.05, { startDelay: 0.3 }) },
+      ],
+      [
+        "#clientEl",
+        { opacity: [0, 1] },
+        { duration: 0.5, delay: stagger(0.05) },
+      ],
+    ];
+
+    inView("#examples", () => {
+      // @ts-expect-error
+      animate(sequence);
+    });
+  });
+</script>
+
 <section
   id="examples"
   class="container z-30 my-section flex flex-col items-center justify-center bg-none pb-12">

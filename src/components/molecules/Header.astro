@@ -5,6 +5,18 @@ import { Icon } from "astro-icon/components";
 import MobileNav from "$/components/molecules/MobileNav.tsx";
 ---
 
+<script>
+  import { animate } from "motion/mini";
+
+  document.addEventListener("astro:page-load", () => {
+    animate(
+      "#header-wrapper",
+      { opacity: [0, 1] },
+      { duration: 0.5, delay: 0.5 },
+    );
+  });
+</script>
+
 <div
   id="header-wrapper"
   transition:persist

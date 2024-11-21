@@ -2,6 +2,52 @@
 import { Packages, Button } from "$/components";
 ---
 
+<script>
+  import lottie_light from "lottie-web";
+  import { inView, animate, stagger } from "motion";
+
+  const sequence = [
+    [
+      "#servicesEl",
+      { opacity: [0, 1], x: [-50, 0] },
+      { duration: 1, delay: stagger(0.05, { startDelay: 0.3 }) },
+    ],
+    ["#packagesEl", { opacity: [0, 1] }, { duration: 1, delay: 0.3 }],
+  ];
+
+  document.addEventListener("astro:page-load", () => {
+    const lottieContainer = document.getElementById(
+      "lottie-container:services",
+    ) as HTMLElement;
+    const flashingText = document.getElementById(
+      "flashing-text",
+    ) as HTMLElement;
+
+    const anim = lottie_light.loadAnimation({
+      container: lottieContainer,
+      renderer: "svg",
+      loop: false,
+      autoplay: false,
+      path: "/animations/wand-waving.json",
+    });
+
+    inView("#services", () => {
+      setTimeout(() => {
+        anim.play();
+        setTimeout(() => flashingText.classList.add("flashing-text"), 200);
+      }, 1500);
+
+      // @ts-expect-error
+      animate(sequence);
+      animate(lottieContainer, { opacity: [0, 1] }, { delay: 1.5 });
+    });
+
+    window.addEventListener("astro:before-swap", () => {
+      anim.destroy();
+    });
+  });
+</script>
+
 <section
   id="services"
   class="container relative flex flex-col justify-center pb-12">
