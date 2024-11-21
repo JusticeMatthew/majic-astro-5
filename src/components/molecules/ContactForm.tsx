@@ -103,9 +103,9 @@ export default function ContactForm({
               <form.Field
                 name="email"
                 validatorAdapter={zodValidator()}
-                asyncDebounceMs={500}
                 validators={{
-                  onChange: z.string().email("We need a valid email"),
+                  onChangeAsyncDebounceMs: 500,
+                  onChangeAsync: z.string().email("We need a valid email"),
                 }}
                 children={(field) => (
                   <div class="relative">

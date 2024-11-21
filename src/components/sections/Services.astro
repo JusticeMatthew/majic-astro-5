@@ -25,16 +25,16 @@ import Button from "$/atoms/Button.astro";
         "flashing-text",
       ) as HTMLElement;
 
-      const anim = lottie.loadAnimation({
-        container: lottieContainer,
-        renderer: "canvas",
-        loop: false,
-        autoplay: false,
-        path: "/animations/wand-waving.json",
-      });
+      // const anim = lottie.loadAnimation({
+      //   container: lottieContainer,
+      //   renderer: "canvas",
+      //   loop: false,
+      //   autoplay: false,
+      //   path: "/animations/wand-waving.json",
+      // });
 
       setTimeout(() => {
-        anim.play();
+        // anim.play();
         setTimeout(() => flashingText.classList.add("flashing-text"), 200);
       }, 1500);
 
@@ -42,9 +42,9 @@ import Button from "$/atoms/Button.astro";
       animate(sequence);
       animate(lottieContainer, { opacity: [0, 1] }, { delay: 1.5 });
 
-      return () => {
-        anim.destroy();
-      };
+      // return () => {
+      //   anim.destroy();
+      // };
     });
 
     window.addEventListener("astro:before-swap", () => {

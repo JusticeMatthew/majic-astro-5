@@ -20,35 +20,35 @@ import MobilePackages from "$/molecules/MobilePackages.tsx";
         "lottie-container:packages-Commerce",
       ) as HTMLElement;
 
-      const personalAnimation = lottie.loadAnimation({
-        container: lottiePersonal,
-        renderer: "canvas",
-        loop: true,
-        autoplay: true,
-        path: "/animations/personalPlan.json",
-      });
+      // const personalAnimation = lottie.loadAnimation({
+      //   container: lottiePersonal,
+      //   renderer: "canvas",
+      //   loop: true,
+      //   autoplay: true,
+      //   path: "/animations/personalPlan.json",
+      // });
 
-      const businessAnimation = lottie.loadAnimation({
-        container: lottieBusiness,
-        renderer: "canvas",
-        loop: true,
-        autoplay: true,
-        path: "/animations/businessPlan.json",
-      });
+      // const businessAnimation = lottie.loadAnimation({
+      //   container: lottieBusiness,
+      //   renderer: "canvas",
+      //   loop: true,
+      //   autoplay: true,
+      //   path: "/animations/businessPlan.json",
+      // });
 
-      const commerceAnimation = lottie.loadAnimation({
-        container: lottieCommerce,
-        renderer: "canvas",
-        loop: true,
-        autoplay: true,
-        path: "/animations/commercePlan.json",
-      });
+      // const commerceAnimation = lottie.loadAnimation({
+      //   container: lottieCommerce,
+      //   renderer: "canvas",
+      //   loop: true,
+      //   autoplay: true,
+      //   path: "/animations/commercePlan.json",
+      // });
 
-      return () => {
-        personalAnimation.destroy();
-        businessAnimation.destroy();
-        commerceAnimation.destroy();
-      };
+      // return () => {
+      //   personalAnimation.destroy();
+      //   businessAnimation.destroy();
+      //   commerceAnimation.destroy();
+      // };
     });
 
     window.addEventListener("astro:before-swap", () => {

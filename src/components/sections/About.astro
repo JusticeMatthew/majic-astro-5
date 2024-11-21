@@ -16,15 +16,15 @@ import Button from "$/atoms/Button.astro";
         "lottie-container:about",
       ) as HTMLElement;
 
-      if (!workingAnimation) {
-        workingAnimation = lottie.loadAnimation({
-          container: lottieContainer,
-          renderer: "canvas",
-          loop: true,
-          autoplay: true,
-          path: "/animations/workingV2.json",
-        });
-      }
+      // if (!workingAnimation) {
+      //   workingAnimation = lottie.loadAnimation({
+      //     container: lottieContainer,
+      //     renderer: "canvas",
+      //     loop: true,
+      //     autoplay: true,
+      //     path: "/animations/workingV2.json",
+      //   });
+      // }
 
       animate(
         "#aboutEl",
