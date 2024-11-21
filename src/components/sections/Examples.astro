@@ -1,31 +1,30 @@
 ---
 import { Image } from "astro:assets";
-import { clients } from "$/constants";
-import { Button } from "$/components";
 import { Icon } from "astro-icon/components";
+import Button from "$/atoms/Button.astro";
+import clients from "$/constants/clients.ts";
 import logoLight from "$/assets/logo-light.svg";
 ---
 
 <script>
   import { animate, inView, stagger } from "motion";
+  const sequence = [
+    [
+      "#examplesEl",
+      { y: [30, 0], opacity: [0, 1] },
+      { duration: 0.5, delay: stagger(0.05, { startDelay: 0.3 }) },
+    ],
+    ["#clientEl", { opacity: [0, 1] }, { duration: 0.5, delay: stagger(0.05) }],
+  ];
 
   document.addEventListener("astro:page-load", () => {
-    const sequence = [
-      [
-        "#examplesEl",
-        { y: [30, 0], opacity: [0, 1] },
-        { duration: 0.5, delay: stagger(0.05, { startDelay: 0.3 }) },
-      ],
-      [
-        "#clientEl",
-        { opacity: [0, 1] },
-        { duration: 0.5, delay: stagger(0.05) },
-      ],
-    ];
-
-    inView("#examples", () => {
+    const stop = inView("#examples", () => {
       // @ts-expect-error
       animate(sequence);
+    });
+
+    window.addEventListener("astro:before-swap", () => {
+      stop();
     });
   });
 </script>

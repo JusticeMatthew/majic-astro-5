@@ -3,7 +3,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "$/*": ["src/*", "public/*"]
+      "$/assets/*": ["src/assets/*"],
+      "$/styles/*": ["src/styles/*"],
+      "$/layouts/*": ["src/layouts/*"],
+      "$/constants/*": ["src/constants/*"],
+      "$/components/*": ["src/components/*"],
+      "$/atoms/*": ["src/components/atoms/*"],
+      "$/molecules/*": ["src/components/molecules/*"],
+      "$/sections/*": ["src/components/sections/*"]
     },
     "jsx": "preserve",
     "jsxImportSource": "solid-js"

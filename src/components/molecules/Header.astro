@@ -1,7 +1,7 @@
 ---
-import { navLinks } from "$/constants";
-import { Button } from "$/components";
 import { Icon } from "astro-icon/components";
+import Button from "$/atoms/Button.astro";
+import navLinks from "$/constants/navLinks.ts";
 import MobileNav from "$/components/molecules/MobileNav.tsx";
 ---
 
@@ -12,7 +12,7 @@ import MobileNav from "$/components/molecules/MobileNav.tsx";
     animate(
       "#header-wrapper",
       { opacity: [0, 1] },
-      { duration: 0.5, delay: 1 },
+      { duration: 0.5, delay: 0.5 },
     );
   });
 </script>

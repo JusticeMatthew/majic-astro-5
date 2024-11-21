@@ -1,11 +1,6 @@
-import {
-  children as resolveChildren,
-  createSignal,
-  createEffect,
-  Show,
-} from "solid-js";
-import lottie_light from "lottie-web";
-import { pricingPlans } from "$/constants";
+import lottie from "lottie-web";
+import { createSignal, createEffect, Show } from "solid-js";
+import pricingPlans from "$/constants/pricingPlans.ts";
 
 type PlanName = "Personal" | "Business" | "Commerce";
 
@@ -17,17 +12,17 @@ export default function MobilePackages() {
       `solid-lottie-${activePlan()}`,
     ) as HTMLElement;
 
-    const animation = lottie_light.loadAnimation({
+    const animation = lottie.loadAnimation({
       container: lottieTarget,
-      renderer: "svg",
+      renderer: "canvas",
       loop: true,
       autoplay: true,
       path: `/animations/${activePlan().toLowerCase()}Plan.json`,
     });
 
-    window.addEventListener("astro:before-swap", () => {
+    return () => {
       animation.destroy();
-    });
+    };
   });
 
   return (

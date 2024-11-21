@@ -1,35 +1,50 @@
 ---
 import { Icon } from "astro-icon/components";
-import { Benefits, Button } from "$/components";
+import Benefits from "$/atoms/Benefits.astro";
+import Button from "$/atoms/Button.astro";
 ---
 
 <script>
-  import lottie_light from "lottie-web";
+  import lottie from "lottie-web";
   import { inView, animate, stagger } from "motion";
 
   document.addEventListener("astro:page-load", () => {
-    const lottieContainer = document.getElementById(
-      "lottie-container:about",
-    ) as HTMLElement;
+    let workingAnimation: any;
 
-    const workingAnimation = lottie_light.loadAnimation({
-      container: lottieContainer,
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      path: "/animations/workingV2.json",
-    });
+    const stop = inView("#about", () => {
+      const lottieContainer = document.getElementById(
+        "lottie-container:about",
+      ) as HTMLElement;
 
-    inView("#about", () => {
+      if (!workingAnimation) {
+        workingAnimation = lottie.loadAnimation({
+          container: lottieContainer,
+          renderer: "canvas",
+          loop: true,
+          autoplay: true,
+          path: "/animations/workingV2.json",
+        });
+      }
+
       animate(
         "#aboutEl",
         { opacity: [0, 1], x: [-50, 0] },
         { duration: 1, delay: stagger(0.05, { startDelay: 0.3 }) },
       );
+
+      return () => {
+        if (workingAnimation) {
+          workingAnimation.destroy();
+          workingAnimation = null;
+        }
+      };
     });
 
     window.addEventListener("astro:before-swap", () => {
-      workingAnimation.destroy();
+      stop();
+      if (workingAnimation) {
+        workingAnimation.destroy();
+      }
     });
   });
 </script>
@@ -57,7 +72,7 @@ import { Benefits, Button } from "$/components";
     </div>
     <figure
       id="lottie-container:about"
-      class="mx-auto h-min max-w-[16rem] sm:max-w-[28rem] tablet:max-w-[40rem]">
+      class="mx-auto aspect-square h-full w-full px-10 sm:h-[20rem] sm:w-[20rem] sm:px-0 tablet:h-[28rem] tablet:w-[28rem] container:h-[40rem] container:w-[40rem] container:-translate-y-8">
     </figure>
   </div>
   <Benefits />

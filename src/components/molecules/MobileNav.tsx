@@ -1,4 +1,4 @@
-import { navLinks } from "$/constants";
+import navLinks from "$/constants/navLinks.ts";
 import { children as resolveChildren, createSignal } from "solid-js";
 
 interface MobileNavProps {

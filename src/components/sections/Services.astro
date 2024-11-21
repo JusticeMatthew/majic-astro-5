@@ -1,9 +1,10 @@
 ---
-import { Packages, Button } from "$/components";
+import Packages from "$/sections/Packages.astro";
+import Button from "$/atoms/Button.astro";
 ---
 
 <script>
-  import lottie_light from "lottie-web";
+  import lottie from "lottie-web";
   import { inView, animate, stagger } from "motion";
 
   const sequence = [
@@ -16,22 +17,22 @@ import { Packages, Button } from "$/components";
   ];
 
   document.addEventListener("astro:page-load", () => {
-    const lottieContainer = document.getElementById(
-      "lottie-container:services",
-    ) as HTMLElement;
-    const flashingText = document.getElementById(
-      "flashing-text",
-    ) as HTMLElement;
+    const stop = inView("#services", () => {
+      const lottieContainer = document.getElementById(
+        "lottie-container:services",
+      ) as HTMLElement;
+      const flashingText = document.getElementById(
+        "flashing-text",
+      ) as HTMLElement;
 
-    const anim = lottie_light.loadAnimation({
-      container: lottieContainer,
-      renderer: "svg",
-      loop: false,
-      autoplay: false,
-      path: "/animations/wand-waving.json",
-    });
+      const anim = lottie.loadAnimation({
+        container: lottieContainer,
+        renderer: "canvas",
+        loop: false,
+        autoplay: false,
+        path: "/animations/wand-waving.json",
+      });
 
-    inView("#services", () => {
       setTimeout(() => {
         anim.play();
         setTimeout(() => flashingText.classList.add("flashing-text"), 200);
@@ -40,10 +41,14 @@ import { Packages, Button } from "$/components";
       // @ts-expect-error
       animate(sequence);
       animate(lottieContainer, { opacity: [0, 1] }, { delay: 1.5 });
+
+      return () => {
+        anim.destroy();
+      };
     });
 
     window.addEventListener("astro:before-swap", () => {
-      anim.destroy();
+      stop();
     });
   });
 </script>
@@ -90,10 +95,11 @@ import { Packages, Button } from "$/components";
 
 <style>
   #lottie-container\:services {
-    width: 180px;
+    width: 280px;
+    height: auto;
     position: absolute;
     top: -3rem;
-    left: 55rem;
+    left: 51rem;
     transform: scaleX(-1);
     transform: rotate(260deg);
   }

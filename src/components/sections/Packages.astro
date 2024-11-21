@@ -1,53 +1,58 @@
 ---
-import { pricingPlans } from "$/constants";
 import { Icon } from "astro-icon/components";
-import MobilePackages from "$/components/molecules/MobilePackages.tsx";
-
-const mobileLottieStyles = "w-44 h-44 sm:w-60 sm:h-60 tablet:h-80 tablet:w-80";
+import pricingPlans from "$/constants/pricingPlans.ts";
+import MobilePackages from "$/molecules/MobilePackages.tsx";
 ---
 
 <script>
-  import lottie_light from "lottie-web";
+  import lottie from "lottie-web";
+  import { inView } from "motion";
 
   document.addEventListener("astro:page-load", () => {
-    const lottiePersonal = document.getElementById(
-      "lottie-container:packages-Personal",
-    ) as HTMLElement;
-    const lottieBusiness = document.getElementById(
-      "lottie-container:packages-Business",
-    ) as HTMLElement;
-    const lottieCommerce = document.getElementById(
-      "lottie-container:packages-Commerce",
-    ) as HTMLElement;
+    const stop = inView("#services", () => {
+      const lottiePersonal = document.getElementById(
+        "lottie-container:packages-Personal",
+      ) as HTMLElement;
+      const lottieBusiness = document.getElementById(
+        "lottie-container:packages-Business",
+      ) as HTMLElement;
+      const lottieCommerce = document.getElementById(
+        "lottie-container:packages-Commerce",
+      ) as HTMLElement;
 
-    const personalAnimation = lottie_light.loadAnimation({
-      container: lottiePersonal,
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      path: "/animations/personalPlan.json",
-    });
+      const personalAnimation = lottie.loadAnimation({
+        container: lottiePersonal,
+        renderer: "canvas",
+        loop: true,
+        autoplay: true,
+        path: "/animations/personalPlan.json",
+      });
 
-    const businessAnimation = lottie_light.loadAnimation({
-      container: lottieBusiness,
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      path: "/animations/businessPlan.json",
-    });
+      const businessAnimation = lottie.loadAnimation({
+        container: lottieBusiness,
+        renderer: "canvas",
+        loop: true,
+        autoplay: true,
+        path: "/animations/businessPlan.json",
+      });
 
-    const commerceAnimation = lottie_light.loadAnimation({
-      container: lottieCommerce,
-      renderer: "svg",
-      loop: true,
-      autoplay: true,
-      path: "/animations/commercePlan.json",
+      const commerceAnimation = lottie.loadAnimation({
+        container: lottieCommerce,
+        renderer: "canvas",
+        loop: true,
+        autoplay: true,
+        path: "/animations/commercePlan.json",
+      });
+
+      return () => {
+        personalAnimation.destroy();
+        businessAnimation.destroy();
+        commerceAnimation.destroy();
+      };
     });
 
     window.addEventListener("astro:before-swap", () => {
-      personalAnimation.destroy();
-      businessAnimation.destroy();
-      commerceAnimation.destroy();
+      stop();
     });
   });
 </script>
