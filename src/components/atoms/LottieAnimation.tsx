@@ -1,4 +1,4 @@
-import Lottie from "lottie-web";
+import lottie_light from "lottie-web";
 import { createEffect } from "solid-js";
 
 interface LottieAnimationProps {
@@ -16,9 +16,9 @@ export default function LottieAnimation({
       `lottie-container:${selector}`,
     ) as HTMLElement;
 
-    animation = Lottie.loadAnimation({
+    animation = lottie_light.loadAnimation({
       container: lottieContainer,
-      renderer: "canvas",
+      renderer: "svg",
       loop: true,
       autoplay: true,
       path: `/animations/${selector}.json`,

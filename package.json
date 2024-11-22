@@ -12,7 +12,7 @@
     "@astrojs/check": "^0.9.4",
     "@astrojs/netlify": "6.0.0-beta.1",
     "@astrojs/sitemap": "^3.2.1",
-    "@astrojs/solid-js": "^4.4.3",
+    "@astrojs/solid-js": "4.4.4-beta.0",
     "@astrojs/tailwind": "^5.1.2",
     "@tanstack/solid-form": "^0.35.0",
     "@tanstack/zod-form-adapter": "^0.36.2",
