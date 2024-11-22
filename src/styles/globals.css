@@ -29,7 +29,7 @@
 
   @media (prefers-reduced-motion: no-preference) {
     .flashing-text {
-      animation: move-bg 8s linear infinite;
+      animation: move-bg 16s linear infinite;
     }
 
     @keyframes move-bg {

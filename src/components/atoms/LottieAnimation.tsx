@@ -11,11 +11,12 @@ export default function LottieAnimation({
   styles,
 }: LottieAnimationProps) {
   onMount(() => {
+    let animation: any;
     const lottieContainer = document.getElementById(
       `lottie-container:${selector}`,
     ) as HTMLElement;
 
-    const animation = Lottie.loadAnimation({
+    animation = Lottie.loadAnimation({
       container: lottieContainer,
       renderer: "canvas",
       loop: true,
