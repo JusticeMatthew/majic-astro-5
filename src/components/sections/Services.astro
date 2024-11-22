@@ -27,7 +27,7 @@ import Button from "$/atoms/Button.astro";
 
       const anim = new DotLottieWorker({
         canvas: wandContainer,
-        src: "animations/wand.lottie",
+        src: `${window.location.origin}/animations/wand.lottie`,
         loop: false,
         autoplay: false,
         workerId: "wand-lottie",

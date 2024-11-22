@@ -13,14 +13,12 @@ import Button from "$/atoms/Button.astro";
       canvas: document.getElementById(
         "lottie-container-about",
       ) as HTMLCanvasElement,
-      src: "animations/working.lottie",
+      src: `${window.location.origin}/animations/working.lottie`,
       loop: true,
       autoplay: true,
-      workerId: "about-lottie",
     });
 
     const stop = inView("#about", () => {
-      aboutLottie.play().then(() => console.log("Started"));
       animate(
         "#aboutEl",
         { opacity: [0, 1], x: [-50, 0] },
