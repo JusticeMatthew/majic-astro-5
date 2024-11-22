@@ -4,7 +4,7 @@ import Button from "$/atoms/Button.astro";
 ---
 
 <script>
-  import lottie from "lottie-web";
+  import { DotLottie } from "@lottiefiles/dotlottie-web";
   import { inView, animate, stagger } from "motion";
 
   const sequence = [
@@ -18,19 +18,18 @@ import Button from "$/atoms/Button.astro";
 
   document.addEventListener("astro:page-load", () => {
     const stop = inView("#services", () => {
-      const lottieContainer = document.getElementById(
-        "lottie-container:services",
-      ) as HTMLElement;
+      const wandContainer = document.getElementById(
+        "lottie-container-services",
+      ) as HTMLCanvasElement;
       const flashingText = document.getElementById(
         "flashing-text",
       ) as HTMLElement;
 
-      const anim = lottie.loadAnimation({
-        container: lottieContainer,
-        renderer: "canvas",
+      const anim = new DotLottie({
+        canvas: wandContainer,
+        src: "/animations/wand.lottie",
         loop: false,
         autoplay: false,
-        path: "/animations/wand-waving.json",
       });
 
       setTimeout(() => {
@@ -40,7 +39,7 @@ import Button from "$/atoms/Button.astro";
 
       // @ts-expect-error
       animate(sequence);
-      animate(lottieContainer, { opacity: [0, 1] }, { delay: 1.5 });
+      animate(wandContainer, { opacity: [0, 1] }, { delay: 1.5 });
 
       return () => {
         anim.destroy();
@@ -56,8 +55,10 @@ import Button from "$/atoms/Button.astro";
 <section
   id="services"
   class="container relative flex flex-col justify-center pb-12">
-  <figure id="lottie-container:services" class="invisible container:visible">
-  </figure>
+  <canvas
+    id="lottie-container-services"
+    class="invisible w-24 container:visible">
+  </canvas>
   <h3
     id="servicesEl"
     class="relative z-10 mb-6 max-w-[20ch] font-calistoga text-level-5 drop-shadow">
@@ -94,12 +95,11 @@ import Button from "$/atoms/Button.astro";
 </section>
 
 <style>
-  #lottie-container\:services {
-    width: 280px;
+  #lottie-container-services {
     height: auto;
     position: absolute;
     top: -3rem;
-    left: 51rem;
+    left: 56rem;
     transform: scaleX(-1);
     transform: rotate(260deg);
   }

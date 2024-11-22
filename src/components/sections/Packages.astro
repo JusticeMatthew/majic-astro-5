@@ -1,9 +1,45 @@
 ---
 import { Icon } from "astro-icon/components";
-import LottieAnimation from "$/atoms/LottieAnimation";
 import pricingPlans from "$/constants/pricingPlans.ts";
 import MobilePackages from "$/molecules/MobilePackages.tsx";
 ---
+
+<script>
+  import { DotLottie } from "@lottiefiles/dotlottie-web";
+
+  document.addEventListener("astro:page-load", () => {
+    const personalLottie = new DotLottie({
+      canvas: document.getElementById(
+        "lottie-container-Personal",
+      ) as HTMLCanvasElement,
+      src: "/animations/Personal.lottie",
+      loop: true,
+      autoplay: true,
+    });
+    const businessLottie = new DotLottie({
+      canvas: document.getElementById(
+        "lottie-container-Business",
+      ) as HTMLCanvasElement,
+      src: "/animations/Business.lottie",
+      loop: true,
+      autoplay: true,
+    });
+    const commerceLottie = new DotLottie({
+      canvas: document.getElementById(
+        "lottie-container-Commerce",
+      ) as HTMLCanvasElement,
+      src: "/animations/Commerce.lottie",
+      loop: true,
+      autoplay: true,
+    });
+
+    window.addEventListener("astro:before-swap", () => {
+      personalLottie.destroy();
+      businessLottie.destroy();
+      commerceLottie.destroy();
+    });
+  });
+</script>
 
 <section
   id="packagesEl"
@@ -27,10 +63,9 @@ import MobilePackages from "$/molecules/MobilePackages.tsx";
               </div>
             )}
             <div>
-              <LottieAnimation
-                client:only="solid-js"
-                selector={plan.name}
-                styles="mx-auto h-96 w-96"
+              <canvas
+                id={`lottie-container-${plan.name}`}
+                class="mx-auto h-96 w-96"
               />
               <p class="mt-8 w-full text-center font-calistoga text-level-2">
                 {plan.name}

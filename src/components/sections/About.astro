@@ -2,13 +2,22 @@
 import { Icon } from "astro-icon/components";
 import Benefits from "$/atoms/Benefits.astro";
 import Button from "$/atoms/Button.astro";
-import LottieAnimation from "$/atoms/LottieAnimation.tsx";
 ---
 
 <script>
   import { inView, animate, stagger } from "motion";
+  import { DotLottie } from "@lottiefiles/dotlottie-web";
 
   document.addEventListener("astro:page-load", () => {
+    const aboutLottie = new DotLottie({
+      canvas: document.getElementById(
+        "lottie-container-about",
+      ) as HTMLCanvasElement,
+      src: "/animations/working.lottie",
+      loop: true,
+      autoplay: true,
+    });
+
     const stop = inView("#about", () => {
       animate(
         "#aboutEl",
@@ -19,6 +28,7 @@ import LottieAnimation from "$/atoms/LottieAnimation.tsx";
 
     window.addEventListener("astro:before-swap", () => {
       stop();
+      aboutLottie.destroy();
     });
   });
 </script>
@@ -44,11 +54,10 @@ import LottieAnimation from "$/atoms/LottieAnimation.tsx";
         <Icon name="right-arrow" class="ml-5 mr-5 inline sm:ml-32" />
       </Button>
     </div>
-    <LottieAnimation
-      client:only="solid-js"
-      selector="workingV2"
-      styles="mx-auto aspect-square h-full w-full px-10 sm:h-[20rem] sm:w-[20rem] sm:px-0 tablet:h-[28rem] tablet:w-[28rem] container:h-[40rem] container:w-[40rem] container:-translate-y-8"
-    />
+    <canvas
+      id="lottie-container-about"
+      class="mx-auto aspect-square h-full w-full px-10 sm:h-[20rem] sm:w-[20rem] sm:px-0 tablet:h-[28rem] tablet:w-[28rem] container:h-[40rem] container:w-[40rem] container:-translate-y-8">
+    </canvas>
   </div>
   <Benefits />
 </section>

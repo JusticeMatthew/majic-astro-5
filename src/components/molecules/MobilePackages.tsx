@@ -1,11 +1,28 @@
-import { createSignal, Show } from "solid-js";
-import LottieAnimation from "$/atoms/LottieAnimation";
+import { createSignal, createEffect, Show } from "solid-js";
+import { DotLottie } from "@lottiefiles/dotlottie-web";
 import pricingPlans from "$/constants/pricingPlans.ts";
 
 type PlanName = "Personal" | "Business" | "Commerce";
 
 export default function MobilePackages() {
   const [activePlan, setActivePlan] = createSignal<PlanName>("Business");
+
+  createEffect(() => {
+    const lottieTarget = document.getElementById(
+      `solid-lottie-${activePlan()}`,
+    ) as HTMLCanvasElement;
+
+    const solidLottie = new DotLottie({
+      canvas: lottieTarget,
+      src: `/animations/${activePlan()}.lottie`,
+      loop: true,
+      autoplay: true,
+    });
+
+    return () => {
+      solidLottie.destroy();
+    };
+  });
 
   return (
     <div class="relative mt-16 flex h-auto w-full flex-col justify-between rounded-b-lg bg-light py-4 pl-4 pr-6 text-dark shadow sm:py-8 container:hidden">
@@ -57,10 +74,9 @@ export default function MobilePackages() {
                       {monthly}
                     </p>
                   </div>
-                  <LottieAnimation
-                    selector={name}
-                    styles="h-44 w-44 sm:h-60 sm:w-60 tablet:h-80 tablet:w-80"
-                  />
+                  <canvas
+                    id={`solid-lottie-${name}`}
+                    class="h-44 w-44 sm:h-60 sm:w-60 tablet:h-80 tablet:w-80"></canvas>
                 </div>
                 <div class="mt-10 flex w-full flex-col items-center px-6 sm:mt-8">
                   <div class="grid w-fit grid-cols-1 gap-x-4 md:grid-cols-2">
