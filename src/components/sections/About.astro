@@ -15,10 +15,11 @@ import Button from "$/atoms/Button.astro";
       ) as HTMLCanvasElement,
       src: "/animations/working.lottie",
       loop: true,
-      autoplay: true,
+      autoplay: false,
     });
 
     const stop = inView("#about", () => {
+      aboutLottie.play();
       animate(
         "#aboutEl",
         { opacity: [0, 1], x: [-50, 0] },

@@ -5,6 +5,7 @@ import MobilePackages from "$/molecules/MobilePackages.tsx";
 ---
 
 <script>
+  import { inView } from "motion";
   import { DotLottie } from "@lottiefiles/dotlottie-web";
 
   document.addEventListener("astro:page-load", () => {
@@ -14,7 +15,7 @@ import MobilePackages from "$/molecules/MobilePackages.tsx";
       ) as HTMLCanvasElement,
       src: "/animations/Personal.lottie",
       loop: true,
-      autoplay: true,
+      autoplay: false,
     });
     const businessLottie = new DotLottie({
       canvas: document.getElementById(
@@ -22,7 +23,7 @@ import MobilePackages from "$/molecules/MobilePackages.tsx";
       ) as HTMLCanvasElement,
       src: "/animations/Business.lottie",
       loop: true,
-      autoplay: true,
+      autoplay: false,
     });
     const commerceLottie = new DotLottie({
       canvas: document.getElementById(
@@ -30,13 +31,20 @@ import MobilePackages from "$/molecules/MobilePackages.tsx";
       ) as HTMLCanvasElement,
       src: "/animations/Commerce.lottie",
       loop: true,
-      autoplay: true,
+      autoplay: false,
+    });
+
+    const stop = inView("#services", () => {
+      personalLottie.play();
+      businessLottie.play();
+      commerceLottie.play();
     });
 
     window.addEventListener("astro:before-swap", () => {
       personalLottie.destroy();
       businessLottie.destroy();
       commerceLottie.destroy();
+      stop();
     });
   });
 </script>
