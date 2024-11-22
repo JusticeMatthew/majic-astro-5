@@ -1,5 +1,5 @@
 import Lottie from "lottie-web";
-import { onMount } from "solid-js";
+import { createEffect } from "solid-js";
 
 interface LottieAnimationProps {
   selector: string;
@@ -10,7 +10,7 @@ export default function LottieAnimation({
   selector,
   styles,
 }: LottieAnimationProps) {
-  onMount(() => {
+  createEffect(() => {
     let animation: any;
     const lottieContainer = document.getElementById(
       `lottie-container:${selector}`,
