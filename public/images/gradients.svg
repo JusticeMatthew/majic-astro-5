@@ -1,8 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" preserveAspectRatio="xMidYMid slice">
   <defs>
-    <filter id="goo" x="-50%" y="-50%" width="200%" height="200%">
-      <!-- Reduce stdDeviation for efficiency -->
-      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+    <filter id="goo" x="0" y="0" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
       <feColorMatrix
         in="blur"
         type="matrix"
@@ -12,7 +11,6 @@
                 0 0 0 15 -7"
         result="goo"
       />
-      <!-- Replace feBlend with feComposite for slightly better performance -->
       <feComposite in="SourceGraphic" in2="goo" operator="atop" />
     </filter>
   </defs>
