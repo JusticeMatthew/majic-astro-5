@@ -6,46 +6,19 @@ import LottieAnimation from "$/atoms/LottieAnimation.tsx";
 ---
 
 <script>
-  import lottie from "lottie-web";
   import { inView, animate, stagger } from "motion";
 
   document.addEventListener("astro:page-load", () => {
-    let workingAnimation: any;
-
     const stop = inView("#about", () => {
-      const lottieContainer = document.getElementById(
-        "lottie-container:about",
-      ) as HTMLElement;
-
-      if (!workingAnimation) {
-        workingAnimation = lottie.loadAnimation({
-          container: lottieContainer,
-          renderer: "canvas",
-          loop: true,
-          autoplay: true,
-          path: "/animations/workingV2.json",
-        });
-      }
-
       animate(
         "#aboutEl",
         { opacity: [0, 1], x: [-50, 0] },
         { duration: 1, delay: stagger(0.05, { startDelay: 0.3 }) },
       );
-
-      return () => {
-        if (workingAnimation) {
-          workingAnimation.destroy();
-          workingAnimation = null;
-        }
-      };
     });
 
     window.addEventListener("astro:before-swap", () => {
       stop();
-      if (workingAnimation) {
-        workingAnimation.destroy();
-      }
     });
   });
 </script>
