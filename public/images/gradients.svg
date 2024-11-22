@@ -1,17 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="50%" height="50%" preserveAspectRatio="xMidYMid slice">
   <defs>
-    <filter id="goo" x="0" y="0" width="200%" height="200%">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" color-interpolation-filters="sRGB" />
+    <filter id="goo" x="0" y="0" width="200%" height="200%" color-interpolation-filters="sRGB">
       <feColorMatrix
         in="blur"
         type="matrix"
         values="1 0 0 0 0  
                 0 1 0 0 0  
                 0 0 1 0 0  
-                0 0 0 15 -7"
+                0 0 0 18 -8"
         result="goo"
       />
-      <feComposite in="SourceGraphic" in2="goo" operator="atop" />
     </filter>
   </defs>
 </svg>
