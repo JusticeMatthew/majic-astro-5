@@ -1,61 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
+import LottieAnimation from "$/atoms/LottieAnimation";
 import pricingPlans from "$/constants/pricingPlans.ts";
 import MobilePackages from "$/molecules/MobilePackages.tsx";
 ---
-
-<script>
-  import lottie from "lottie-web";
-  import { inView } from "motion";
-
-  document.addEventListener("astro:page-load", () => {
-    const stop = inView("#services", () => {
-      const lottiePersonal = document.getElementById(
-        "lottie-container:packages-Personal",
-      ) as HTMLElement;
-      const lottieBusiness = document.getElementById(
-        "lottie-container:packages-Business",
-      ) as HTMLElement;
-      const lottieCommerce = document.getElementById(
-        "lottie-container:packages-Commerce",
-      ) as HTMLElement;
-
-      const personalAnimation = lottie.loadAnimation({
-        container: lottiePersonal,
-        renderer: "canvas",
-        loop: true,
-        autoplay: true,
-        path: "/animations/personalPlan.json",
-      });
-
-      const businessAnimation = lottie.loadAnimation({
-        container: lottieBusiness,
-        renderer: "canvas",
-        loop: true,
-        autoplay: true,
-        path: "/animations/businessPlan.json",
-      });
-
-      const commerceAnimation = lottie.loadAnimation({
-        container: lottieCommerce,
-        renderer: "canvas",
-        loop: true,
-        autoplay: true,
-        path: "/animations/commercePlan.json",
-      });
-
-      return () => {
-        personalAnimation.destroy();
-        businessAnimation.destroy();
-        commerceAnimation.destroy();
-      };
-    });
-
-    window.addEventListener("astro:before-swap", () => {
-      stop();
-    });
-  });
-</script>
 
 <section
   id="packagesEl"
@@ -79,9 +27,10 @@ import MobilePackages from "$/molecules/MobilePackages.tsx";
               </div>
             )}
             <div>
-              <figure
-                id={`lottie-container:packages-${plan.name}`}
-                class="mx-auto h-96 w-96"
+              <LottieAnimation
+                client:only="solid-js"
+                selector={plan.name}
+                styles="mx-auto h-96 w-96"
               />
               <p class="mt-8 w-full text-center font-calistoga text-level-2">
                 {plan.name}
