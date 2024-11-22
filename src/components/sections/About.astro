@@ -6,19 +6,21 @@ import Button from "$/atoms/Button.astro";
 
 <script>
   import { inView, animate, stagger } from "motion";
-  import { DotLottie } from "@lottiefiles/dotlottie-web";
+  import { DotLottieWorker } from "@lottiefiles/dotlottie-web";
 
   document.addEventListener("astro:page-load", () => {
-    const aboutLottie = new DotLottie({
+    const aboutLottie = new DotLottieWorker({
       canvas: document.getElementById(
         "lottie-container-about",
       ) as HTMLCanvasElement,
-      src: "/animations/working.lottie",
+      src: "animations/working.lottie",
       loop: true,
       autoplay: true,
+      workerId: "about-lottie",
     });
 
     const stop = inView("#about", () => {
+      aboutLottie.play().then(() => console.log("Started"));
       animate(
         "#aboutEl",
         { opacity: [0, 1], x: [-50, 0] },

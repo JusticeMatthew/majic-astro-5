@@ -5,39 +5,41 @@ import MobilePackages from "$/molecules/MobilePackages.tsx";
 ---
 
 <script>
-  import { DotLottie } from "@lottiefiles/dotlottie-web";
+  import { DotLottieWorker } from "@lottiefiles/dotlottie-web";
 
   document.addEventListener("astro:page-load", () => {
-    const personalLottie = new DotLottie({
+    const personalLottie = new DotLottieWorker({
       canvas: document.getElementById(
         "lottie-container-Personal",
       ) as HTMLCanvasElement,
-      src: "/animations/Personal.lottie",
+      src: "animations/Personal.lottie",
       loop: true,
       autoplay: true,
+      workerId: "personal-lottie",
     });
-    const businessLottie = new DotLottie({
+    const businessLottie = new DotLottieWorker({
       canvas: document.getElementById(
         "lottie-container-Business",
       ) as HTMLCanvasElement,
-      src: "/animations/Business.lottie",
+      src: "animations/Business.lottie",
       loop: true,
       autoplay: true,
+      workerId: "business-lottie",
     });
-    const commerceLottie = new DotLottie({
+    const commerceLottie = new DotLottieWorker({
       canvas: document.getElementById(
         "lottie-container-Commerce",
       ) as HTMLCanvasElement,
-      src: "/animations/Commerce.lottie",
+      src: "animations/Commerce.lottie",
       loop: true,
       autoplay: true,
+      workerId: "commerce-lottie",
     });
 
     window.addEventListener("astro:before-swap", () => {
       personalLottie.destroy();
       businessLottie.destroy();
       commerceLottie.destroy();
-      stop();
     });
   });
 </script>

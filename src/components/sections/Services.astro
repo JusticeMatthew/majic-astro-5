@@ -4,7 +4,7 @@ import Button from "$/atoms/Button.astro";
 ---
 
 <script>
-  import { DotLottie } from "@lottiefiles/dotlottie-web";
+  import { DotLottieWorker } from "@lottiefiles/dotlottie-web";
   import { inView, animate, stagger } from "motion";
 
   const sequence = [
@@ -25,11 +25,12 @@ import Button from "$/atoms/Button.astro";
         "flashing-text",
       ) as HTMLElement;
 
-      const anim = new DotLottie({
+      const anim = new DotLottieWorker({
         canvas: wandContainer,
-        src: "/animations/wand.lottie",
+        src: "animations/wand.lottie",
         loop: false,
         autoplay: false,
+        workerId: "wand-lottie",
       });
 
       setTimeout(() => {
