@@ -16,6 +16,7 @@ import Button from "$/atoms/Button.astro";
       src: `${window.location.origin}/animations/working.lottie`,
       loop: true,
       autoplay: true,
+      workerId: "about",
     });
 
     const stop = inView("#about", () => {
