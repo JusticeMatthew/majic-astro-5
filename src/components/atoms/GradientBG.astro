@@ -27,8 +27,8 @@
         const time = Date.now() / 1000;
         const movement =
           i % 2 === 0 ? Math.sin(time / (i + 1)) : Math.cos(time / (i + 1));
-        const x = blob.x * canvas.width + movement * canvas.width * 0.05;
-        const y = blob.y * canvas.height + movement * canvas.height * 0.05;
+        const x = blob.x * canvas.width + movement * canvas.width * 0.3;
+        const y = blob.y * canvas.height + movement * canvas.height * 0.3;
 
         const gradient = ctx.createRadialGradient(
           x,
@@ -112,6 +112,7 @@
     top: 0;
     left: 0;
     background-color: #20204e;
+    will-change: transform, filter;
   }
 
   canvas {
