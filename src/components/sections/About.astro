@@ -6,14 +6,14 @@ import Button from "$/atoms/Button.astro";
 
 <script>
   import { inView, animate, stagger } from "motion";
-  import { DotLottie } from "@lottiefiles/dotlottie-web";
+  import { DotLottieWorker } from "@lottiefiles/dotlottie-web";
 
   document.addEventListener("astro:page-load", () => {
-    const aboutLottie = new DotLottie({
+    const aboutLottie = new DotLottieWorker({
       canvas: document.getElementById(
         "lottie-container-about",
       ) as HTMLCanvasElement,
-      src: "/animations/working.lottie",
+      src: `${window.location.origin}/animations/working.lottie`,
       loop: true,
       autoplay: true,
     });
