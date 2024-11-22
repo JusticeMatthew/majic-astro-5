@@ -7,23 +7,23 @@ type PlanName = "Personal" | "Business" | "Commerce";
 export default function MobilePackages() {
   const [activePlan, setActivePlan] = createSignal<PlanName>("Business");
 
-  // createEffect(() => {
-  //   const lottieTarget = document.getElementById(
-  //     `solid-lottie-${activePlan()}`,
-  //   ) as HTMLElement;
+  createEffect(() => {
+    const lottieTarget = document.getElementById(
+      `solid-lottie-${activePlan()}`,
+    ) as HTMLElement;
 
-  //   // const animation = lottie.loadAnimation({
-  //   //   container: lottieTarget,
-  //   //   renderer: "canvas",
-  //   //   loop: true,
-  //   //   autoplay: true,
-  //   //   path: `/animations/${activePlan().toLowerCase()}Plan.json`,
-  //   // });
+    const animation = lottie.loadAnimation({
+      container: lottieTarget,
+      renderer: "canvas",
+      loop: true,
+      autoplay: true,
+      path: `/animations/${activePlan().toLowerCase()}Plan.json`,
+    });
 
-  //   // return () => {
-  //   //   animation.destroy();
-  //   // };
-  // });
+    return () => {
+      animation.destroy();
+    };
+  });
 
   return (
     <div class="relative mt-16 flex h-auto w-full flex-col justify-between rounded-b-lg bg-light py-4 pl-4 pr-6 text-dark shadow sm:py-8 container:hidden">
