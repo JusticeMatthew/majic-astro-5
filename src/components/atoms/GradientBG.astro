@@ -61,6 +61,8 @@
     position: relative;
     transition: height 0.5s;
     opacity: 70%;
+    will-change: transform, filter;
+    transform: translate3D(0, 0, 0);
   }
 
   html[data-is-top="false"] .gradients-container {
@@ -87,6 +89,7 @@
     mix-blend-mode: var(--blending);
     animation: moveInCircle 60s infinite;
     transform-origin: center;
+    blur: 40px;
   }
 
   /* Light blue blob */
