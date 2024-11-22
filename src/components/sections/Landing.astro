@@ -3,22 +3,17 @@ import Button from "$/components/atoms/Button.astro";
 ---
 
 <script>
-  import { stagger } from "motion";
   import { animate } from "motion/mini";
 
   document.addEventListener("astro:page-load", () => {
-    animate(
-      "#landingEl",
-      { opacity: 1 },
-      { duration: 1, delay: stagger(0.05, { startDelay: 0 }) },
-    );
+    animate("#landingEl", { opacity: 1 }, { duration: 0.5 });
   });
 </script>
 
 <section
+  id="landingEl"
   class="container flex min-h-lvh flex-col items-center justify-center text-center">
   <h2
-    id="landingEl"
     class="z-10 my-4 text-pretty font-calistoga text-level-6 drop-shadow sm:my-6">
     We build <span class="flashing-text sm:bg-none sm:text-light"
       >beautiful</span
@@ -29,7 +24,6 @@ import Button from "$/components/atoms/Button.astro";
     >
   </h2>
   <p
-    id="landingEl"
     class="z-10 my-4 max-w-[30ch] text-balance font-inter text-light-gray sm:my-6 sm:max-w-[65ch]">
     Majic helps companies find new customers online and grow their digital
     presence through stand-out websites & tailored design services.
@@ -38,7 +32,7 @@ import Button from "$/components/atoms/Button.astro";
       memorable experience for your audience.
     </span>
   </p>
-  <div id="landingEl" class="mt-6 flex flex-col items-center gap-6 sm:flex-row">
+  <div class="mt-6 flex flex-col items-center gap-6 sm:flex-row">
     <Button server:defer href="/contact" floating class="px-12"
       >Connect with us today</Button
     >
