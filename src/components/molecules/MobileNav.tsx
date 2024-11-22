@@ -23,7 +23,10 @@ export default function MobileNav(props: MobileNavProps) {
 
   return (
     <div class="relative tablet:hidden">
-      <button onClick={handleMenuToggle} class="p-3 active:scale-95">
+      <button
+        onClick={handleMenuToggle}
+        aria-label="nav menu"
+        class="p-3 active:scale-95">
         {astro.menuIcon}
       </button>
       <aside

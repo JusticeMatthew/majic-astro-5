@@ -1,36 +1,95 @@
 <script>
   document.addEventListener("astro:page-load", () => {
-    const interBubble = document.querySelector<HTMLDivElement>(".interactive")!;
-    let curX = 0;
-    let curY = 0;
-    let tgX = 0;
-    let tgY = 0;
+    const canvas = document.getElementById("gooeyCanvas") as HTMLCanvasElement;
+    const ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
 
-    function move() {
-      curX += (tgX - curX) * 0.1;
-      curY += (tgY - curY) * 0.1;
-      interBubble.style.transform = `translate(${curX}px, ${curY}px)`;
-      requestAnimationFrame(move);
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    const blobs = [
+      { x: 0.15, y: 0.25, size: 0.3, color: "rgba(18, 113, 255, 0.8)" },
+      { x: 0.35, y: 0.15, size: 0.3, color: "rgba(221, 74, 255, 0.8)" },
+      { x: 0.05, y: 0.25, size: 0.3, color: "rgba(116, 92, 221, 0.8)" },
+      { x: 0.15, y: 0.25, size: 0.3, color: "rgba(200, 50, 125, 0.8)" },
+      { x: 0.5, y: 0.5, size: 0.45, color: "rgba(0, 169, 225, 0.8)" },
+    ];
+
+    let interactive = { x: 0, y: 0, targetX: 0, targetY: 0, size: 0.25 };
+
+    function drawBlobs() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      blobs.forEach((blob, i) => {
+        const time = Date.now() / 1000;
+        const movement =
+          i % 2 === 0 ? Math.sin(time / (i + 1)) : Math.cos(time / (i + 1));
+        const x = blob.x * canvas.width + movement * canvas.width * 0.05;
+        const y = blob.y * canvas.height + movement * canvas.height * 0.05;
+
+        const gradient = ctx.createRadialGradient(
+          x,
+          y,
+          0,
+          x,
+          y,
+          blob.size * canvas.width,
+        );
+        gradient.addColorStop(0, blob.color);
+        gradient.addColorStop(1, "transparent");
+
+        ctx.fillStyle = gradient;
+        ctx.beginPath();
+        ctx.arc(x, y, blob.size * canvas.width, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Interactive bubble
+      interactive.x += (interactive.targetX - interactive.x) * 0.1;
+      interactive.y += (interactive.targetY - interactive.y) * 0.1;
+
+      const gradient = ctx.createRadialGradient(
+        interactive.x,
+        interactive.y,
+        0,
+        interactive.x,
+        interactive.y,
+        interactive.size * canvas.width,
+      );
+      gradient.addColorStop(0, "rgba(140, 100, 255, 0.5)");
+      gradient.addColorStop(1, "transparent");
+
+      ctx.fillStyle = gradient;
+      ctx.beginPath();
+      ctx.arc(
+        interactive.x,
+        interactive.y,
+        interactive.size * canvas.width,
+        0,
+        Math.PI * 2,
+      );
+      ctx.fill();
     }
 
     window.addEventListener("mousemove", (event) => {
-      tgX = event.clientX;
-      tgY = event.clientY;
+      interactive.targetX = event.clientX;
+      interactive.targetY = event.clientY;
     });
 
-    move();
+    function animate() {
+      drawBlobs();
+      requestAnimationFrame(animate);
+    }
+
+    animate();
   });
 </script>
 
 <div class="gradient-bg sticky left-0 top-0 z-0 opacity-60" transition:persist>
-  <div class="gradients-container">
-    <figure class="g1"></figure>
-    <figure class="g2"></figure>
-    <figure class="g3"></figure>
-    <figure class="g4"></figure>
-    <figure class="g5"></figure>
-    <figure class="interactive"></figure>
-  </div>
+  <canvas id="gooeyCanvas"></canvas>
 </div>
 
 <style>
@@ -41,7 +100,7 @@
     --color4: 200, 50, 125;
     --color5: 0, 169, 225;
     --color-interactive: 140, 100, 255;
-    --circle-size: 60%;
+    --circle-size: 20%;
     --blending: hard-light;
   }
 
@@ -54,8 +113,15 @@
     background-color: #20204e;
   }
 
-  .gradients-container {
+  canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
     filter: url("/images/gradients.svg#goo") blur(40px);
+  }
+
+  .gradients-container {
+    display: block;
     width: 100%;
     height: 100%;
     position: relative;
