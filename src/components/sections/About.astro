@@ -15,11 +15,10 @@ import Button from "$/atoms/Button.astro";
       ) as HTMLCanvasElement,
       src: "/animations/working.lottie",
       loop: true,
-      autoplay: false,
+      autoplay: true,
     });
 
     const stop = inView("#about", () => {
-      aboutLottie.play();
       animate(
         "#aboutEl",
         { opacity: [0, 1], x: [-50, 0] },
@@ -34,7 +33,7 @@ import Button from "$/atoms/Button.astro";
   });
 </script>
 
-<section id="about" class="mb-section mt-60 w-full pb-12">
+<section id="about" class="mb-section mt-12 w-full scroll-mt-48 pb-12">
   <div
     class="container flex flex-col-reverse justify-between gap-12 tablet:flex-row tablet:gap-40">
     <div
