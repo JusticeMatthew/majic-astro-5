@@ -8,9 +8,11 @@ import Footer from "$/molecules/Footer.astro";
 import Stars from "$/atoms/Stars.astro";
 import GradientBG from "$/atoms/GradientBG.astro";
 import BaseLayout from "$/layouts/BaseLayout.astro";
+import { Toaster } from "@studiocms/ui/components";
 ---
 
 <BaseLayout title="Dev | Majic Web Design">
+  <Toaster position="top-center" />
   <div class="relative">
     <div class="absolute inset-0">
       <GradientBG />

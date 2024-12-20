@@ -3,6 +3,7 @@ import { actions } from "astro:actions";
 import { createSignal, createEffect } from "solid-js";
 import { createForm } from "@tanstack/solid-form";
 import { zodValidator } from "@tanstack/zod-form-adapter";
+// import { toast } from "@studiocms/ui/components";
 
 export default function ContactForm({
   children,
@@ -24,6 +25,14 @@ export default function ContactForm({
       const { error } = await actions.sendEmail(value);
 
       if (!error) {
+        // const successEvent = new CustomEvent("success");
+        // toast({
+        //   title: "Success!",
+        //   description:
+        //     "Your message has been received and we will respond within 48 hours.",
+        //   type: "success",
+        // });
+        // document.dispatchEvent(successEvent);
         setSending(false);
         form.reset();
       } else {
