@@ -49,20 +49,20 @@ import MobilePackages from "$/molecules/MobilePackages.tsx";
   class="h-[min(auto, 60vh)] relative mb-6 flex flex-col items-center">
   <div class="flex w-full flex-col justify-between">
     <MobilePackages client:only="solid-js" />
-    <div class="mt-8 hidden grid-cols-3 gap-6 container:grid">
+    <div class="container:grid mt-8 hidden grid-cols-3 gap-6">
       {
         pricingPlans.map((plan) => (
           <div
             class:list={[
-              "relative flex h-auto flex-col justify-between rounded-lg bg-light py-16 text-dark shadow",
-              { "ring-[3px] ring-blurple": plan.recommended },
+              "bg-light text-dark relative flex h-auto flex-col justify-between rounded-lg py-16 shadow",
+              { "ring-blurple ring-[3px]": plan.recommended },
             ]}>
             {plan.recommended && (
-              <div class="absolute -top-5 left-0 flex w-full justify-center text-center text-light">
-                <p class="z-10 w-fit rounded-full bg-secondary-gradient px-14 py-1 ring-[3px] ring-blurple">
+              <div class="text-light absolute -top-5 left-0 flex w-full justify-center text-center">
+                <p class="secondary-gradient ring-blurple z-10 w-fit rounded-full px-14 py-1 ring-[3px]">
                   Most Popular
                 </p>
-                <figure class="absolute -top-1 mx-auto h-[44px] w-60 rounded-full bg-blurple blur-lg" />
+                <figure class="bg-blurple absolute -top-1 mx-auto h-[44px] w-60 rounded-full blur-lg" />
               </div>
             )}
             <div>
@@ -72,10 +72,10 @@ import MobilePackages from "$/molecules/MobilePackages.tsx";
                 width={384}
                 class="mx-auto"
               />
-              <p class="mt-8 w-full text-center font-calistoga text-level-2">
+              <p class="font-calistoga text-level-2 mt-8 w-full text-center">
                 {plan.name}
               </p>
-              <p class="mt-2 text-balance text-center text-min text-dark/80">
+              <p class="text-min text-dark/80 mt-2 text-center text-balance">
                 {plan.blurb}
               </p>
               <div class="my-14 px-12">
@@ -88,10 +88,10 @@ import MobilePackages from "$/molecules/MobilePackages.tsx";
               </div>
             </div>
             <div>
-              <p class="w-full text-center font-calistoga text-level-2">
+              <p class="font-calistoga text-level-2 w-full text-center">
                 {plan.price}
               </p>
-              <p class="mt-2 w-full text-center text-min text-dark/80">
+              <p class="text-min text-dark/80 mt-2 w-full text-center">
                 {plan.monthly}
               </p>
             </div>

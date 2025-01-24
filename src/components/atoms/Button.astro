@@ -22,13 +22,13 @@ const {
 } = Astro.props;
 
 const buttonStyles = {
-  primary: "bg-primary-gradient text-light",
+  primary: "primary-gradient text-light",
   secondary: "text-light bg-none",
   dark: "bg-dark-purple hover:bg-dark",
 }[variant];
 
 const figureStyles = {
-  primary: "bg-secondary-gradient",
+  primary: "secondary-gradient",
   secondary:
     "bg-blurple opacity-15 backdrop-blur-lg group-hover:bg-blurple group-hover:opacity-40",
   dark: "bg-none",
@@ -63,7 +63,7 @@ const figureStyles = {
   </figure>
   <span
     class:list={[
-      "nowrap relative z-20 block h-full w-full place-content-center rounded-lg text-center transition-all duration-100 group-hover:text-light",
+      "nowrap group-hover:text-light relative z-20 block h-full w-full place-content-center rounded-lg text-center transition-all duration-100",
       { "group-hover:bg-none": variant === "secondary" },
       { "group-hover:bg-dark": variant === "primary" },
       `${header ? "py-0" : "py-3"}`,

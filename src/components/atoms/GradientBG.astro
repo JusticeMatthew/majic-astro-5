@@ -7,9 +7,13 @@
     let tgY = 0;
 
     function move() {
-      curX += (tgX - curX) * 0.1;
-      curY += (tgY - curY) * 0.1;
-      interBubble.style.transform = `translate(${curX}px, ${curY}px)`;
+      curX += (tgX - curX) * 0.15;
+      curY += (tgY - curY) * 0.15;
+
+      if (Math.abs(tgX - curX) > 0.5 || Math.abs(tgY - curY) > 0.5) {
+        interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
+      }
+
       requestAnimationFrame(move);
     }
 
@@ -22,7 +26,7 @@
   });
 </script>
 
-<div class="gradient-bg sticky left-0 top-0 z-0 opacity-60" transition:persist>
+<div class="gradient-bg sticky top-0 left-0 z-0 opacity-60" transition:persist>
   <div class="gradients-container">
     <figure class="g1"></figure>
     <figure class="g2"></figure>
@@ -52,6 +56,8 @@
     top: 0;
     left: 0;
     background-color: #20204e;
+    will-change: filter, height;
+    transform: translateZ(0);
   }
 
   .gradients-container {
@@ -87,9 +93,10 @@
     mix-blend-mode: var(--blending);
     animation: moveInCircle 60s infinite;
     transform-origin: center;
+    will-change: transform;
+    backface-visibility: hidden;
   }
 
-  /* Light blue blob */
   .g1 {
     top: 25%;
     left: 15%;

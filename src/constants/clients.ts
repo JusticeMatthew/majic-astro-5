@@ -1,7 +1,7 @@
 import { getImage } from "astro:assets";
-import dawnforge from "$/assets/dawnforge-bg.webp";
-import tandt from "$/assets/tandt-bg.webp";
-import bandc from "$/assets/bandc-bg.webp";
+import dawnforge from "$/assets/images/dawnforge-bg.webp";
+import tandt from "$/assets/images/tandt-bg.webp";
+import bandc from "$/assets/images/bandc-bg.webp";
 
 const dawnforgeBg = await getImage({ src: dawnforge });
 const bandcBg = await getImage({ src: bandc });

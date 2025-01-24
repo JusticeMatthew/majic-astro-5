@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 @font-face {
   font-family: "Inter";
@@ -18,14 +16,70 @@
   font-display: swap;
 }
 
-@layer components {
-  .flashing-text {
-    background: linear-gradient(90deg, #735bdc, #00a7e1, #ff64f5, #735cdd) 0 0 /
-      500% 100%;
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-  }
+@theme {
+  --default-font-family: "Inter", "sans-serif";
+
+  --font-inter: "Inter", "sans-serif";
+  --font-calistoga: "Calistoga", "display";
+
+  --text-min: 1rem;
+  --text-level-base: clamp(1rem, 0.9628rem + 0.1802vi, 1.125rem);
+  --text-level-1: clamp(1.2rem, 1.1109rem + 0.4319vi, 1.4996rem);
+  --text-level-2: clamp(1.44rem, 1.2738rem + 0.8058vi, 1.999rem);
+  --text-level-3: clamp(1.728rem, 1.4495rem + 1.3502vi, 2.6647rem);
+  --text-level-4: clamp(2.0736rem, 1.6341rem + 2.131vi, 3.552rem);
+  --text-level-5: clamp(2.4883rem, 1.8204rem + 3.2382vi, 4.7348rem);
+  --text-level-6: clamp(2.986rem, 1.9973rem + 4.7936vi, 6.3115rem);
+
+  --color-light: oklch(98.42% 0.0034 247.86);
+  --color-dark: oklch(17.93% 0.0237 268.6);
+  --color-dark-bg: oklch(23.36% 0.0508 304.03);
+  --color-light-gray: oklch(93.7% 0.0071 268.55);
+  --color-blurple: oklch(65.58% 0.1823 268.18);
+  --color-light-purple: oklch(81.63% 0.0952 284.09);
+  --color-dark-purple: oklch(27.24% 0.0826 279.41);
+
+  --spacing-section: clamp(9rem, 7.1495rem + 8.972vw, 15rem);
+
+  --breakpoint-tablet: 1025px;
+  --breakpoint-packages: 900px;
+  --breakpoint-container: 1400px;
+}
+
+@utility container {
+  max-width: clamp(16rem, 100%, 90rem);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@utility primary-gradient {
+  background-image: linear-gradient(
+    to right,
+    oklch(56.6% 0.1887 286.93),
+    oklch(68.45% 0.1401 232.33)
+  );
+}
+
+@utility secondary-gradient {
+  background-image: linear-gradient(
+    to right,
+    oklch(47.34% 0.2079 293.63),
+    oklch(58.43% 0.154 264.69)
+  );
+}
+
+@utility flashing-text {
+  background: linear-gradient(
+      90deg,
+      oklch(56.36% 0.1887 287.28),
+      oklch(68.45% 0.1401 232.33),
+      oklch(74.96% 0.2459 330.34),
+      oklch(56.6% 0.1887 286.93)
+    )
+    0 0 / 500% 100%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
 
   @media (prefers-reduced-motion: no-preference) {
     .flashing-text {
@@ -40,33 +94,15 @@
   }
 }
 
-:root {
-  /* Font Sizes*/
-  --step-00: clamp(0.8333rem, 0.8302rem + 0.0153vi, 0.844rem);
-  --step-0: clamp(1rem, 0.9628rem + 0.1802vi, 1.125rem);
-  --step-1: clamp(1.2rem, 1.1109rem + 0.4319vi, 1.4996rem);
-  --step-2: clamp(1.44rem, 1.2738rem + 0.8058vi, 1.999rem);
-  --step-3: clamp(1.728rem, 1.4495rem + 1.3502vi, 2.6647rem);
-  --step-4: clamp(2.0736rem, 1.6341rem + 2.131vi, 3.552rem);
-  --step-5: clamp(2.4883rem, 1.8204rem + 3.2382vi, 4.7348rem);
-  --step-6: clamp(2.986rem, 1.9973rem + 4.7936vi, 6.3115rem);
-  --step-7: clamp(3.5832rem, 2.1472rem + 6.9623vi, 8.4132rem);
-  --step-8: clamp(4.2998rem, 2.244rem + 9.9676vi, 11.2149rem);
-
-  /* Section Spacing*/
-  --space-section: clamp(9rem, 7.1495rem + 8.972vw, 15rem);
-}
-
 body {
-  font-size: var(--step-0);
-  font-family: "Inter", sans-serif;
+  font-size: var(--text-level-base);
   line-height: 1.5;
-  color: #f8fafc;
+  color: var(--color-light);
   background-color: black;
-  overflow-x: clip !important;
-  transition-property: all !important;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
-  transition-duration: 250ms !important;
+  overflow-x: clip;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 250ms;
   font-smooth: antialiased;
   -webkit-font-smoothing: antialiased;
 }
@@ -78,12 +114,6 @@ button,
 input,
 label {
   line-height: 1.1;
-}
-
-.container {
-  max-width: clamp(16rem, 100%, 90rem);
-  margin: 0 auto;
-  padding: 0 1rem;
 }
 
 #landingEl,

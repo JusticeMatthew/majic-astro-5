@@ -1,5 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
+import Burger from "$/assets/icons/burger.svg";
+import Close from "$/assets/icons/close.svg";
 import Button from "$/atoms/Button.astro";
 import navLinks from "$/constants/navLinks.ts";
 import MobileNav from "$/components/molecules/MobileNav.tsx";
@@ -20,11 +22,11 @@ import MobileNav from "$/components/molecules/MobileNav.tsx";
 <div
   id="header-wrapper"
   transition:persist
-  class="fixed top-0 z-50 flex w-screen items-center justify-center px-0 container:px-7 container:pt-4">
+  class="container:px-7 container:pt-4 fixed top-0 z-50 flex w-screen items-center justify-center px-0">
   <header
     id="header"
     transition:persist
-    class="transition-[color, box-shadow, backdrop-filter, background-image] flex w-full items-center justify-between px-6 py-4 duration-300 container:rounded-lg">
+    class="transition-[color, box-shadow, backdrop-filter, background-image] container:rounded-lg flex w-full items-center justify-between px-6 py-4 duration-300">
     <a href="/" class="flex cursor-pointer items-center gap-3">
       <figure
         id="logo"
@@ -38,21 +40,21 @@ import MobileNav from "$/components/molecules/MobileNav.tsx";
       </h1>
     </a>
     <MobileNav client:only="solid-js">
-      <Icon name="burger" class="text-3xl" />
-      <Icon name="close" class="m-4 text-4xl text-dark" />
+      <Burger id="burger" width={30} height={30} />
+      <Close id="close" width={36} height={36} class="fill-dark m-4" />
       <Button
         href="/contact"
-        class="px-7 text-level-2 text-light"
+        class="text-level-2 text-light px-7"
         variant="dark">
         Contact
       </Button>
     </MobileNav>
-    <nav class="hidden gap-3 tablet:flex">
+    <nav class="tablet:flex hidden gap-3">
       {
         navLinks.map(({ href, label }) => (
           <a
             href={href}
-            class="cursor-pointer rounded-lg bg-gradient-to-r from-blurple/30 to-blurple/30 bg-[length:100%_0%] bg-bottom bg-no-repeat px-3 py-2 transition-[background-size] hover:bg-[length:100%_100%]">
+            class="from-blurple/30 to-blurple/30 cursor-pointer rounded-lg bg-gradient-to-r bg-[length:100%_0%] bg-bottom bg-no-repeat px-3 py-2 transition-[background-size] hover:bg-[length:100%_100%]">
             {label}
           </a>
         ))
@@ -76,7 +78,7 @@ import MobileNav from "$/components/molecules/MobileNav.tsx";
     color: rgba(248, 250, 252, 0.9);
 
     & #burger {
-      background-color: rgba(248, 250, 252, 0.8);
+      fill: rgba(248, 250, 252, 0.8);
     }
 
     & #logo {
@@ -95,7 +97,7 @@ import MobileNav from "$/components/molecules/MobileNav.tsx";
       0 8px 10px -6px rgb(0 0 0 / 0.1);
 
     & #burger {
-      background-color: #0d111c;
+      fill: #0d111c;
     }
 
     & #logo {

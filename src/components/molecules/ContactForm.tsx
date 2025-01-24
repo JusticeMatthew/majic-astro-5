@@ -3,7 +3,7 @@ import { actions } from "astro:actions";
 import { createSignal, createEffect } from "solid-js";
 import { createForm } from "@tanstack/solid-form";
 import { zodValidator } from "@tanstack/zod-form-adapter";
-// import { toast } from "@studiocms/ui/components";
+import { toast } from "studiocms:ui/components";
 
 export default function ContactForm({
   children,
@@ -25,14 +25,14 @@ export default function ContactForm({
       const { error } = await actions.sendEmail(value);
 
       if (!error) {
-        // const successEvent = new CustomEvent("success");
-        // toast({
-        //   title: "Success!",
-        //   description:
-        //     "Your message has been received and we will respond within 48 hours.",
-        //   type: "success",
-        // });
-        // document.dispatchEvent(successEvent);
+        const successEvent = new CustomEvent("success");
+        toast({
+          title: "Success!",
+          description:
+            "Your message has been received and we will respond within 48 hours.",
+          type: "success",
+        });
+        document.dispatchEvent(successEvent);
         setSending(false);
         form.reset();
       } else {
@@ -64,7 +64,7 @@ export default function ContactForm({
         e.stopPropagation();
         form.handleSubmit();
       }}
-      class="z-30 mb-14 flex w-full flex-col text-dark">
+      class="text-dark z-30 mb-14 flex w-full flex-col">
       <div class="flex w-full flex-col md:flex-row md:gap-14">
         <div class="w-full">
           <div class={inputContainerStyles}>
@@ -97,7 +97,7 @@ export default function ContactForm({
                       onInput={(e) => field().handleChange(e.target.value)}
                     />
                     {field().state.meta.errors && (
-                      <span class="absolute -top-5 left-16 text-min text-red-700">
+                      <span class="text-min absolute -top-5 left-16 text-red-700">
                         {field().state.meta.errors}
                       </span>
                     )}
@@ -137,7 +137,7 @@ export default function ContactForm({
                       onInput={(e) => field().handleChange(e.target.value)}
                     />
                     {field().state.meta.errors && (
-                      <span class="absolute -top-5 left-16 text-min text-red-700">
+                      <span class="text-min absolute -top-5 left-16 text-red-700">
                         {field().state.meta.errors}
                       </span>
                     )}
@@ -153,7 +153,7 @@ export default function ContactForm({
                 name="company"
                 children={(field) => (
                   <input
-                    class="mt-2 h-12 w-full rounded-lg bg-slate-200 p-3 ring-blurple focus-within:ring-4 hover:ring-4 focus:outline-none sm:h-14"
+                    class="ring-blurple mt-2 h-12 w-full rounded-lg bg-slate-200 p-3 focus-within:ring-4 hover:ring-4 focus:outline-none sm:h-14"
                     name={field().name}
                     value={field().state.value}
                     onBlur={field().handleBlur}
@@ -194,7 +194,7 @@ export default function ContactForm({
                     onInput={(e) => field().handleChange(e.target.value)}
                   />
                   {field().state.meta.errors && (
-                    <span class="absolute -top-5 left-24 text-min text-red-700">
+                    <span class="text-min absolute -top-5 left-24 text-red-700">
                       {field().state.meta.errors}
                     </span>
                   )}

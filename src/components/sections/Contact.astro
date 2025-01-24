@@ -1,5 +1,5 @@
 ---
-import logo from "$/assets/logo.svg";
+import logo from "$/assets/icons/logo.svg";
 import { Image } from "astro:assets";
 import Button from "$/atoms/Button.astro";
 import ContactForm from "$/molecules/ContactForm.tsx";
@@ -7,7 +7,6 @@ import ContactForm from "$/molecules/ContactForm.tsx";
 
 <script>
   import { animate, inView } from "motion";
-  // import { toast } from "@studiocms/ui/components";
 
   document.addEventListener("astro:page-load", () => {
     inView("#contactEl", () => {
@@ -20,16 +19,16 @@ import ContactForm from "$/molecules/ContactForm.tsx";
   });
 </script>
 
-<section class="w-screen bg-dark-bg">
+<section class="bg-dark-bg w-screen">
   <div id="contactEl" class="container flex flex-col">
-    <h3 class="z-30 mb-16 text-center font-calistoga text-level-5 drop-shadow">
+    <h3 class="font-calistoga text-level-5 z-30 mb-16 text-center drop-shadow">
       Ready to see <span class="flashing-text drop-shadow-xl"
         >Majic<span class="text-light drop-shadow"> can do for </span>you</span
       >?
     </h3>
     <div
-      class="relative z-30 flex min-h-20 w-full flex-col items-center justify-evenly overflow-clip rounded-lg bg-light px-6 text-dark sm:items-start sm:px-16">
-      <p class="mb-4 mt-14 font-calistoga text-level-3">Send us a message</p>
+      class="bg-light text-dark relative z-30 flex min-h-20 w-full flex-col items-center justify-evenly overflow-clip rounded-lg px-6 sm:items-start sm:px-16">
+      <p class="font-calistoga text-level-3 mt-14 mb-4">Send us a message</p>
       <p class="mb-14 max-w-prose">
         Connect with us today and let Majic illuminate the path to online
         greatness and amaze your visitors with every click.
@@ -48,7 +47,7 @@ import ContactForm from "$/molecules/ContactForm.tsx";
         src={logo}
         alt=""
         width={800}
-        class="right-50 absolute -right-16 top-12 z-10 -rotate-[20deg] opacity-30"
+        class="absolute top-12 right-50 z-10 -rotate-[20deg] opacity-30"
       />
     </div>
   </div>

@@ -1,11 +1,11 @@
 ---
 import { Image } from "astro:assets";
-import mailbox from "$/assets/mailbox.svg";
 import navLinks from "$/constants/navLinks.ts";
+import mailbox from "$/assets/images/mailbox.svg";
 ---
 
 <div
-  class="relative flex w-screen flex-col items-center justify-center bg-dark-bg pt-40">
+  class="bg-dark-bg relative flex w-screen flex-col items-center justify-center pt-40">
   <Image src={mailbox} alt="mailbox" width={120} class="z-30 -translate-y-10" />
   <figure
     id="background"
@@ -36,11 +36,11 @@ import navLinks from "$/constants/navLinks.ts";
           <p class="mb-1 font-semibold">Contact</p>
           <a
             href="/contact"
-            class="block p-1 text-content underline-offset-4 hover:underline"
+            class="block p-1 text-base underline-offset-4 hover:underline"
             >Send a message</a
           >
-          <p class="p-1 text-content">386-601-9344</p>
-          <p class="p-1 text-content">info@majicwebdesign.com</p>
+          <p class="p-1 text-base">386-601-9344</p>
+          <p class="p-1 text-base">info@majicwebdesign.com</p>
         </span>
       </div>
     </div>
