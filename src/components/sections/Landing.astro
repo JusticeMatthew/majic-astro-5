@@ -2,16 +2,7 @@
 import Button from "$/components/atoms/Button.astro";
 ---
 
-<script>
-  import { animate } from "motion/mini";
-
-  document.addEventListener("astro:page-load", () => {
-    animate("#landingEl", { opacity: 1 }, { duration: 0.5 });
-  });
-</script>
-
 <section
-  id="landingEl"
   class="container flex min-h-lvh flex-col items-center justify-center text-center">
   <h2
     class="font-calistoga text-level-6 z-10 my-4 text-pretty drop-shadow sm:my-6">
@@ -33,15 +24,9 @@ import Button from "$/components/atoms/Button.astro";
     </span>
   </p>
   <div class="mt-6 flex flex-col items-center gap-6 sm:flex-row">
-    <Button server:defer href="/contact" floating class="px-12"
-      >Connect with us today</Button
+    <Button href="/contact" floating class="px-12">Connect with us today</Button
     >
-    <Button
-      server:defer
-      href="#about"
-      floating
-      variant="secondary"
-      class="px-12 py-3">
+    <Button href="#about" floating variant="secondary" class="px-12 py-3">
       More about Majic
     </Button>
   </div>
