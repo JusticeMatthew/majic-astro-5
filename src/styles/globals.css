@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "tailwindcss-intersect";
+@plugin "tailwindcss-motion";
 
 @font-face {
   font-family: "Inter";
@@ -17,10 +19,10 @@
 }
 
 @theme {
-  --default-font-family: "Inter", "sans-serif";
+  --default-font-family: "Inter", sans-serif;
 
-  --font-inter: "Inter", "sans-serif";
-  --font-calistoga: "Calistoga", "display";
+  --font-inter: "Inter", sans-serif;
+  --font-calistoga: "Calistoga", display;
 
   --text-min: 1rem;
   --text-level-base: clamp(1rem, 0.9628rem + 0.1802vi, 1.125rem);
@@ -80,16 +82,16 @@
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
+}
 
-  @media (prefers-reduced-motion: no-preference) {
-    .flashing-text {
-      animation: move-bg 16s linear infinite;
-    }
+@media (prefers-reduced-motion: no-preference) {
+  .flashing-text {
+    animation: move-bg 16s linear infinite;
+  }
 
-    @keyframes move-bg {
-      to {
-        background-position: -500%;
-      }
+  @keyframes move-bg {
+    to {
+      background-position: -500%;
     }
   }
 }
@@ -114,12 +116,4 @@ button,
 input,
 label {
   line-height: 1.1;
-}
-
-#aboutEl,
-#servicesEl,
-#examplesEl,
-#packagesEl,
-#contactEl {
-  opacity: 0;
 }

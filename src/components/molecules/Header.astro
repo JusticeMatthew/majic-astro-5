@@ -1,5 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
 import Burger from "$/assets/icons/burger.svg";
 import Close from "$/assets/icons/close.svg";
 import Button from "$/atoms/Button.astro";
@@ -7,26 +6,12 @@ import navLinks from "$/constants/navLinks.ts";
 import MobileNav from "$/components/molecules/MobileNav.tsx";
 ---
 
-<script>
-  import { animate } from "motion/mini";
-
-  document.addEventListener("astro:page-load", () => {
-    animate(
-      "#header-wrapper",
-      { opacity: [0, 1] },
-      { duration: 0.5, delay: 0.5 },
-    );
-  });
-</script>
-
 <div
-  id="header-wrapper"
   transition:persist
   class="container:px-7 container:pt-4 fixed top-0 z-50 flex w-screen items-center justify-center px-0">
   <header
-    id="header"
     transition:persist
-    class="transition-[color, box-shadow, backdrop-filter, background-image] container:rounded-lg flex w-full items-center justify-between px-6 py-4 duration-300">
+    class="motion-opacity-in-0 transition-[color, box-shadow, backdrop-filter, background-image] container:rounded-lg flex w-full items-center justify-between px-6 py-4 duration-300">
     <a href="/" class="flex cursor-pointer items-center gap-3">
       <figure
         id="logo"
@@ -65,12 +50,8 @@ import MobileNav from "$/components/molecules/MobileNav.tsx";
 </div>
 
 <style>
-  #header-wrapper {
-    opacity: 0;
-  }
-
-  #header {
-    max-width: clamp(16rem, 100%, 94rem);
+  header {
+    max-width: clamp(16rem, 100%, 94rem) !important;
   }
 
   html[data-is-top="true"] header {

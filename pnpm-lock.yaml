@@ -72,6 +72,12 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.6.11
         version: 0.6.11(prettier-plugin-astro@0.14.1)(prettier@3.3.3)
+      tailwindcss-intersect:
+        specifier: ^2.1.0
+        version: 2.1.0(tailwindcss@4.0.0)
+      tailwindcss-motion:
+        specifier: ^1.0.1
+        version: 1.0.1(tailwindcss@4.0.0)
 
 packages:
 
@@ -2659,6 +2665,16 @@ packages:
     resolution: {integrity: sha512-OoohrmuUlBs8B8o6MB2Aevn+pRIH9zDALSR+6hhqVfa6fRwG/Qw9VUMSMW9VNg2CFc/MTIfabtdOVl9ODIJjpw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
+
+  tailwindcss-intersect@2.1.0:
+    resolution: {integrity: sha512-JonOxIkpCgDkEFaIw3WHN7t2bs+uclnCzsvCcVyN/VuCULtJnxHGe0PEi13rZf/KnW1D77UKogoUEmwxW+wo/A==}
+    peerDependencies:
+      tailwindcss: '>=3.2.0 || >=4.0.0'
+
+  tailwindcss-motion@1.0.1:
+    resolution: {integrity: sha512-ZqarvI3XSclT46Dq1wOo9qG9Yx0TIyEtkMfTo8l0JuVKvO1WiSbvAECuTqdYHpC9Ml7abuJIk7u907SBHYprwQ==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || insiders'
 
   tailwindcss@4.0.0:
     resolution: {integrity: sha512-ULRPI3A+e39T7pSaf1xoi58AqqJxVCLg8F/uM5A3FadUbnyDTgltVnXJvdkTjwCOGA6NazqHVcwPJC5h2vRYVQ==}
@@ -6063,6 +6079,14 @@ snapshots:
       css-what: 6.1.0
       csso: 5.0.5
       picocolors: 1.1.1
+
+  tailwindcss-intersect@2.1.0(tailwindcss@4.0.0):
+    dependencies:
+      tailwindcss: 4.0.0
+
+  tailwindcss-motion@1.0.1(tailwindcss@4.0.0):
+    dependencies:
+      tailwindcss: 4.0.0
 
   tailwindcss@4.0.0: {}
 

@@ -3,6 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "$/utils/*": ["src/utils/*"],
       "$/assets/*": ["src/assets/*"],
       "$/styles/*": ["src/styles/*"],
       "$/layouts/*": ["src/layouts/*"],

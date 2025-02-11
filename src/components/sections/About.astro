@@ -5,30 +5,12 @@ import Button from "$/atoms/Button.astro";
 ---
 
 <script>
-  import { inView, animate, stagger } from "motion";
-  import { DotLottieWorker } from "@lottiefiles/dotlottie-web";
+  import { loadLottie } from "$/utils/lottieHelpers";
 
   document.addEventListener("astro:page-load", () => {
-    const aboutLottie = new DotLottieWorker({
-      canvas: document.getElementById(
-        "lottie-container-about",
-      ) as HTMLCanvasElement,
-      src: `${window.location.origin}/animations/working.lottie`,
-      loop: true,
-      autoplay: true,
-      workerId: "about",
-    });
+    const aboutLottie = loadLottie("working");
 
-    const stop = inView("#about", () => {
-      animate(
-        "#aboutEl",
-        { opacity: [0, 1], x: [-50, 0] },
-        { duration: 1, delay: stagger(0.05, { startDelay: 0.3 }) },
-      );
-    });
-
-    window.addEventListener("astro:before-swap", () => {
-      stop();
+    document.addEventListener("astro:before-swap", () => {
       aboutLottie.destroy();
     });
   });
@@ -36,28 +18,25 @@ import Button from "$/atoms/Button.astro";
 
 <section id="about" class="mb-section mt-12 w-full scroll-mt-48 pb-12">
   <div
-    class="container flex flex-col-reverse justify-between gap-12 tablet:flex-row tablet:gap-40">
+    class="tablet:flex-row tablet:gap-40 container flex flex-col-reverse justify-between gap-12">
     <div
-      class="mx-auto mb-28 flex flex-col items-center text-center tablet:items-start tablet:justify-center tablet:text-left">
+      class="tablet:items-start intersect:opacity-100 tablet:justify-center tablet:text-left intersect-once intersect-half tablet:intersect:-motion-translate-x-in-25 max-md:intersect:motion-translate-y-in-25 mx-auto mb-28 flex flex-col items-center text-center opacity-0 transition-all !duration-1000 ease-out">
       <h3
-        id="aboutEl"
-        class="mx-auto mb-6 w-[11ch] text-balance font-calistoga text-level-5 drop-shadow">
+        class="font-calistoga text-level-5 mx-auto mb-6 w-[11ch] text-balance drop-shadow">
         Running your own business is tough enough
       </h3>
-      <p
-        id="aboutEl"
-        class="relative mb-12 mt-6 max-w-[50ch] text-pretty text-light-gray">
+      <p class="text-light-gray relative mt-6 mb-12 max-w-[50ch] text-pretty">
         That&apos;s why Majic wants to provide a one-stop shop for businesses
         who need worry free web design & development services at a fair rate.
       </p>
-      <Button href="/services" floating id="aboutEl" class="pl-6">
+      <Button href="/services" floating class="pl-6">
         See our affordable pricing
-        <Icon name="right-arrow" class="ml-5 mr-5 inline sm:ml-32" />
+        <Icon name="right-arrow" class="mr-5 ml-5 inline sm:ml-32" />
       </Button>
     </div>
     <canvas
-      id="lottie-container-about"
-      class="mx-auto aspect-square h-full w-full px-10 sm:h-[20rem] sm:w-[20rem] sm:px-0 tablet:h-[28rem] tablet:w-[28rem] container:h-[40rem] container:w-[40rem] container:-translate-y-8">
+      id="lottie-container-working"
+      class="tablet:!h-112 tablet:!w-112 container:!h-160 container:!w-160 container:-translate-y-8 mx-auto aspect-square h-80 w-80">
     </canvas>
   </div>
   <Benefits />
