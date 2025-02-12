@@ -1,0 +1,34 @@
+---
+import pricingPlans from "$/constants/pricingPlans";
+import { Tabs, TabItem } from "studiocms:ui/components";
+---
+
+<div
+  class="bg-light text-dark container:hidden relative mt-16 flex h-auto w-full flex-col items-center justify-between rounded-lg py-4 pr-6 pl-4 shadow sm:py-8">
+  <div class="flex w-full items-center">
+    <Tabs align="center">
+      {
+        pricingPlans.map(({ name, price, monthly, recommended, services }) => (
+          <TabItem label={name}>{name}</TabItem>
+        ))
+      }
+    </Tabs>
+  </div>
+</div>
+
+<style is:global>
+  .sui-tabs-list {
+    font-size: var(--text-level-1);
+  }
+
+  .sui-tab-header.primary.active::after {
+    content: "" !important;
+    height: 4px !important;
+    width: 100% !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    border-radius: 20px;
+    background-color: var(--color-blurple) !important;
+  }
+</style>

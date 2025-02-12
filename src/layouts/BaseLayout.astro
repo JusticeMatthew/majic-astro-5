@@ -21,6 +21,7 @@ const ogDescription =
     <link rel="canonical" href={canonicalURL} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=1" />
     <link rel="icon" type="favicon" href="/favicon.ico?v=1" />
+    <meta name="robots" content="index, follow" />
     {/* OG Tags */}
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -42,19 +43,20 @@ const ogDescription =
       as="font"
       type="font/woff2"
       href="/fonts/Calistoga.woff2"
+      crossorigin="anonymous"
     />
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/Inter.woff2" />
+    <link
+      rel="preload"
+      as="font"
+      type="font/woff2"
+      href="/fonts/Inter.woff2"
+      crossorigin="anonymous"
+    />
     <link
       rel="preload"
       as="image"
       type="image/svg+xml"
       href="/images/logo-light.svg"
-    />
-    <link
-      rel="preload"
-      as="image"
-      type="image/svg+xml"
-      href="/images/logo.svg"
     />
     <ClientRouter />
     <ScrollObserver />

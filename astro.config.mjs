@@ -10,7 +10,14 @@ import ui from "@studiocms/ui";
 // https://astro.build/config
 export default defineConfig({
   site: "http://majicwebdesign.netlify.app",
-  integrations: [icon(), solidJs(), sitemap(), ui()],
+  integrations: [
+    icon(),
+    solidJs(),
+    sitemap(),
+    ui({
+      noInjectCSS: true,
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

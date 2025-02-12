@@ -1,7 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import pricingPlans from "$/constants/pricingPlans.ts";
-import MobilePackages from "$/molecules/MobilePackages.tsx";
+import MobilePackagesV2 from "$/molecules/MobilePackagesV2.astro";
 ---
 
 <script>
@@ -48,7 +48,7 @@ import MobilePackages from "$/molecules/MobilePackages.tsx";
   id="packagesEl"
   class="h-[min(auto, 60vh)] relative mb-6 flex flex-col items-center">
   <div class="flex w-full flex-col justify-between">
-    <MobilePackages client:only="solid-js" />
+    <MobilePackagesV2 />
     <div class="container:grid mt-8 hidden grid-cols-3 gap-6">
       {
         pricingPlans.map((plan) => (
