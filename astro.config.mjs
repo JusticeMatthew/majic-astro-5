@@ -6,7 +6,6 @@ import netlify from "@astrojs/netlify";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 import ui from "@studiocms/ui";
-import vercel from "@astrojs/vercel";
 
 // https://astro.build/config
 export default defineConfig({
@@ -26,5 +25,5 @@ export default defineConfig({
   experimental: {
     svg: true,
   },
-  adapter: vercel(),
+  adapter: netlify(),
 });
