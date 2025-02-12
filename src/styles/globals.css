@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tailwindcss-intersect";
-@plugin "tailwindcss-motion";
 
 @font-face {
   font-family: "Inter";

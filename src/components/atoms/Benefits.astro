@@ -4,17 +4,17 @@ import benefits from "$/constants/benefits";
 
 <div
   id="benefits"
-  class="container relative z-20 grid w-screen grid-cols-1 p-0 tablet:grid-cols-3">
+  class="tablet:grid-cols-3 relative z-20 container grid w-screen grid-cols-1 p-0">
   {
     benefits[0].map(({ maskId, title, content }) => (
       <div
         id={maskId}
-        class="mask z-50 col-span-1 w-full bg-light-purple pl-12 text-dark-purple [&:nth-child(3)]:pb-24 tablet:[&:nth-child(3)]:pb-0">
+        class="mask bg-light-purple text-dark-purple tablet:[&:nth-child(3)]:pb-0 z-50 col-span-1 w-full pl-12 [&:nth-child(3)]:pb-24">
         <div class="relative mt-44 md:mb-24">
-          <figure class="absolute h-[2.15rem] w-1 rounded-lg bg-blurple" />
+          <figure class="bg-blurple absolute h-[2.15rem] w-1 rounded-lg" />
           <div class="ml-6">
-            <p class="mb-3 text-level-1 font-semibold">{title}</p>
-            <p class="max-w-[30ch] text-pretty sm:max-w-prose tablet:max-w-[40ch]">
+            <p class="text-level-1 mb-3 font-semibold">{title}</p>
+            <p class="tablet:max-w-[40ch] max-w-[30ch] text-pretty sm:max-w-prose">
               {content}
             </p>
           </div>
@@ -26,11 +26,11 @@ import benefits from "$/constants/benefits";
     benefits[1].map(({ maskId, title, content }) => (
       <div
         id={maskId}
-        class="mask2 z-50 col-span-1 hidden w-full bg-light-purple pl-12 text-dark-purple tablet:block">
-        <div class="relative mb-28 mt-24">
-          <figure class="absolute h-[2.15rem] w-1 rounded-lg bg-blurple" />
+        class="mask2 bg-light-purple text-dark-purple tablet:block z-50 col-span-1 hidden w-full pl-12">
+        <div class="relative mt-24 mb-28">
+          <figure class="bg-blurple absolute h-[2.15rem] w-1 rounded-lg" />
           <div class="ml-6">
-            <p class="mb-3 text-level-1 font-semibold">{title}</p>
+            <p class="text-level-1 mb-3 font-semibold">{title}</p>
             <p class="max-w-[40ch] text-pretty">{content}</p>
           </div>
         </div>
@@ -63,11 +63,11 @@ import benefits from "$/constants/benefits";
   }
 
   .mask {
-    mask-position: 3rem 7rem !important;
+    mask-position: 4.5rem 7rem !important;
   }
 
   .mask2 {
-    mask-position: 3rem 2rem !important;
+    mask-position: 4.5rem 2rem !important;
   }
 
   #mask1 {
