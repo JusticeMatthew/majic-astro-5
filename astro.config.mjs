@@ -2,14 +2,13 @@
 import { defineConfig, envField } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import solidJs from "@astrojs/solid-js";
-import netlify from "@astrojs/netlify";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 import ui from "@studiocms/ui";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "http://majicwebdesign.netlify.app",
+  site: "http://majicwebdesign.vercel.app",
   integrations: [
     icon(),
     solidJs(),
@@ -32,5 +31,4 @@ export default defineConfig({
   experimental: {
     svg: true,
   },
-  adapter: netlify(),
 });
