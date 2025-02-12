@@ -80,7 +80,7 @@ export default function ContactForm({
                   <div class="relative">
                     <input
                       classList={{
-                        "mt-2 h-12 w-full rounded-lg bg-slate-200 p-3 focus:outline-none sm:h-14 ":
+                        "mt-2 h-12 w-full rounded-lg bg-slate-200 p-3 focus:outline-none sm:h-14":
                           true,
                         "ring-blurple focus-within:ring-4 hover:ring-4": field()
                           .state.meta.errors.length

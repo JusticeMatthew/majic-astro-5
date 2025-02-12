@@ -22,7 +22,6 @@ export default defineConfig({
       RESEND_API_KEY: envField.string({ context: "server", access: "secret" }),
     },
   },
-  adapter: netlify(),
   experimental: {
     svg: true,
   },

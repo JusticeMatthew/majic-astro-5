@@ -3,84 +3,32 @@ import Packages from "$/sections/Packages.astro";
 import Button from "$/atoms/Button.astro";
 ---
 
-<script>
-  import { DotLottieWorker } from "@lottiefiles/dotlottie-web";
-  import { inView, animate, stagger } from "motion";
-
-  const sequence = [
-    [
-      "#servicesEl",
-      { opacity: [0, 1], x: [-50, 0] },
-      { duration: 1, delay: stagger(0.05, { startDelay: 0.3 }) },
-    ],
-    ["#packagesEl", { opacity: [0, 1] }, { duration: 1, delay: 0.3 }],
-  ];
-
-  document.addEventListener("astro:page-load", () => {
-    const stop = inView("#services", () => {
-      const wandContainer = document.getElementById(
-        "lottie-container-services",
-      ) as HTMLCanvasElement;
-      const flashingText = document.getElementById(
-        "flashing-text",
-      ) as HTMLElement;
-
-      const anim = new DotLottieWorker({
-        canvas: wandContainer,
-        src: `${window.location.origin}/animations/wand.lottie`,
-        loop: false,
-        autoplay: false,
-        workerId: "wand-lottie",
-      });
-
-      setTimeout(() => {
-        anim.play();
-        setTimeout(() => flashingText.classList.add("flashing-text"), 200);
-      }, 1500);
-
-      // @ts-expect-error
-      animate(sequence);
-      animate(wandContainer, { opacity: [0, 1] }, { delay: 1.5 });
-
-      return () => {
-        anim.destroy();
-      };
-    });
-
-    window.addEventListener("astro:before-swap", () => {
-      stop();
-    });
-  });
-</script>
-
 <section
   id="services"
-  class="container relative flex flex-col justify-center pb-12">
-  <canvas
-    id="lottie-container-services"
-    class="invisible w-24 container:visible">
-  </canvas>
-  <h3
-    id="servicesEl"
-    class="relative z-10 mb-6 max-w-[20ch] font-calistoga text-level-5 drop-shadow">
-    Let's cast a spell of
-    <span id="flashing-text" class="drop-shadow-xl">success</span> for your online
-    journey
-  </h3>
-  <p id="servicesEl" class="my-6 max-w-[65ch] text-pretty text-light-gray">
-    Majic goes above and beyond to provide the most complete digital service to
-    our clients at an affordable price, offering three convenient packages that
-    cover the majority of online needs. Everything you need to thrive on the
-    web:
-  </p>
-  <p id="servicesEl" class="mb-16 mt-6 block font-bold">We take care of it.</p>
+  class="relative container flex flex-col justify-center pb-12">
+  <div
+    class="intersect:opacity-100 intersect-once intersect-half tablet:intersect:-motion-translate-x-in-25 max-md:intersect:motion-translate-y-in-25 opacity-0 transition-all !duration-1000 ease-out">
+    <h3
+      class="font-calistoga text-level-5 relative z-10 mb-6 max-w-[20ch] drop-shadow">
+      Let's cast a spell of
+      <span id="flashing-text" class="drop-shadow-xl">success</span> for your online
+      journey
+    </h3>
+    <p class="text-light-gray my-6 max-w-[65ch] text-pretty">
+      Majic goes above and beyond to provide the most complete digital service
+      to our clients at an affordable price, offering three convenient packages
+      that cover the majority of online needs. Everything you need to thrive on
+      the web:
+    </p>
+    <p class="mt-6 mb-16 block font-bold">We take care of it.</p>
+  </div>
   <Packages />
   <div
-    class="flex w-full flex-col items-center justify-center rounded-lg bg-[#94ADFF] p-8 text-center text-dark-purple selection:bg-dark-purple selection:text-light sm:p-16">
-    <h2 class="text-balance font-calistoga text-level-4">
+    class="text-dark-purple selection:bg-dark-purple selection:text-light flex w-full flex-col items-center justify-center rounded-lg bg-[#94ADFF] p-8 text-center sm:p-16">
+    <h2 class="font-calistoga text-level-4 text-balance">
       Need something more specific?
     </h2>
-    <p class="mb-8 mt-6 max-w-prose text-pretty">
+    <p class="mt-6 mb-8 max-w-prose text-pretty">
       Get in touch for a personalized quote or
       <a
         href="/services"
