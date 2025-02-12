@@ -16,7 +16,6 @@ export default function ContactForm({
     defaultValues: {
       name: "",
       email: "",
-      company: "",
       message: "",
     },
     validatorAdapters: zodValidator(),
@@ -147,23 +146,6 @@ export default function ContactForm({
               />
             </label>
           </div>
-          <div class={inputContainerStyles}>
-            <label>
-              Company
-              <form.Field
-                name="company"
-                children={(field) => (
-                  <input
-                    class="ring-blurple mt-2 h-12 w-full rounded-lg bg-slate-200 p-3 focus-within:ring-4 hover:ring-4 focus:outline-none sm:h-14"
-                    name={field().name}
-                    value={field().state.value}
-                    onBlur={field().handleBlur}
-                    onInput={(e) => field().handleChange(e.target.value)}
-                  />
-                )}
-              />
-            </label>
-          </div>
         </div>
         <div class="w-full">
           <label>
@@ -178,7 +160,7 @@ export default function ContactForm({
                 <div class="relative">
                   <textarea
                     classList={{
-                      "mt-2 h-[13.5rem] w-full resize-none rounded-lg bg-slate-200 p-3 focus:outline-none sm:h-[17.8rem]":
+                      "mt-2 w-full resize-none rounded-lg bg-slate-200 p-3 focus:outline-none h-43":
                         true,
                       "ring-blurple focus-within:ring-4 hover:ring-4": field()
                         .state.meta.errors.length
