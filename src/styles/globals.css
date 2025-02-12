@@ -116,3 +116,31 @@ input,
 label {
   line-height: 1.1;
 }
+
+.sui-toast-container {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  border-radius: 8px;
+  padding: 24px;
+  width: 35ch;
+
+  & .sui-toast-progress-bar {
+    height: 4px;
+    background-color: var(--color-blurple);
+    margin: 6px;
+  }
+
+  & .sui-toast-title {
+    font-size: var(--text-level-1);
+    font-weight: 600;
+  }
+
+  & .toast-icon,
+  .close-icon {
+    width: 32px;
+    height: 32px;
+    stroke-width: 2px;
+  }
+
+  @apply ring-blurple ring-4 drop-shadow;
+}

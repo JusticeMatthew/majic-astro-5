@@ -31,6 +31,7 @@ export default function ContactForm({
           description:
             "Your message has been received and we will respond within 48 hours.",
           type: "success",
+          persistent: true,
         });
         document.dispatchEvent(successEvent);
         setSending(false);
