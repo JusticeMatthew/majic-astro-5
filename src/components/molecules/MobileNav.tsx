@@ -22,7 +22,7 @@ export default function MobileNav(props: MobileNavProps) {
   };
 
   return (
-    <div class="relative tablet:hidden">
+    <div class="tablet:hidden relative">
       <button
         onClick={handleMenuToggle}
         aria-label="nav menu"
@@ -30,25 +30,24 @@ export default function MobileNav(props: MobileNavProps) {
         {astro.menuIcon}
       </button>
       <aside
-        class={`${menuOpen() ? "right-0" : "-right-[115vh]"} fixed top-0 h-screen w-screen transition-all duration-300`}>
-        <div class="flex h-full w-full justify-end bg-gradient-to-l from-dark-bg to-transparent backdrop-blur">
-          <figure onClick={handleMenuToggle} class="w-full"></figure>
-          <nav class="flex h-full min-w-52 flex-col bg-light-purple">
+        class={`${menuOpen() ? "right-0" : "-right-[115vh]"} fixed top-0 h-screen w-fit transition-all duration-300`}>
+        <div class="from-dark-bg flex h-full w-full justify-end bg-gradient-to-l to-transparent backdrop-blur">
+          <nav class="bg-light-purple flex h-full min-w-52 flex-col">
             <button onClick={handleMenuToggle}>{astro.closeIcon}</button>
-            <div class="mt-6 flex h-full w-full flex-col justify-between px-4 text-dark">
+            <div class="text-dark mt-6 flex h-full w-full flex-col justify-between px-4">
               <div class="flex w-full flex-col items-center">
                 {navLinks.map(({ href, label }) => (
                   <a
                     href={href}
                     onClick={handleMenuToggle}
-                    class="w-full rounded-lg py-3 text-center text-level-2 hover:bg-blurple/30 focus:bg-blurple/30 active:scale-95 [&:nth-child(3)]:mb-3">
+                    class="text-level-2 hover:bg-blurple/30 focus:bg-blurple/30 w-full rounded-lg py-3 text-center active:scale-95 [&:nth-child(3)]:mb-3">
                     {label}
                   </a>
                 ))}
               </div>
               <div class="mb-16 flex w-full flex-col items-center">
                 {astro.button}
-                <p class="mb-1 mt-2">or call:</p>
+                <p class="mt-2 mb-1">or call:</p>
                 <a href="tel:3866019344">386-601-9344</a>
               </div>
             </div>

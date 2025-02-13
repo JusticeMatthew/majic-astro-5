@@ -5,36 +5,12 @@ import MobilePackagesV2 from "$/molecules/MobilePackagesV2.astro";
 ---
 
 <script>
-  import { DotLottieWorker } from "@lottiefiles/dotlottie-web";
+  import { loadLottie } from "$/utils/lottieHelpers";
 
   document.addEventListener("astro:page-load", () => {
-    const personalLottie = new DotLottieWorker({
-      canvas: document.getElementById(
-        "lottie-container-Personal",
-      ) as HTMLCanvasElement,
-      src: `${window.location.origin}/animations/Personal.lottie`,
-      loop: true,
-      autoplay: true,
-      workerId: "personal-lottie",
-    });
-    const businessLottie = new DotLottieWorker({
-      canvas: document.getElementById(
-        "lottie-container-Business",
-      ) as HTMLCanvasElement,
-      src: `${window.location.origin}/animations/Business.lottie`,
-      loop: true,
-      autoplay: true,
-      workerId: "business-lottie",
-    });
-    const commerceLottie = new DotLottieWorker({
-      canvas: document.getElementById(
-        "lottie-container-Commerce",
-      ) as HTMLCanvasElement,
-      src: `${window.location.origin}/animations/Commerce.lottie`,
-      loop: true,
-      autoplay: true,
-      workerId: "commerce-lottie",
-    });
+    const personalLottie = loadLottie("Personal");
+    const businessLottie = loadLottie("Business");
+    const commerceLottie = loadLottie("Commerce");
 
     window.addEventListener("astro:before-swap", () => {
       personalLottie.destroy();
@@ -46,7 +22,7 @@ import MobilePackagesV2 from "$/molecules/MobilePackagesV2.astro";
 
 <section
   id="packagesEl"
-  class="h-[min(auto, 60vh)] relative mb-6 flex flex-col items-center">
+  class="h-[min(auto, 60vh)] intersect:opacity-100 transition-[opacity, translate] intersect:translate-y-0 relative mb-6 flex translate-y-10 flex-col items-center opacity-0 !delay-300 !duration-1000 !ease-out">
   <div class="flex w-full flex-col justify-between">
     <MobilePackagesV2 />
     <div class="container:grid mt-8 hidden grid-cols-3 gap-6">

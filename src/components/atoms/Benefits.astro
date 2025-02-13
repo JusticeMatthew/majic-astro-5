@@ -9,7 +9,7 @@ import benefits from "$/constants/benefits";
     benefits[0].map(({ maskId, title, content }) => (
       <div
         id={maskId}
-        class="mask bg-light-purple text-dark-purple tablet:[&:nth-child(3)]:pb-0 z-50 col-span-1 w-full pl-12 [&:nth-child(3)]:pb-24">
+        class="mask bg-light-purple text-dark-purple tablet:[&:nth-child(3)]:pb-0 z-50 col-span-1 w-full pl-6 md:pl-12 [&:nth-child(3)]:pb-24">
         <div class="relative mt-44 md:mb-24">
           <figure class="bg-blurple absolute h-[2.15rem] w-1 rounded-lg" />
           <div class="ml-6">
@@ -64,6 +64,12 @@ import benefits from "$/constants/benefits";
 
   .mask {
     mask-position: 4.5rem 7rem !important;
+  }
+
+  @media (max-width: 768px) {
+    .mask {
+      mask-position: 3rem 7rem !important;
+    }
   }
 
   .mask2 {

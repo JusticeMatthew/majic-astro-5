@@ -59,7 +59,9 @@
   });
 </script>
 
-<div class="gradient-bg sticky top-0 left-0 z-0 opacity-60" transition:persist>
+<div
+  class="gradient-bg sticky top-0 left-0 z-0 transform-gpu opacity-60"
+  transition:persist>
   <div class="gradients-container">
     <figure class="g1"></figure>
     <figure class="g2"></figure>
@@ -86,8 +88,6 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    top: 0;
-    left: 0;
     background-color: #20204e;
     will-change: filter, height;
     transform: translateZ(0);
@@ -128,6 +128,7 @@
     transform-origin: center;
     will-change: transform;
     backface-visibility: hidden;
+    transform: translate3d(0, 0, 0);
   }
 
   .g1 {

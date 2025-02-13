@@ -21,7 +21,7 @@ import Button from "$/atoms/Button.astro";
     class="tablet:flex-row tablet:gap-40 container flex flex-col-reverse justify-between gap-12">
     {/* TODO: Find a way to remove "intersect-half" on mobile */}
     <div
-      class="tablet:items-start tablet:justify-center tablet:text-left intersect-once intersect-half intersect:opacity-100 intersect:translate-0 tablet:-translate-x-15 mb-28 flex flex-col items-center text-center opacity-0 !duration-1000 ease-out max-md:translate-y-20">
+      class="tablet:items-start tablet:justify-center tablet:text-left intersect-once intersect-half intersect:opacity-100 intersect:translate-0 tablet:-translate-x-15 mb-28 flex flex-col items-center text-center opacity-0 !duration-1000 ease-out will-change-transform max-md:translate-y-20">
       <h3
         class="font-calistoga text-level-5 mb-6 w-[11ch] text-balance drop-shadow">
         Running your own business is tough enough
@@ -37,7 +37,7 @@ import Button from "$/atoms/Button.astro";
     </div>
     <canvas
       id="lottie-container-working"
-      class="tablet:!h-112 tablet:!w-112 container:!h-160 container:!w-160 container:-translate-y-8 mx-auto aspect-square h-80 w-80">
+      class="tablet:!h-112 tablet:!w-112 container:!h-160 container:!w-160 container:-translate-y-8 mx-auto aspect-square h-80 w-80 transform-gpu will-change-transform">
     </canvas>
   </div>
   <Benefits />

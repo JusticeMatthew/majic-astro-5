@@ -1,0 +1,17 @@
+---
+import { Image } from "astro:assets";
+import mobileBg from "$/assets/images/mobile-bg.png";
+import GradientBG from "$/atoms/GradientBG.astro";
+---
+
+<div class="tablet:hidden absolute inset-0">
+  <Image
+    src={mobileBg}
+    width={mobileBg.width}
+    alt=""
+    class="sticky top-0 left-0 h-screen w-screen object-cover object-center"
+  />
+</div>
+<div class="max-tablet:hidden absolute inset-0">
+  <GradientBG server:defer />
+</div>

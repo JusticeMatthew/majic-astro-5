@@ -21,6 +21,7 @@
     "astro": "^5.1.9",
     "astro-icon": "^1.1.2",
     "astro-scroll-observer": "^0.5.3",
+    "detect-gpu": "^5.0.68",
     "motion": "^11.11.17",
     "resend": "^4.0.1",
     "sharp": "^0.33.5",
