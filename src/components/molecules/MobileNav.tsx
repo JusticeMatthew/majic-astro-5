@@ -29,8 +29,11 @@ export default function MobileNav(props: MobileNavProps) {
         class="p-3 active:scale-95">
         {astro.menuIcon}
       </button>
+      <figure
+        onClick={handleMenuToggle}
+        class={`fixed top-0 left-0 -z-1 h-screen w-screen bg-black/30 backdrop-blur-lg transition-opacity duration-300 ${menuOpen() ? "opacity-100" : "opacity-0"}`}></figure>
       <aside
-        class={`${menuOpen() ? "right-0" : "-right-[115vh]"} fixed top-0 h-screen w-fit transition-all duration-300`}>
+        class={`${menuOpen() ? "right-0" : "-right-[100vw]"} fixed top-0 h-screen w-fit drop-shadow-lg transition-all duration-300 will-change-transform`}>
         <div class="from-dark-bg flex h-full w-full justify-end bg-gradient-to-l to-transparent backdrop-blur">
           <nav class="bg-light-purple flex h-full min-w-52 flex-col">
             <button onClick={handleMenuToggle}>{astro.closeIcon}</button>
