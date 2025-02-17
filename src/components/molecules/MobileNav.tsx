@@ -31,7 +31,7 @@ export default function MobileNav(props: MobileNavProps) {
       </button>
       <figure
         onClick={handleMenuToggle}
-        class={`fixed top-0 left-0 -z-1 h-screen w-screen bg-black/30 backdrop-blur-lg transition-opacity duration-300 ${menuOpen() ? "opacity-100" : "opacity-0"}`}></figure>
+        class={`fixed top-0 left-0 -z-1 h-screen w-screen bg-black/30 backdrop-blur-lg transition-opacity duration-300 ${menuOpen() ? "opacity-100" : "hidden opacity-0"}`}></figure>
       <aside
         class={`${menuOpen() ? "right-0" : "-right-[100vw]"} fixed top-0 h-screen w-fit drop-shadow-lg transition-all duration-300 will-change-transform`}>
         <div class="from-dark-bg flex h-full w-full justify-end bg-gradient-to-l to-transparent backdrop-blur">

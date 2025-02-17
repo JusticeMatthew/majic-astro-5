@@ -98,7 +98,9 @@
     height: 100%;
     position: relative;
     transition: height 0.5s;
-    filter: url(#goo) blur(20px);
+    will-change: filter, height;
+    transform: translateZ(0);
+    filter: url(#goo);
     opacity: 70%;
   }
 
