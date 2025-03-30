@@ -1,7 +1,7 @@
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const bgWrapper = document.querySelector(".bg-wrapper");
-    const scene = document.querySelector(".scene");
+  document.addEventListener("astro:page-load", function () {
+    const bgWrapper = document.querySelector(".bg-wrapper") as HTMLElement;
+    const scene = document.querySelector(".scene") as HTMLElement;
     let targetRotateX = 0;
     let targetRotateY = 0;
     let currentRotateX = 0;
@@ -15,8 +15,8 @@
     // Set up smooth animation with requestAnimationFrame
     function updateAnimation() {
       // Smoothly interpolate current rotation towards target
-      currentRotateX += (targetRotateX - currentRotateX) * 0.07; // Reduced from 0.1 for smoother motion
-      currentRotateY += (targetRotateY - currentRotateY) * 0.07; // Reduced from 0.1 for smoother motion
+      currentRotateX += (targetRotateX - currentRotateX) * 0.07;
+      currentRotateY += (targetRotateY - currentRotateY) * 0.07;
 
       // Apply transform with smoothed values
       bgWrapper.style.transform = `translate3d(0, 0, 10px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) scale(1.12)`;
@@ -47,11 +47,8 @@
     // Handle touch events for mobile
     document.addEventListener("touchmove", function (e) {
       if (e.touches.length > 0) {
-        if (!isMoving) {
-          isMoving = true;
-        }
-
         const touch = e.touches[0];
+
         // Calculate touch position relative to the center
         const xPos = touch.clientX / window.innerWidth - 0.5;
         const yPos = touch.clientY / window.innerHeight - 0.5;
@@ -62,19 +59,17 @@
 
         targetRotateX = adjustedY * -17.5;
         targetRotateY = adjustedX * 17.5;
-
-        clearTimeout(timeout);
-        timeout = setTimeout(function () {
-          isMoving = false;
-          targetRotateX = 0;
-          targetRotateY = 0;
-        }, 500);
       }
+    });
+
+    // Handle touchend event - no reset behavior
+    document.addEventListener("touchend", function () {
+      // Perspective stays where it is when touch ends
     });
 
     // Handle window resize
     window.addEventListener("resize", function () {
-      // Reset any size-dependent values if needed
+      // Nothing needed here, but keeping for extensibility
     });
   });
 </script>
