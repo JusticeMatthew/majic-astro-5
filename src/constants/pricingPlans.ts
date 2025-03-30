@@ -18,7 +18,7 @@ const pricingPlans = [
   {
     name: "Business",
     recommended: true,
-    blurb: "Fully managed online solutions for your business",
+    blurb: "Fully managed solutions for your company",
     services: [
       "Custom designed website",
       "Personalized domain name",

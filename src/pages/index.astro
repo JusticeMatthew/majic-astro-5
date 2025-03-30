@@ -10,18 +10,18 @@ import Services from "$/sections/Services.astro";
 import Examples from "$/sections/Examples.astro";
 import Contact from "$/sections/Contact.astro";
 import Footer from "$/molecules/Footer.astro";
-import NewGradientBG from "$/components/atoms/NewGradientBG.astro";
+import GradientBG from "$/components/atoms/GradientBG.astro";
 ---
 
 <BaseLayout title="Dev | Majic Web Design">
   <Toaster position="top-center" />
-  <NewGradientBG>
+  <GradientBG>
     <div class="relative z-20">
       <Landing />
       <About />
       <Services />
     </div>
-  </NewGradientBG>
+  </GradientBG>
   <div class="relative">
     <div class="absolute inset-0 top-0">
       <Stars>

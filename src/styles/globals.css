@@ -47,6 +47,10 @@
   --breakpoint-container: 1400px;
 }
 
+@utility wiggle {
+  animation: wiggle-once 0.5s ease-in-out 1;
+}
+
 @utility container {
   max-width: clamp(16rem, 100%, 90rem);
   margin: 0 auto;
@@ -93,6 +97,10 @@
       background-position: -500%;
     }
   }
+}
+
+.group:hover .group-hover\:flashing-text {
+  animation: move-bg 16s linear infinite;
 }
 
 body {

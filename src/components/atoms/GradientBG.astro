@@ -1,243 +1,266 @@
-<!-- Add this SVG filter definition to your HTML, ideally near the top of the body -->
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  version="1.1"
-  style="position: absolute; width: 0; height: 0;">
-  <defs>
-    <filter id="goo">
-      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"
-      ></feGaussianBlur>
-      <feColorMatrix
-        in="blur"
-        mode="matrix"
-        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 15 -4"
-        result="goo"></feColorMatrix>
-      <feComposite in="SourceGraphic" in2="goo" operator="atop"></feComposite>
-    </filter>
-  </defs>
-</svg>
-
 <script>
-  document.addEventListener("astro:page-load", () => {
-    const interBubble = document.querySelector(
-      ".interactive",
-    ) as HTMLDivElement;
-    let curX = 0;
-    let curY = 0;
-    let tgX = 0;
-    let tgY = 0;
-    let rafId: number | null = null;
+  document.addEventListener("astro:page-load", function () {
+    const bgWrapper = document.querySelector(".bg-wrapper") as HTMLElement;
+    let targetRotateX = 0;
+    let targetRotateY = 0;
+    let currentRotateX = 0;
+    let currentRotateY = 0;
 
-    const throttledMove = (event: MouseEvent) => {
-      if (!rafId) {
-        rafId = requestAnimationFrame(() => {
-          tgX = event.clientX;
-          tgY = event.clientY;
-          rafId = null;
-        });
-      }
-    };
+    // Track initial state
+    const initialTransform =
+      "translate3d(0, 0, 10px) rotateX(0deg) rotateY(0deg) scale(1.12)";
+    bgWrapper.style.transform = initialTransform;
 
-    function move() {
-      curX += (tgX - curX) * 0.15;
-      curY += (tgY - curY) * 0.15;
+    // Set up smooth animation with requestAnimationFrame
+    function updateAnimation() {
+      // Smoothly interpolate current rotation towards target
+      currentRotateX += (targetRotateX - currentRotateX) * 0.07;
+      currentRotateY += (targetRotateY - currentRotateY) * 0.07;
 
-      if (Math.abs(tgX - curX) > 0.5 || Math.abs(tgY - curY) > 0.5) {
-        interBubble.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
-      }
+      // Apply transform with smoothed values
+      bgWrapper.style.transform = `translate3d(0, 0, 10px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) scale(1.12)`;
 
-      requestAnimationFrame(move);
+      // Continue animation loop
+      requestAnimationFrame(updateAnimation);
     }
 
-    window.addEventListener("mousemove", throttledMove, { passive: true });
-    move();
+    // Start the animation loop
+    updateAnimation();
 
-    return () => {
-      window.removeEventListener("mousemove", throttledMove);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
+    // Track mouse movement for desktop
+    document.addEventListener("mousemove", function (e) {
+      // Calculate mouse position relative to the center of the viewport
+      const xPos = e.clientX / window.innerWidth - 0.5;
+      const yPos = e.clientY / window.innerHeight - 0.5;
+
+      // Non-linear mapping for more effect in the center region
+      // This uses a quadratic function that's stronger in the center
+      const adjustedX = xPos * (1 - Math.abs(xPos)) * 2.9;
+      const adjustedY = yPos * (1 - Math.abs(yPos)) * 2.9;
+
+      // Update target rotation with the adjusted values
+      targetRotateX = adjustedY * -17.5;
+      targetRotateY = adjustedX * 17.5;
+    });
+
+    // Handle touch events for mobile
+    document.addEventListener("touchmove", function (e) {
+      if (e.touches.length > 0) {
+        const touch = e.touches[0];
+
+        // Calculate touch position relative to the center
+        const xPos = touch.clientX / window.innerWidth - 0.5;
+        const yPos = touch.clientY / window.innerHeight - 0.5;
+
+        // Apply same non-linear mapping as mouse movement
+        const adjustedX = xPos * (1 - Math.abs(xPos)) * 2.9;
+        const adjustedY = yPos * (1 - Math.abs(yPos)) * 2.9;
+
+        targetRotateX = adjustedY * -17.5;
+        targetRotateY = adjustedX * 17.5;
+      }
+    });
+
+    // Handle touchend event - no reset behavior
+    document.addEventListener("touchend", function () {
+      // Perspective stays where it is when touch ends
+    });
+
+    // Handle window resize
+    window.addEventListener("resize", function () {
+      // Nothing needed here, but keeping for extensibility
+    });
   });
 </script>
 
-<div
-  class="gradient-bg sticky top-0 left-0 z-0 transform-gpu opacity-60"
-  transition:persist>
-  <div class="gradients-container">
-    <figure class="g1"></figure>
-    <figure class="g2"></figure>
-    <figure class="g3"></figure>
-    <figure class="g4"></figure>
-    <figure class="g5"></figure>
-    <figure class="interactive"></figure>
+<div class="scene">
+  <div class="bg-wrapper">
+    <div class="gradient-base"></div>
+    <div class="blob1"></div>
+    <div class="blob2"></div>
+    <div class="blob3"></div>
+    <div class="blob4"></div>
   </div>
 </div>
+<div class="noise"></div>
+
+<slot />
 
 <style>
-  :root {
-    --color1: 18, 113, 255;
-    --color2: 221, 74, 255;
-    --color3: 116, 92, 221;
-    --color4: 200, 50, 125;
-    --color5: 0, 169, 225;
-    --color-interactive: 140, 100, 255;
-    --circle-size: 60%;
-    --blending: hard-light;
-  }
-
-  .gradient-bg {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background-color: #20204e;
-    will-change: filter, height;
-    transform: translateZ(0);
-  }
-
-  .gradients-container {
+  .container {
+    position: relative;
     width: 100%;
     height: 100%;
-    position: relative;
-    transition: height 0.5s;
-    will-change: filter, height;
-    transform: translateZ(0);
-    filter: url(#goo);
-    opacity: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    pointer-events: none;
   }
 
-  html[data-is-top="false"] .gradients-container {
-    mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+  .scene {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    perspective: 800px; /* Reduced from 1000px for more pronounced effect */
+    overflow: hidden;
   }
 
-  html[data-is-top="true"] .gradients-container {
-    height: 110%;
-  }
-
-  .g1,
-  .g2,
-  .g3,
-  .g4,
-  .g5 {
+  .bg-wrapper {
     position: absolute;
-    width: var(--circle-size);
-    height: var(--circle-size);
-    background: radial-gradient(
-      circle,
-      rgba(var(--color1), 0.8) 0%,
-      rgba(var(--color1), 0) 50%
-    );
-    mix-blend-mode: var(--blending);
-    animation: moveInCircle 60s infinite;
-    transform-origin: center;
-    will-change: transform;
-    backface-visibility: hidden;
-    transform: translate3d(0, 0, 0);
+    top: -25%;
+    left: -25%;
+    width: 150%;
+    height: 150%;
+    will-change: auto;
+    transform-style: preserve-3d;
+    transition: transform 3.5s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  .g1 {
-    top: 25%;
-    left: 15%;
-    transform-origin: center;
-    animation: moveInCircle 90s ease infinite;
-  }
-
-  /* Pink blob */
-  .g2 {
-    top: 15%;
-    left: 35%;
-    animation: moveVertical 90s infinite;
-    background: radial-gradient(
-      circle,
-      rgba(var(--color2), 0.8) 0%,
-      rgba(var(--color2), 0) 50%
-    );
-  }
-
-  /* Purple blob */
-  .g3 {
-    top: calc(25% + 200px);
-    left: calc(25% - 500px);
-    background: radial-gradient(
-      circle,
-      rgba(var(--color3), 0.8) 0%,
-      rgba(var(--color3), 0) 50%
-    );
-    animation: moveInCircle 90s linear infinite;
-  }
-
-  /* Rose blob */
-  .g4 {
-    top: 25%;
-    left: 15%;
-    background: radial-gradient(
-      circle,
-      rgba(var(--color4), 0.8) 0%,
-      rgba(var(--color4), 0) 50%
-    );
-    animation: moveHorizontal 90s ease infinite;
-  }
-
-  /* Teal blob */
-  .g5 {
-    top: calc(50% - var(--circle-size));
-    left: calc(50% - var(--circle-size));
-    background: radial-gradient(
-      circle,
-      rgba(var(--color5), 0.8) 0%,
-      rgba(var(--color5), 0) 50%
-    );
-    animation: moveHorizontal 120s ease infinite;
-    width: calc(var(--circle-size) * 1.5);
-    height: calc(var(--circle-size) * 1.5);
-  }
-
-  .interactive {
+  .gradient-base {
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-dark-purple);
+  }
+
+  .blob1,
+  .blob2,
+  .blob3,
+  .blob4 {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(30px);
+  }
+
+  .blob1 {
+    width: 50%;
+    height: 50%;
     background: radial-gradient(
-      circle at center,
-      rgba(var(--color-interactive), 0.5) 0%,
-      rgba(var(--color-interactive), 0) 50%
+      circle,
+      rgba(0, 169, 225, 0.8) 0%,
+      rgba(0, 169, 225, 0) 70%
     );
-    mix-blend-mode: var(--blending);
-    width: 30%;
-    height: 30%;
-    top: -15%;
-    left: -15%;
-    opacity: 0.5;
+    top: -20%;
+    left: -20%;
+    animation: blob-move1 36s ease-in-out infinite;
   }
 
-  @keyframes moveInCircle {
-    0% {
-      transform: rotate(0deg);
+  .blob2 {
+    width: 64%;
+    height: 64%;
+    background: radial-gradient(
+      circle,
+      rgba(210, 92, 237, 0.7) 0%,
+      rgba(210, 92, 237, 0) 70%
+    );
+    bottom: -30%;
+    right: -20%;
+    animation: blob-move2 42.5s ease-in-out infinite;
+  }
+
+  .blob3 {
+    width: 40%;
+    height: 40%;
+    background: radial-gradient(
+      circle,
+      rgba(116, 92, 221, 0.5) 0%,
+      rgba(116, 92, 221, 0) 70%
+    );
+    top: 30%;
+    left: 10%;
+    animation: blob-move3 33.4s ease-in-out infinite;
+  }
+
+  .blob4 {
+    width: 65%;
+    height: 65%;
+    background: radial-gradient(
+      circle,
+      rgba(54, 47, 120, 0) 0%,
+      rgba(54, 47, 120, 0) 70%
+    );
+    bottom: 20%;
+    left: 40%;
+    animation: blob-move4 38.6s ease-in-out infinite;
+  }
+
+  .noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    z-index: 5;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.50' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    animation: none !important;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  @keyframes blob-move1 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    25% {
+      transform: translate(40%, 25%) scale(1.1);
     }
     50% {
-      transform: rotate(180deg);
+      transform: translate(25%, 50%) scale(0.9);
     }
+    75% {
+      transform: translate(10%, 15%) scale(1.05);
+    }
+    animation-duration: 36s; /* Increased from 20s */
+  }
+
+  @keyframes blob-move2 {
+    0%,
     100% {
-      transform: rotate(360deg);
+      transform: translate(0, 0) scale(1);
+    }
+    25% {
+      transform: translate(-30%, -20%) scale(0.95);
+    }
+    50% {
+      transform: translate(-45%, -10%) scale(1.1);
+    }
+    75% {
+      transform: translate(-20%, -35%) scale(1);
     }
   }
 
-  @keyframes moveVertical {
-    0% {
-      transform: translateY(-50%);
-    }
-    50% {
-      transform: translateY(50%);
-    }
+  @keyframes blob-move3 {
+    0%,
     100% {
-      transform: translateY(-50%);
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(20%, -25%) scale(1.1);
+    }
+    66% {
+      transform: translate(-15%, -10%) scale(0.9);
     }
   }
 
-  @keyframes moveHorizontal {
-    0% {
-      transform: translateX(-20%) translateY(-10%);
-    }
-    50% {
-      transform: translateX(40%) translateY(10%);
-    }
+  @keyframes blob-move4 {
+    0%,
     100% {
-      transform: translateX(-20%) translateY(-10%);
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(-40%, 20%) scale(1.15);
+    }
+    66% {
+      transform: translate(25%, 35%) scale(0.95);
     }
   }
 </style>

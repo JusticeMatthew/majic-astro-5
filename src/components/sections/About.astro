@@ -30,9 +30,12 @@ import Button from "$/atoms/Button.astro";
         That&apos;s why Majic aims to provide a one-stop shop for businesses who
         need worry free web design & development services at a fair rate.
       </p>
-      <Button href="#services" floating class="pl-6">
+      <Button href="#services" floating class="group pl-6">
         See our affordable pricing
-        <Icon name="right-arrow" class="mr-5 ml-5 inline sm:ml-32" />
+        <Icon
+          name="right-arrow"
+          class="group-hover:wiggle mr-5 ml-5 inline sm:ml-32"
+        />
       </Button>
     </div>
     <canvas
@@ -42,3 +45,40 @@ import Button from "$/atoms/Button.astro";
   </div>
   <Benefits />
 </section>
+
+<style is:global>
+  @keyframes wiggle-once {
+    0% {
+      transform: translateX(0);
+    }
+    20% {
+      transform: translateX(-3px);
+    }
+    40% {
+      transform: translateX(3px);
+    }
+    60% {
+      transform: translateX(-2px);
+    }
+    80% {
+      transform: translateX(2px);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+
+  .wiggle-on-hover {
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: both;
+    animation-iteration-count: 1;
+    /* No animation by default */
+    animation-name: none;
+  }
+
+  /* Use with Tailwind group-hover */
+  .group:hover .group-hover\:animate-wiggle {
+    animation-name: wiggle-once;
+  }
+</style>

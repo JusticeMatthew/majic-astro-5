@@ -3,6 +3,148 @@ import Packages from "$/sections/Packages.astro";
 import Button from "$/atoms/Button.astro";
 ---
 
+<script>
+  // Add this to your Astro page script section
+  interface Point {
+    x: number;
+    y: number;
+  }
+
+  document.addEventListener("astro:page-load", (): void => {
+    const revealWord: HTMLElement | null =
+      document.querySelector(".reveal-word");
+    if (!revealWord) return;
+
+    // Get text content and styles
+    const wordText: string = revealWord.textContent || "";
+    const computedStyle: CSSStyleDeclaration =
+      window.getComputedStyle(revealWord);
+
+    // Create a container with relative positioning
+    const container: HTMLSpanElement = document.createElement("span");
+    container.style.position = "relative";
+    container.style.display = "inline-block";
+
+    if (revealWord.parentNode) {
+      revealWord.parentNode.insertBefore(container, revealWord);
+
+      // Clone the original element for the colored text (with animation)
+      const coloredText: HTMLElement = revealWord.cloneNode(
+        true,
+      ) as HTMLElement;
+      container.appendChild(coloredText);
+
+      // Create a separate white text element positioned on top
+      const whiteText: HTMLSpanElement = document.createElement("span");
+      whiteText.textContent = wordText;
+      whiteText.style.position = "absolute";
+      whiteText.style.top = "0";
+      whiteText.style.left = "0";
+      whiteText.style.width = "100%";
+      whiteText.style.height = "100%";
+      whiteText.style.color = "white";
+      whiteText.style.zIndex = "1";
+
+      // Copy font styles from original
+      whiteText.style.fontFamily = computedStyle.fontFamily;
+      whiteText.style.fontSize = computedStyle.fontSize;
+      whiteText.style.fontWeight = computedStyle.fontWeight;
+      whiteText.style.letterSpacing = computedStyle.letterSpacing;
+
+      container.appendChild(whiteText);
+
+      // Remove the original element now that we've cloned it
+      revealWord.remove();
+
+      // Create a canvas for the eraser effect
+      const canvas: HTMLCanvasElement = document.createElement("canvas");
+      canvas.width = 1; // Will resize properly later
+      canvas.height = 1;
+      canvas.style.position = "absolute";
+      canvas.style.top = "0";
+      canvas.style.left = "0";
+      canvas.style.opacity = "0"; // Hide the canvas
+      canvas.style.pointerEvents = "none";
+      canvas.style.zIndex = "2";
+      container.appendChild(canvas);
+
+      const ctx: CanvasRenderingContext2D | null = canvas.getContext("2d");
+      if (!ctx) return;
+
+      // Function to update canvas size and mask
+      function updateCanvas(): void {
+        const rect: DOMRect = container.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+
+        // Fill canvas with white initially
+        ctx!.fillStyle = "white";
+        ctx!.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Apply as mask to white text
+        const dataUrl: string = canvas.toDataURL();
+        whiteText.style.maskImage = `url(${dataUrl})`;
+        whiteText.style.webkitMaskImage = `url(${dataUrl})`;
+      }
+
+      // Initialize with delay to ensure elements are rendered
+      setTimeout(updateCanvas, 50);
+
+      // Track mouse for eraser effect
+      let isHovering: boolean = false;
+      let lastPoint: Point | null = null;
+      const eraserRadius: number = 25;
+
+      container.addEventListener("mouseenter", (): void => {
+        isHovering = true;
+      });
+
+      container.addEventListener("mouseleave", (): void => {
+        isHovering = false;
+        lastPoint = null;
+      });
+
+      document.addEventListener("mousemove", (e: MouseEvent): void => {
+        if (!isHovering || !ctx) return;
+
+        const rect: DOMRect = canvas.getBoundingClientRect();
+        const x: number = e.clientX - rect.left;
+        const y: number = e.clientY - rect.top;
+
+        if (x < 0 || y < 0 || x > rect.width || y > rect.height) return;
+
+        // Set composite operation to cut out from white mask
+        ctx.globalCompositeOperation = "destination-out";
+
+        // Draw circle at mouse position
+        ctx.beginPath();
+        ctx.arc(x, y, eraserRadius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Connect to last point for smoother erasing
+        if (lastPoint) {
+          ctx.beginPath();
+          ctx.moveTo(lastPoint.x, lastPoint.y);
+          ctx.lineTo(x, y);
+          ctx.lineWidth = eraserRadius * 2;
+          ctx.stroke();
+        }
+
+        // Update the mask with the erased areas
+        const dataUrl: string = canvas.toDataURL();
+        whiteText.style.maskImage = `url(${dataUrl})`;
+        whiteText.style.webkitMaskImage = `url(${dataUrl})`;
+
+        // Remember this point for the next move
+        lastPoint = { x, y };
+      });
+
+      // Handle window resize
+      window.addEventListener("resize", updateCanvas);
+    }
+  });
+</script>
+
 <section
   id="services"
   class="relative container flex scroll-mt-48 flex-col justify-center pb-12">
@@ -10,9 +152,10 @@ import Button from "$/atoms/Button.astro";
     class="intersect:opacity-100 intersect-once intersect-half tablet:-translate-x-15 intersect:translate-0 opacity-0 !duration-1000 ease-out will-change-transform max-md:translate-y-20">
     <h3
       class="font-calistoga text-level-5 relative z-10 mb-6 max-w-[20ch] drop-shadow">
-      Let's cast a spell of
-      <span id="flashing-text" class="drop-shadow-xl">success</span> for your online
-      journey
+      Let's cast a
+      <span id="flashing-text" class="reveal-word flashing-text drop-shadow-xl"
+        >spell of success</span
+      > for your online journey
     </h3>
     <p class="text-light-gray my-6 max-w-prose text-pretty">
       Majic goes above and beyond to provide the most complete digital service
@@ -38,7 +181,7 @@ import Button from "$/atoms/Button.astro";
   </div>
 </section>
 
-<style>
+<style is:global>
   #lottie-container-services {
     height: auto;
     position: absolute;
@@ -46,5 +189,27 @@ import Button from "$/atoms/Button.astro";
     left: 56rem;
     transform: scaleX(-1);
     transform: rotate(260deg);
+  }
+
+  /* Canvas reveal effect styling */
+  .reveal-word-wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .reveal-word-color {
+    display: inline-block;
+    white-space: nowrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .reveal-word-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    pointer-events: none;
   }
 </style>
