@@ -87,6 +87,20 @@
   background-clip: text;
 }
 
+@utility flashing-text-still {
+  background: linear-gradient(
+      90deg,
+      oklch(56.36% 0.1887 287.28),
+      oklch(68.45% 0.1401 232.33),
+      oklch(74.96% 0.2459 330.34),
+      oklch(56.6% 0.1887 286.93)
+    )
+    0 0 / 500% 100%;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .flashing-text {
     animation: move-bg 16s linear infinite;
