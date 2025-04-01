@@ -5,13 +5,13 @@ import Button from "$/atoms/Button.astro";
 ---
 
 <script>
-  import { loadLottie } from "$/utils/lottieHelpers";
+  import { loadLottie, cleanupLottie } from "$/utils/lottieHelpers";
 
   document.addEventListener("astro:page-load", () => {
-    const aboutLottie = loadLottie("working");
+    loadLottie("working");
 
     document.addEventListener("astro:before-swap", () => {
-      aboutLottie.destroy();
+      cleanupLottie();
     });
   });
 </script>

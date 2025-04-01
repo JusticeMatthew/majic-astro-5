@@ -5,17 +5,15 @@ import MobilePackagesV2 from "$/molecules/MobilePackagesV2.astro";
 ---
 
 <script>
-  import { loadLottie } from "$/utils/lottieHelpers";
+  import { loadLottie, cleanupLottie } from "$/utils/lottieHelpers";
 
   document.addEventListener("astro:page-load", () => {
-    const personalLottie = loadLottie("Personal", false);
-    const businessLottie = loadLottie("Business", false);
-    const commerceLottie = loadLottie("Commerce", false);
+    loadLottie("Personal", false);
+    loadLottie("Business", false);
+    loadLottie("Commerce", false);
 
     window.addEventListener("astro:before-swap", () => {
-      personalLottie.destroy();
-      businessLottie.destroy();
-      commerceLottie.destroy();
+      cleanupLottie();
     });
   });
 </script>

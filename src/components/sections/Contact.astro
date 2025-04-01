@@ -22,7 +22,7 @@ import ContactForm from "$/molecules/ContactForm.tsx";
 <section id="contact" class="pt-section container flex scroll-mt-20">
   <div class="flex w-full flex-col">
     <h3 class="font-calistoga text-level-5 z-30 mb-16 text-center drop-shadow">
-      Ready to see <p class="flashing-text inline drop-shadow-xl">
+      Ready to see what <p class="flashing-text inline drop-shadow-xl">
         Majic<span class="text-light drop-shadow"> can do for </span>you
       </p>?
     </h3>
@@ -33,7 +33,7 @@ import ContactForm from "$/molecules/ContactForm.tsx";
         Your website should work as hard as you do. Connect with us today and
         let Majic help make it happen.
       </p>
-      <ContactForm client:idle>
+      <ContactForm client:visible>
         <Button
           id="form-submit-button"
           as="button"
