@@ -19,9 +19,14 @@ const loadLottie = (
     return null;
   }
 
+  const animationUrl = new URL(
+    `../assets/animations/${name}.lottie`,
+    import.meta.url,
+  ).href;
+
   const lottie = new DotLottieWorker({
     canvas: canvasElement,
-    src: `${window.location.origin}/animations/${name}.lottie`,
+    src: animationUrl,
     loop: true,
     autoplay: autoplay,
     workerId: SHARED_WORKER_ID,
