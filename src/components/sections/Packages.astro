@@ -37,7 +37,7 @@ import MobilePackagesV2 from "$/molecules/MobilePackagesV2.astro";
                 <p class="secondary-gradient ring-blurple z-10 w-fit rounded-full px-14 py-1 ring-[3px]">
                   Most Popular
                 </p>
-                <figure class="bg-blurple absolute -top-1 mx-auto h-[44px] w-60 rounded-full blur-lg" />
+                <figure class="group-hover:shimmer bg-blurple absolute -top-1 mx-auto h-[44px] w-60 rounded-full blur-lg" />
               </div>
             )}
             <div>
@@ -74,3 +74,40 @@ import MobilePackagesV2 from "$/molecules/MobilePackagesV2.astro";
     </div>
   </div>
 </section>
+
+<style>
+  .group-hover\:shimmer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 195, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .group:hover .group-hover\:shimmer::after {
+    opacity: 1;
+    animation: shimmerEffect 1.2s infinite linear;
+  }
+
+  @keyframes shimmerEffect {
+    0% {
+      background-position: 100% 0;
+    }
+    50% {
+      background-position: 0 -20%;
+    }
+    100% {
+      background-position: -100% 0;
+    }
+  }
+</style>
