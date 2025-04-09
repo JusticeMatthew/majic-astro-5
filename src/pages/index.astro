@@ -15,15 +15,16 @@ import GradientBG from "$/components/atoms/GradientBG.astro";
 
 <BaseLayout title="Dev | Majic Web Design">
   <Toaster position="top-center" />
-  <GradientBG>
-    <div class="relative z-20">
-      <Landing />
-      <About />
-      <Services />
-    </div>
-  </GradientBG>
-  <div class="relative">
-    <div class="absolute inset-0 top-0">
+  <div class="relative min-h-screen">
+    <GradientBG>
+      <div class="relative z-20">
+        <Landing />
+        <About />
+        <Services />
+      </div>
+    </GradientBG>
+
+    <div class="relative">
       <Stars>
         <Examples slot="examples" />
         <Contact slot="contact" />

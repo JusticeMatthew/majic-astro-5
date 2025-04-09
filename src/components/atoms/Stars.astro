@@ -45,15 +45,22 @@
   });
 </script>
 
-<div id="fading-stars-container">
-  <figure
-    class="from-dark-purple via-dark-bg to-dark-bg absolute inset-0 h-full w-screen bg-gradient-to-b via-80%">
-  </figure>
-  <slot name="examples" />
-</div>
-<div id="normal-stars-container" class="!bg-dark-bg">
-  <slot name="contact" />
-  <slot name="footer" />
+<div class="relative">
+  {/* Transition gradient */}
+  <div
+    class="from-dark-purple via-dark-purple/90 pointer-events-none absolute inset-x-0 -top-72 z-10 h-72 bg-gradient-to-t to-transparent">
+  </div>
+
+  <div id="fading-stars-container">
+    <figure
+      class="from-dark-purple via-dark-bg to-dark-bg absolute inset-0 h-full w-screen bg-gradient-to-b via-80%">
+    </figure>
+    <slot name="examples" />
+  </div>
+  <div id="normal-stars-container" class="!bg-dark-bg">
+    <slot name="contact" />
+    <slot name="footer" />
+  </div>
 </div>
 
 <style is:global>
@@ -63,7 +70,7 @@
     width: 100%;
     height: fit-content !important;
     overflow: hidden;
-    z-index: 10;
+    z-index: 20; /* Increased to ensure content stays above transition */
   }
 
   #star {

@@ -1,15 +1,53 @@
 <script>
   document.addEventListener("astro:page-load", function () {
     const bgWrapper = document.querySelector(".bg-wrapper") as HTMLElement;
+    const starsSection = document.querySelector(
+      "#fading-stars-container",
+    ) as HTMLElement;
     let targetRotateX = 0;
     let targetRotateY = 0;
     let currentRotateX = 0;
     let currentRotateY = 0;
 
-    // Track initial state
-    const initialTransform =
-      "translate3d(0, 0, 10px) rotateX(0deg) rotateY(0deg) scale(1.12)";
-    bgWrapper.style.transform = initialTransform;
+    // Add opacity tracking
+    let currentOpacity = 1;
+
+    // Create intersection observer for Stars section
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Start monitoring scroll position
+          window.addEventListener("scroll", handleScroll);
+        } else {
+          window.removeEventListener("scroll", handleScroll);
+        }
+      });
+    });
+
+    if (starsSection) {
+      observer.observe(starsSection);
+    }
+
+    function handleScroll() {
+      if (!starsSection) return;
+
+      const rect = starsSection.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      // Calculate opacity based on Stars section position
+      // Start fade when Stars enters viewport, reach 0 at 30% point
+      if (rect.top <= viewportHeight) {
+        const fadeDistance = viewportHeight * 0.3; // Changed from viewportHeight / 2
+        const scrollProgress = Math.min(
+          1,
+          (viewportHeight - rect.top) / fadeDistance,
+        );
+        currentOpacity = 1 - scrollProgress;
+
+        // Apply opacity to bg-wrapper
+        bgWrapper.style.opacity = currentOpacity.toString();
+      }
+    }
 
     // Set up smooth animation with requestAnimationFrame
     function updateAnimation() {
@@ -115,9 +153,9 @@
     left: -25%;
     width: 150%;
     height: 150%;
-    will-change: transform;
+    will-change: transform, opacity;
     transform-style: preserve-3d;
-    transition: transform 3.5s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: opacity 0.2s ease-out;
   }
 
   .gradient-base {
