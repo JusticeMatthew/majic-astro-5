@@ -38,8 +38,8 @@
 
     // Debounce scroll handler
     function debounce(fn: Function, ms: number) {
-      let timer: NodeJS.Timeout;
-      return (...args: any[]) => {
+      let timer: ReturnType<typeof setTimeout>;
+      return function (this: any, ...args: any[]) {
         clearTimeout(timer);
         timer = setTimeout(() => fn.apply(this, args), ms);
       };
@@ -99,20 +99,19 @@
 
     // Handle touch events for mobile
     document.addEventListener("touchmove", function (e) {
-      if (e.touches.length > 0) {
-        const touch = e.touches[0];
+      const touch = e.touches[0];
+      if (!touch) return;
 
-        // Calculate touch position relative to the center
-        const xPos = touch.clientX / window.innerWidth - 0.5;
-        const yPos = touch.clientY / window.innerHeight - 0.5;
+      // Calculate touch position relative to the center
+      const xPos = touch.clientX / window.innerWidth - 0.5;
+      const yPos = touch.clientY / window.innerHeight - 0.5;
 
-        // Apply same non-linear mapping as mouse movement
-        const adjustedX = xPos * (1 - Math.abs(xPos)) * 2.9;
-        const adjustedY = yPos * (1 - Math.abs(yPos)) * 2.9;
+      // Apply same non-linear mapping as mouse movement
+      const adjustedX = xPos * (1 - Math.abs(xPos)) * 2.9;
+      const adjustedY = yPos * (1 - Math.abs(yPos)) * 2.9;
 
-        targetRotateX = adjustedY * -17.5;
-        targetRotateY = adjustedX * 17.5;
-      }
+      targetRotateX = adjustedY * -17.5;
+      targetRotateY = adjustedX * 17.5;
     });
 
     // Handle touchend event - no reset behavior

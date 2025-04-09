@@ -6,7 +6,7 @@ import benefits from "$/constants/benefits";
   id="benefits"
   class="tablet:grid-cols-3 relative z-20 container grid w-screen grid-cols-1 p-0">
   {
-    benefits[0].map(({ maskId, title, content }) => (
+    benefits[0]!.map(({ maskId, title, content }) => (
       <div
         id={maskId}
         class="mask bg-light-purple text-dark-purple tablet:[&:nth-child(3)]:pb-0 z-50 col-span-1 w-full pl-6 md:pl-12 [&:nth-child(3)]:pb-24">
@@ -23,7 +23,7 @@ import benefits from "$/constants/benefits";
     ))
   }
   {
-    benefits[1].map(({ maskId, title, content }) => (
+    benefits[1]!.map(({ maskId, title, content }) => (
       <div
         id={maskId}
         class="mask2 bg-light-purple text-dark-purple tablet:block z-50 col-span-1 hidden w-full pl-12">

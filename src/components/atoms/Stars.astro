@@ -22,7 +22,9 @@
       star.style.animationDelay = `${randomNumberFromRange(0, 5)}s`;
 
       if (isFading) {
-        const pos = parseInt(star.style.top.split(".")[0]);
+        // Extract the numeric value safely
+        const topValue = star.style.top;
+        const pos = parseInt(topValue.replace("%", ""));
         star.style.setProperty("--dynamic-opacity", `${setStarOpacity(pos)}`);
       }
 

@@ -83,7 +83,6 @@ import Button from "$/atoms/Button.astro";
         // Apply as mask to white text
         const dataUrl: string = canvas.toDataURL();
         whiteText.style.maskImage = `url(${dataUrl})`;
-        whiteText.style.webkitMaskImage = `url(${dataUrl})`;
       }
 
       // Initialize with delay to ensure elements are rendered
@@ -132,7 +131,6 @@ import Button from "$/atoms/Button.astro";
         // Update the mask with the erased areas
         const dataUrl: string = canvas.toDataURL();
         whiteText.style.maskImage = `url(${dataUrl})`;
-        whiteText.style.webkitMaskImage = `url(${dataUrl})`;
 
         // Remember this point for the next move
         lastPoint = { x, y };

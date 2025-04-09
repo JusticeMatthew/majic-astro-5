@@ -15,7 +15,7 @@ export const server = {
       company: z.string().optional(),
     }),
     handler: async ({ name, email, message, company }) => {
-      const { data, error } = await resend.emails.send({
+      const { error } = await resend.emails.send({
         from: "Majic Website <info@majicwebdesign.com>",
         to: ["matthewajustice@gmail.com"],
         subject: "POTENTIAL MAJIC CLIENT",
