@@ -10,7 +10,7 @@ export default function ContactForm({
 }: {
   children: HTMLButtonElement;
 }) {
-  const [sending, setSending] = createSignal(false);
+  const [_, setSending] = createSignal(false);
 
   const form = createForm(() => ({
     defaultValues: {

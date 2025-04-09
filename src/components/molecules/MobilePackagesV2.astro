@@ -8,6 +8,7 @@ import { Tabs, TabItem } from "studiocms:ui/components";
   <div class="flex w-full items-center">
     <Tabs align="center">
       {
+        // @ts-ignore
         pricingPlans.map(({ name, price, monthly, recommended, services }) => (
           <TabItem label={name}>{name}</TabItem>
         ))
