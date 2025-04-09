@@ -8,6 +8,30 @@ const loadLottie = (
   name: string,
   autoplay: boolean = true,
 ): DotLottieWorker | null => {
+  // Initialize lottie immediately if it's not a plan animation
+  if (!name.match(/^(Personal|Business|Commerce)$/)) {
+    return initializeLottie(name, autoplay);
+  }
+
+  // For plan animations, use intersection observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        initializeLottie(name, autoplay);
+        observer.disconnect();
+      }
+    });
+  });
+
+  const container = document.getElementById(`plan-${name.toLowerCase()}`);
+  if (container) {
+    observer.observe(container);
+  }
+
+  return null;
+};
+
+const initializeLottie = (name: string, autoplay: boolean) => {
   const canvasElement = document.getElementById(
     `lottie-container-${name}`,
   ) as HTMLCanvasElement;
@@ -34,18 +58,21 @@ const loadLottie = (
 
   animationInstances.set(name, lottie);
 
-  const planContainer = document.getElementById(
-    `plan-${name.toLowerCase()}`,
-  ) as HTMLDivElement;
+  // Only add hover events for plan animations
+  if (name.match(/^(Personal|Business|Commerce)$/)) {
+    const planContainer = document.getElementById(
+      `plan-${name.toLowerCase()}`,
+    ) as HTMLDivElement;
 
-  if (planContainer) {
-    planContainer.addEventListener("mouseenter", () => {
-      lottie.play();
-    });
+    if (planContainer) {
+      planContainer.addEventListener("mouseenter", () => {
+        lottie.play();
+      });
 
-    planContainer.addEventListener("mouseleave", () => {
-      lottie.pause();
-    });
+      planContainer.addEventListener("mouseleave", () => {
+        lottie.pause();
+      });
+    }
   }
 
   return lottie;

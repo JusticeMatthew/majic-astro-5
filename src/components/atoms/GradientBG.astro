@@ -15,11 +15,19 @@
     // Create intersection observer for Stars section
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // Start monitoring scroll position
+        const viewportHeight = window.innerHeight; // Get current viewport height
+        if (
+          entry.isIntersecting ||
+          entry.boundingClientRect.top <= viewportHeight
+        ) {
           window.addEventListener("scroll", handleScroll);
+          handleScroll();
         } else {
           window.removeEventListener("scroll", handleScroll);
+          if (entry.boundingClientRect.top > viewportHeight) {
+            currentOpacity = 1;
+            bgWrapper.style.opacity = "1";
+          }
         }
       });
     });
@@ -28,26 +36,34 @@
       observer.observe(starsSection);
     }
 
-    function handleScroll() {
-      if (!starsSection) return;
-
-      const rect = starsSection.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-
-      // Calculate opacity based on Stars section position
-      // Start fade when Stars enters viewport, reach 0 at 30% point
-      if (rect.top <= viewportHeight) {
-        const fadeDistance = viewportHeight * 0.3; // Changed from viewportHeight / 2
-        const scrollProgress = Math.min(
-          1,
-          (viewportHeight - rect.top) / fadeDistance,
-        );
-        currentOpacity = 1 - scrollProgress;
-
-        // Apply opacity to bg-wrapper
-        bgWrapper.style.opacity = currentOpacity.toString();
-      }
+    // Debounce scroll handler
+    function debounce(fn: Function, ms: number) {
+      let timer: NodeJS.Timeout;
+      return (...args: any[]) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn.apply(this, args), ms);
+      };
     }
+
+    const handleScroll = debounce(() => {
+      if (!starsSection) return;
+      const rect = starsSection.getBoundingClientRect();
+      const viewportHeight = window.innerHeight; // Get current viewport height
+
+      // Calculate fade based on position relative to viewport
+      const fadeDistance = viewportHeight * 0.3;
+      const scrollProgress = Math.max(
+        0,
+        Math.min(1, (viewportHeight - rect.top) / fadeDistance),
+      );
+      currentOpacity = 1 - scrollProgress;
+
+      // Apply styles only if opacity changed
+      if (bgWrapper) {
+        bgWrapper.style.opacity = currentOpacity.toString();
+        bgWrapper.style.transform = "translate3d(0,0,0)";
+      }
+    }, 16); // ~60fps
 
     // Set up smooth animation with requestAnimationFrame
     function updateAnimation() {

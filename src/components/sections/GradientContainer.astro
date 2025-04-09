@@ -10,6 +10,10 @@ import GradientBG from "$/atoms/GradientBG.astro";
     width={mobileBg.width}
     alt=""
     class="sticky top-0 left-0 h-screen w-screen object-cover object-center"
+    loading="eager"
+    fetchpriority="high"
+    format="webp"
+    quality={80}
   />
 </div>
 <div class="max-tablet:hidden absolute inset-0">
