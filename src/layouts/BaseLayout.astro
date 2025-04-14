@@ -73,6 +73,25 @@ const ogDescription =
 
       Observer.start();
     </script>
+    <script>
+      // Calculate scrollbar width and set it as a CSS variable
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
+      document.documentElement.style.setProperty(
+        "--scrollbar-width",
+        scrollbarWidth + "px",
+      );
+
+      // Update on resize
+      window.addEventListener("resize", () => {
+        const scrollbarWidth =
+          window.innerWidth - document.documentElement.clientWidth;
+        document.documentElement.style.setProperty(
+          "--scrollbar-width",
+          scrollbarWidth + "px",
+        );
+      });
+    </script>
     <!-- Add font-display: swap to CSS -->
     <style is:inline>
       @font-face {

@@ -1,143 +1,168 @@
+---
+import { Image } from "astro:assets";
+import mobileBg from "$/assets/images/mobile-bg.png";
+---
+
+<div class="relative">
+  {/* Mobile background - hidden on desktop */}
+  <Image
+    src={mobileBg}
+    width={mobileBg.width}
+    alt=""
+    class="fixed top-0 left-0 z-0 h-screen w-screen object-cover object-center md:hidden"
+    loading="eager"
+    fetchpriority="high"
+    format="webp"
+    quality={80}
+  />
+
+  {/* Desktop gradient - hidden on mobile */}
+  <div class="hidden md:block">
+    <div class="scene">
+      <div class="bg-wrapper">
+        <div class="gradient-base"></div>
+        <div class="blob1"></div>
+        <div class="blob2"></div>
+        <div class="blob3"></div>
+        <div class="blob4"></div>
+      </div>
+    </div>
+    <div class="noise"></div>
+  </div>
+
+  <slot />
+</div>
+
 <script>
   document.addEventListener("astro:page-load", function () {
-    const bgWrapper = document.querySelector(".bg-wrapper") as HTMLElement;
-    const starsSection = document.querySelector(
-      "#fading-stars-container",
-    ) as HTMLElement;
-    let targetRotateX = 0;
-    let targetRotateY = 0;
-    let currentRotateX = 0;
-    let currentRotateY = 0;
+    // Only run the JS if we're on desktop
+    if (window.innerWidth >= 768) {
+      const bgWrapper = document.querySelector(".bg-wrapper") as HTMLElement;
+      const starsSection = document.querySelector(
+        "#fading-stars-container",
+      ) as HTMLElement;
+      let targetRotateX = 0;
+      let targetRotateY = 0;
+      let currentRotateX = 0;
+      let currentRotateY = 0;
 
-    // Add opacity tracking
-    let currentOpacity = 1;
+      // Add opacity tracking
+      let currentOpacity = 1;
 
-    // Create intersection observer for Stars section
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        const viewportHeight = window.innerHeight; // Get current viewport height
-        if (
-          entry.isIntersecting ||
-          entry.boundingClientRect.top <= viewportHeight
-        ) {
-          window.addEventListener("scroll", handleScroll);
-          handleScroll();
-        } else {
-          window.removeEventListener("scroll", handleScroll);
-          if (entry.boundingClientRect.top > viewportHeight) {
-            currentOpacity = 1;
-            bgWrapper.style.opacity = "1";
+      // Create intersection observer for Stars section
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const viewportHeight = window.innerHeight; // Get current viewport height
+          if (
+            entry.isIntersecting ||
+            entry.boundingClientRect.top <= viewportHeight
+          ) {
+            window.addEventListener("scroll", handleScroll);
+            handleScroll();
+          } else {
+            window.removeEventListener("scroll", handleScroll);
+            if (entry.boundingClientRect.top > viewportHeight) {
+              currentOpacity = 1;
+              bgWrapper.style.opacity = "1";
+            }
           }
-        }
+        });
       });
-    });
 
-    if (starsSection) {
-      observer.observe(starsSection);
-    }
-
-    // Debounce scroll handler
-    function debounce(fn: Function, ms: number) {
-      let timer: ReturnType<typeof setTimeout>;
-      return function (this: any, ...args: any[]) {
-        clearTimeout(timer);
-        timer = setTimeout(() => fn.apply(this, args), ms);
-      };
-    }
-
-    const handleScroll = debounce(() => {
-      if (!starsSection) return;
-      const rect = starsSection.getBoundingClientRect();
-      const viewportHeight = window.innerHeight; // Get current viewport height
-
-      // Calculate fade based on position relative to viewport
-      const fadeDistance = viewportHeight * 0.3;
-      const scrollProgress = Math.max(
-        0,
-        Math.min(1, (viewportHeight - rect.top) / fadeDistance),
-      );
-      currentOpacity = 1 - scrollProgress;
-
-      // Apply styles only if opacity changed
-      if (bgWrapper) {
-        bgWrapper.style.opacity = currentOpacity.toString();
-        bgWrapper.style.transform = "translate3d(0,0,0)";
+      if (starsSection) {
+        observer.observe(starsSection);
       }
-    }, 16); // ~60fps
 
-    // Set up smooth animation with requestAnimationFrame
-    function updateAnimation() {
-      // Smoothly interpolate current rotation towards target
-      currentRotateX += (targetRotateX - currentRotateX) * 0.012;
-      currentRotateY += (targetRotateY - currentRotateY) * 0.012;
+      // Debounce scroll handler
+      function debounce(fn: Function, ms: number) {
+        let timer: ReturnType<typeof setTimeout>;
+        return function (this: any, ...args: any[]) {
+          clearTimeout(timer);
+          timer = setTimeout(() => fn.apply(this, args), ms);
+        };
+      }
 
-      // Apply transform with smoothed values
-      bgWrapper.style.transform = `translate3d(0, 0, 10px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) scale(1.12)`;
+      const handleScroll = debounce(() => {
+        if (!starsSection) return;
+        const rect = starsSection.getBoundingClientRect();
+        const viewportHeight = window.innerHeight; // Get current viewport height
 
-      // Continue animation loop
-      requestAnimationFrame(updateAnimation);
+        // Calculate fade based on position relative to viewport
+        const fadeDistance = viewportHeight * 0.3;
+        const scrollProgress = Math.max(
+          0,
+          Math.min(1, (viewportHeight - rect.top) / fadeDistance),
+        );
+        currentOpacity = 1 - scrollProgress;
+
+        // Apply styles only if opacity changed
+        if (bgWrapper) {
+          bgWrapper.style.opacity = currentOpacity.toString();
+          bgWrapper.style.transform = "translate3d(0,0,0)";
+        }
+      }, 16); // ~60fps
+
+      // Set up smooth animation with requestAnimationFrame
+      function updateAnimation() {
+        // Smoothly interpolate current rotation towards target
+        currentRotateX += (targetRotateX - currentRotateX) * 0.011;
+        currentRotateY += (targetRotateY - currentRotateY) * 0.011;
+
+        // Apply transform with smoothed values
+        bgWrapper.style.transform = `translate3d(0, 0, 10px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) scale(1.12)`;
+
+        // Continue animation loop
+        requestAnimationFrame(updateAnimation);
+      }
+
+      // Start the animation loop
+      updateAnimation();
+
+      // Track mouse movement for desktop
+      document.addEventListener("mousemove", function (e) {
+        // Calculate mouse position relative to the center of the viewport
+        const xPos = e.clientX / window.innerWidth - 0.5;
+        const yPos = e.clientY / window.innerHeight - 0.5;
+
+        // Non-linear mapping for more effect in the center region
+        // This uses a quadratic function that's stronger in the center
+        const adjustedX = xPos * (1 - Math.abs(xPos)) * 2.9;
+        const adjustedY = yPos * (1 - Math.abs(yPos)) * 2.9;
+
+        // Update target rotation with the adjusted values
+        targetRotateX = adjustedY * -17.5;
+        targetRotateY = adjustedX * 17.5;
+      });
+
+      // Handle touch events for mobile
+      document.addEventListener("touchmove", function (e) {
+        const touch = e.touches[0];
+        if (!touch) return;
+
+        // Calculate touch position relative to the center
+        const xPos = touch.clientX / window.innerWidth - 0.5;
+        const yPos = touch.clientY / window.innerHeight - 0.5;
+
+        // Apply same non-linear mapping as mouse movement
+        const adjustedX = xPos * (1 - Math.abs(xPos)) * 2.9;
+        const adjustedY = yPos * (1 - Math.abs(yPos)) * 2.9;
+
+        targetRotateX = adjustedY * -17.5;
+        targetRotateY = adjustedX * 17.5;
+      });
+
+      // Handle touchend event - no reset behavior
+      document.addEventListener("touchend", function () {
+        // Perspective stays where it is when touch ends
+      });
+
+      // Handle window resize
+      window.addEventListener("resize", function () {
+        // Nothing needed here, but keeping for extensibility
+      });
     }
-
-    // Start the animation loop
-    updateAnimation();
-
-    // Track mouse movement for desktop
-    document.addEventListener("mousemove", function (e) {
-      // Calculate mouse position relative to the center of the viewport
-      const xPos = e.clientX / window.innerWidth - 0.5;
-      const yPos = e.clientY / window.innerHeight - 0.5;
-
-      // Non-linear mapping for more effect in the center region
-      // This uses a quadratic function that's stronger in the center
-      const adjustedX = xPos * (1 - Math.abs(xPos)) * 2.9;
-      const adjustedY = yPos * (1 - Math.abs(yPos)) * 2.9;
-
-      // Update target rotation with the adjusted values
-      targetRotateX = adjustedY * -17.5;
-      targetRotateY = adjustedX * 17.5;
-    });
-
-    // Handle touch events for mobile
-    document.addEventListener("touchmove", function (e) {
-      const touch = e.touches[0];
-      if (!touch) return;
-
-      // Calculate touch position relative to the center
-      const xPos = touch.clientX / window.innerWidth - 0.5;
-      const yPos = touch.clientY / window.innerHeight - 0.5;
-
-      // Apply same non-linear mapping as mouse movement
-      const adjustedX = xPos * (1 - Math.abs(xPos)) * 2.9;
-      const adjustedY = yPos * (1 - Math.abs(yPos)) * 2.9;
-
-      targetRotateX = adjustedY * -17.5;
-      targetRotateY = adjustedX * 17.5;
-    });
-
-    // Handle touchend event - no reset behavior
-    document.addEventListener("touchend", function () {
-      // Perspective stays where it is when touch ends
-    });
-
-    // Handle window resize
-    window.addEventListener("resize", function () {
-      // Nothing needed here, but keeping for extensibility
-    });
   });
 </script>
-
-<div class="scene">
-  <div class="bg-wrapper">
-    <div class="gradient-base"></div>
-    <div class="blob1"></div>
-    <div class="blob2"></div>
-    <div class="blob3"></div>
-    <div class="blob4"></div>
-  </div>
-</div>
-<div class="noise"></div>
-
-<slot />
 
 <style>
   .container {

@@ -52,7 +52,7 @@
 }
 
 @utility container {
-  max-width: clamp(16rem, 100%, 90rem);
+  max-width: clamp(16rem, calc(100vw - var(--scrollbar-width, 0px)), 90rem);
   margin: 0 auto;
   padding: 0 1rem;
 }
