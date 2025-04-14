@@ -1,0 +1,80 @@
+---
+import pricingPlans from "$/constants/pricingPlans";
+import CheckMark from "$/assets/icons/check-icon.svg";
+import { Tabs, TabItem } from "studiocms:ui/components";
+---
+
+<div
+  class="bg-light text-dark container:hidden relative mt-16 flex h-auto w-full flex-col items-center justify-between rounded-lg px-4 py-4 shadow sm:py-8">
+  <div class="flex w-full items-center">
+    <Tabs align="center">
+      {
+        pricingPlans.map(({ name, price, blurb, recommended, services }) => (
+          <TabItem label={name}>
+            <div
+              id={`plan-${name.toLowerCase()}`}
+              class:list={[
+                "bg-light text-dark group relative flex h-auto flex-col justify-between rounded-lg pt-8",
+              ]}>
+              {recommended && (
+                <div class="text-light absolute top-0 left-0 flex w-full justify-center text-center">
+                  <p class="secondary-gradient ring-blurple z-10 w-fit rounded-full px-14 py-1 ring-[3px]">
+                    Most Popular
+                  </p>
+                  <figure class="shimmer bg-blurple absolute -top-1 mx-auto h-[44px] w-60 rounded-full blur-lg" />
+                </div>
+              )}
+              <div>
+                <canvas
+                  id={`lottie-container-${name}`}
+                  height={324}
+                  width={324}
+                  class="mx-auto transition-transform duration-300 ease-in-out will-change-transform group-hover:-translate-y-2"
+                />
+                <p class="mt-8 flex w-full flex-col px-12">
+                  <span class="text-level-2 font-calistoga group-hover:flashing-text">
+                    {name}
+                  </span>
+                  <span class="text-level-1 font-medium tracking-tight">
+                    {price}
+                  </span>
+                </p>
+                <p class="text-level-2 w-full text-center font-medium" />
+                <p class="text-min text-dark/80 mt-2 px-12 text-pretty">
+                  {blurb}
+                </p>
+                <div class="my-14 px-12">
+                  {services.map((service) => (
+                    <div class="mb-6 flex">
+                      <CheckMark width={24} height={24} />
+                      <p class="ml-6 inline">{service}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </TabItem>
+        ))
+      }
+    </Tabs>
+  </div>
+</div>
+
+<style is:global>
+  .sui-tabs-list {
+    font-size: var(--text-level-1);
+    gap: 6px;
+    margin-left: 0px !important;
+  }
+
+  .sui-tab-header.primary.active::after {
+    content: "" !important;
+    height: 4px !important;
+    width: 100% !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    border-radius: 20px;
+    background-color: var(--color-blurple) !important;
+  }
+</style>

@@ -1,16 +1,16 @@
 import { getImage } from "astro:assets";
 import dawnforge from "$/assets/images/dawnforge-bg.webp";
-import tandt from "$/assets/images/tandt-bg.webp";
 import bandc from "$/assets/images/bandc-bg.webp";
+import wpr from "$/assets/images/wpr.png";
 
 const dawnforgeBg = await getImage({ src: dawnforge });
 const bandcBg = await getImage({ src: bandc });
-const tandtBg = await getImage({ src: tandt });
+const wprBg = await getImage({ src: wpr });
 
 const examples = [
   {
     title: "B&C Pest Control",
-    subtitle: "Florida’s Pest Control Experts",
+    subtitle: "Florida's Pest Control Experts",
     content:
       "A fresh look for a trusted pest control service, blending modern aesthetics with practical solutions.",
     site: "https://bandcpestcontrol.com/",
@@ -28,13 +28,13 @@ const examples = [
     styles: `background-image: linear-gradient(to right, #3f0624 30%, rgba(63, 6, 36, .8) 60%, transparent), url(${dawnforgeBg.src})`,
   },
   {
-    title: "T&T Photography",
-    subtitle: "Discovering Nature’s Finest Moments",
+    title: "World Population Review",
+    subtitle: "Global Data Insights Made Clear",
     content:
-      "Showcasing the stunning portfolio of a talented local photography team with sleek design and seamless performance.",
-    site: "https://tandt-v2.vercel.app/",
+      "Transforming complex demographic data into gorgeous, intuitive visualizations and insights.",
+    site: "https://worldpopulationreview.com/",
     background: "bg-[#2e4b6b]",
-    styles: `background-image: linear-gradient(to right, #2e4b6b 30%, rgba(46, 75, 107, .8) 60%, transparent), url(${tandtBg.src})`,
+    styles: `background-image: linear-gradient(to right, #2e4b6b 30%, rgba(46, 75, 107, .8) 60%, transparent), url(${wprBg.src})`,
   },
 ];
 

@@ -97,7 +97,7 @@ export default function ContactForm({
                       onInput={(e) => field().handleChange(e.target.value)}
                     />
                     {field().state.meta.errors && (
-                      <span class="text-min absolute -top-5 left-16 text-red-700">
+                      <span class="text-min absolute -top-5.5 left-16 text-red-700">
                         {field().state.meta.errors}
                       </span>
                     )}
@@ -137,7 +137,7 @@ export default function ContactForm({
                       onInput={(e) => field().handleChange(e.target.value)}
                     />
                     {field().state.meta.errors && (
-                      <span class="text-min absolute -top-5 left-16 text-red-700">
+                      <span class="text-min absolute -top-5.5 left-16 text-red-700">
                         {field().state.meta.errors}
                       </span>
                     )}
@@ -177,7 +177,7 @@ export default function ContactForm({
                     onInput={(e) => field().handleChange(e.target.value)}
                   />
                   {field().state.meta.errors && (
-                    <span class="text-min absolute -top-5 left-24 text-red-700">
+                    <span class="text-min absolute -top-5.5 left-24 text-red-700">
                       {field().state.meta.errors}
                     </span>
                   )}

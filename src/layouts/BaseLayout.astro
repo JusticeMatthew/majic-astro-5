@@ -66,6 +66,11 @@ const ogDescription =
     <script>
       import { Observer } from "tailwindcss-intersect";
 
+      const aboutSection = document.querySelector("[data-about-content]");
+      if (aboutSection && window.innerWidth >= 768) {
+        aboutSection.classList.add("intersect-half");
+      }
+
       Observer.start();
     </script>
     <!-- Add font-display: swap to CSS -->

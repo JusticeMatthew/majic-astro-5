@@ -68,8 +68,8 @@
     // Set up smooth animation with requestAnimationFrame
     function updateAnimation() {
       // Smoothly interpolate current rotation towards target
-      currentRotateX += (targetRotateX - currentRotateX) * 0.07;
-      currentRotateY += (targetRotateY - currentRotateY) * 0.07;
+      currentRotateX += (targetRotateX - currentRotateX) * 0.012;
+      currentRotateY += (targetRotateY - currentRotateY) * 0.012;
 
       // Apply transform with smoothed values
       bgWrapper.style.transform = `translate3d(0, 0, 10px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) scale(1.12)`;

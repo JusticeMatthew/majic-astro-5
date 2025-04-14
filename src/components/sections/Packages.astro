@@ -1,7 +1,7 @@
 ---
-import { Icon } from "astro-icon/components";
+import CheckMark from "$/assets/icons/check-icon.svg";
 import pricingPlans from "$/constants/pricingPlans.ts";
-import MobilePackagesV2 from "$/molecules/MobilePackagesV2.astro";
+// import MobilePackages from "$/molecules/MobilePackages.astro";
 ---
 
 <script>
@@ -22,7 +22,7 @@ import MobilePackagesV2 from "$/molecules/MobilePackagesV2.astro";
   id="packagesEl"
   class="h-[min(auto, 60vh)] intersect:opacity-100 intersect-once transition-[opacity, translate] intersect:translate-y-0 relative mb-6 flex translate-y-10 flex-col items-center opacity-0 !delay-300 !duration-1000 !ease-out">
   <div class="flex w-full flex-col justify-between">
-    <MobilePackagesV2 />
+    <!-- <MobilePackages /> -->
     <div class="container:grid mt-8 hidden grid-cols-3 gap-6">
       {
         pricingPlans.map((plan) => (
@@ -37,7 +37,7 @@ import MobilePackagesV2 from "$/molecules/MobilePackagesV2.astro";
                 <p class="secondary-gradient ring-blurple z-10 w-fit rounded-full px-14 py-1 ring-[3px]">
                   Most Popular
                 </p>
-                <figure class="group-hover:shimmer bg-blurple absolute -top-1 mx-auto h-[44px] w-60 rounded-full blur-lg" />
+                <figure class="shimmer bg-blurple absolute -top-1 mx-auto h-[44px] w-60 rounded-full blur-lg" />
               </div>
             )}
             <div>
@@ -62,7 +62,7 @@ import MobilePackagesV2 from "$/molecules/MobilePackagesV2.astro";
               <div class="my-14 px-12">
                 {plan.services.map((service) => (
                   <div class="mb-6 flex">
-                    <Icon name="check-icon" class="text-2xl" />
+                    <CheckMark width={24} height={24} />
                     <p class="ml-6 inline">{service}</p>
                   </div>
                 ))}
@@ -76,7 +76,7 @@ import MobilePackagesV2 from "$/molecules/MobilePackagesV2.astro";
 </section>
 
 <style>
-  .group-hover\:shimmer::after {
+  .shimmer::after {
     content: "";
     position: absolute;
     top: 0;
@@ -94,7 +94,7 @@ import MobilePackagesV2 from "$/molecules/MobilePackagesV2.astro";
     transition: opacity 0.3s ease-in-out;
   }
 
-  .group:hover .group-hover\:shimmer::after {
+  .shimmer::after {
     opacity: 1;
     animation: shimmerEffect 1.2s infinite linear;
   }
