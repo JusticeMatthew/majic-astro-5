@@ -22,9 +22,20 @@ import MobileNav from "$/components/molecules/MobileNav.tsx";
         </span>
       </h1>
     </a>
-    <MobileNav client:only="solid-js">
-      <Burger id="burger" width={30} height={30} />
-      <Close id="close" width={36} height={36} class="fill-dark m-4" />
+    <MobileNav client:visible>
+      <Burger
+        id="burger"
+        width={30}
+        height={30}
+        aria-label="open navigation menu"
+      />
+      <Close
+        id="close"
+        width={36}
+        height={36}
+        class="fill-dark m-4"
+        aria-label="close menu"
+      />
       <Button
         href="#contact"
         class="text-level-2 text-light px-7"
