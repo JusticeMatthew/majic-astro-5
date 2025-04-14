@@ -8,8 +8,11 @@ const loadLottie = (
   name: string,
   autoplay: boolean = true,
 ): DotLottieWorker | null => {
+  // Get the base name without the mobile- prefix if it exists
+  const baseName = name.replace("mobile-", "");
+
   // Initialize lottie immediately if it's not a plan animation
-  if (!name.match(/^(Personal|Business|Commerce)$/)) {
+  if (!baseName.match(/^(Personal|Business|Commerce)$/)) {
     return initializeLottie(name, autoplay);
   }
 
@@ -23,7 +26,11 @@ const loadLottie = (
     });
   });
 
-  const container = document.getElementById(`plan-${name.toLowerCase()}`);
+  const containerId = name.startsWith("mobile-")
+    ? `plan-mobile-${baseName.toLowerCase()}`
+    : `plan-${baseName.toLowerCase()}`;
+
+  const container = document.getElementById(containerId);
   if (container) {
     observer.observe(container);
   }
@@ -32,6 +39,7 @@ const loadLottie = (
 };
 
 const initializeLottie = (name: string, autoplay: boolean) => {
+  const baseName = name.replace("mobile-", "");
   const canvasElement = document.getElementById(
     `lottie-container-${name}`,
   ) as HTMLCanvasElement;
@@ -43,25 +51,30 @@ const initializeLottie = (name: string, autoplay: boolean) => {
     return null;
   }
 
+  // Use the base name for the animation URL
   const animationUrl = new URL(
-    `../assets/animations/${name}.lottie`,
+    `../assets/animations/${baseName}.lottie`,
     import.meta.url,
   ).href;
+
+  const isMobile = name.startsWith("mobile-");
 
   const lottie = new DotLottieWorker({
     canvas: canvasElement,
     src: animationUrl,
     loop: true,
-    autoplay: autoplay,
+    // Always autoplay for mobile versions, otherwise use the passed autoplay parameter
+    autoplay: isMobile ? true : autoplay,
     workerId: SHARED_WORKER_ID,
   });
 
   animationInstances.set(name, lottie);
 
-  // Only add hover events for plan animations
-  if (name.match(/^(Personal|Business|Commerce)$/)) {
+  // Only add hover events for desktop plan animations
+  if (baseName.match(/^(Personal|Business|Commerce)$/) && !isMobile) {
+    const containerId = `plan-${baseName.toLowerCase()}`;
     const planContainer = document.getElementById(
-      `plan-${name.toLowerCase()}`,
+      containerId,
     ) as HTMLDivElement;
 
     if (planContainer) {

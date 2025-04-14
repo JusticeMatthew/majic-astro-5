@@ -1,7 +1,7 @@
 ---
 import CheckMark from "$/assets/icons/check-icon.svg";
 import pricingPlans from "$/constants/pricingPlans.ts";
-// import MobilePackages from "$/molecules/MobilePackages.astro";
+import MobilePackages from "$/molecules/MobilePackages.astro";
 ---
 
 <script>
@@ -22,7 +22,7 @@ import pricingPlans from "$/constants/pricingPlans.ts";
   id="packagesEl"
   class="h-[min(auto, 60vh)] intersect:opacity-100 intersect-once transition-[opacity, translate] intersect:translate-y-0 relative mb-6 flex translate-y-10 flex-col items-center opacity-0 !delay-300 !duration-1000 !ease-out">
   <div class="flex w-full flex-col justify-between">
-    <!-- <MobilePackages /> -->
+    <MobilePackages />
     <div class="container:grid mt-8 hidden grid-cols-3 gap-6">
       {
         pricingPlans.map((plan) => (
