@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { Icon } from "astro-icon/components";
+import Plane from "$/assets/icons/plane.svg";
 import Button from "$/atoms/Button.astro";
 import clients from "$/constants/clients.ts";
 import logoLight from "$/assets/logo-light.svg";
@@ -82,9 +82,10 @@ import logoLight from "$/assets/logo-light.svg";
           floating
           class="tablet:px-12 pl-4 whitespace-nowrap sm:px-6">
           Contact
-          <Icon
-            name="plane"
-            class="tablet:hidden mr-4 ml-28 inline sm:mr-0 sm:ml-32"
+          <Plane
+            width={16}
+            height={16}
+            class="tablet:hidden fill-light mr-4 ml-28 inline sm:mr-0 sm:ml-32"
           />
         </Button>
       </div>
