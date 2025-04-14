@@ -4,14 +4,12 @@ import tailwindcss from "@tailwindcss/vite";
 import solidJs from "@astrojs/solid-js";
 import sitemap from "@astrojs/sitemap";
 import vercel from "@astrojs/vercel";
-import icon from "astro-icon";
 import ui from "@studiocms/ui";
 
 // https://astro.build/config
 export default defineConfig({
   site: "http://majicwebdesign.vercel.app",
   integrations: [
-    icon(),
     solidJs(),
     sitemap(),
     ui({
