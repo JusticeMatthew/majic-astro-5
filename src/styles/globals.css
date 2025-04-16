@@ -2,10 +2,10 @@
 @import "tailwindcss-intersect";
 
 @theme {
-  --default-font-family: var(--astro-inter), sans-serif;
+  --default-font-family: var(--astro-inter);
 
-  --font-inter: var(--astro-inter), sans-serif;
-  --font-calistoga: var(--astro-calistoga), display;
+  --font-inter: var(--astro-inter);
+  --font-calistoga: var(--astro-calistoga);
 
   --text-min: 1rem;
   --text-level-base: clamp(1rem, 0.9628rem + 0.1802vi, 1.125rem);
