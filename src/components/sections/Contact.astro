@@ -5,19 +5,7 @@ import Button from "$/atoms/Button.astro";
 import ContactForm from "$/molecules/ContactForm.tsx";
 ---
 
-<script>
-  import { animate, inView } from "motion";
-
-  document.addEventListener("astro:page-load", () => {
-    inView("#contactEl", () => {
-      animate(
-        "#contactEl",
-        { y: [30, 0], opacity: [0, 1] },
-        { duration: 0.5, delay: 0.3 },
-      );
-    });
-  });
-</script>
+<script></script>
 
 <section id="contact" class="pt-section container flex scroll-mt-20">
   <div class="flex w-full flex-col">

@@ -24,8 +24,37 @@ export default defineConfig({
       RESEND_API_KEY: envField.string({ context: "server", access: "secret" }),
     },
   },
-  experimental: {
-    svg: true,
-  },
   adapter: vercel(),
+  experimental: {
+    fonts: [
+      {
+        provider: "local",
+        name: "Calistoga",
+        cssVariable: "--astro-calistoga",
+        fallbacks: ["Calistoga"],
+        variants: [
+          {
+            weight: 400,
+            style: "normal",
+            display: "swap",
+            src: ["./src/assets/fonts/Calistoga.woff2"],
+          },
+        ],
+      },
+      {
+        provider: "local",
+        name: "Inter",
+        cssVariable: "--astro-inter",
+        fallbacks: ["Inter"],
+        variants: [
+          {
+            weight: "400 900",
+            style: "normal",
+            display: "swap",
+            src: ["./src/assets/fonts/Inter.woff2"],
+          },
+        ],
+      },
+    ],
+  },
 });

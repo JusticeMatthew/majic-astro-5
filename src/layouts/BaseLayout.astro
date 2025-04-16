@@ -1,10 +1,9 @@
 ---
 import "$/styles/globals.css";
+import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
 import { ScrollObserver } from "astro-scroll-observer";
 import Header from "$/molecules/Header.astro";
-import calistogaFont from "$/assets/fonts/Calistoga.woff2";
-import interFont from "$/assets/fonts/Inter.woff2";
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const { title } = Astro.props;
@@ -40,21 +39,8 @@ const ogDescription =
     <meta property="twitter:image" content="/images/og-logo-v2.png" />
     <meta property="twitter:url" content={canonicalURL} />
     {/* Assets */}
-    <link
-      rel="preload"
-      as="font"
-      type="font/woff2"
-      href={calistogaFont}
-      crossorigin="anonymous"
-      fetchpriority="high"
-    />
-    <link
-      rel="preload"
-      as="font"
-      type="font/woff2"
-      href={interFont}
-      crossorigin="anonymous"
-    />
+    <Font cssVariable="--astro-calistoga" preload />
+    <Font cssVariable="--astro-inter" preload />
     <link
       rel="preload"
       as="image"

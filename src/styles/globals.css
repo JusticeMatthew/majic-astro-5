@@ -1,27 +1,11 @@
 @import "tailwindcss";
 @import "tailwindcss-intersect";
 
-@font-face {
-  font-family: "Inter";
-  src: url("../assets/fonts/Inter.woff2") format("woff2");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Calistoga";
-  src: url("../assets/fonts/Calistoga.woff2") format("woff2");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 @theme {
-  --default-font-family: "Inter", sans-serif;
+  --default-font-family: var(--astro-inter), sans-serif;
 
-  --font-inter: "Inter", sans-serif;
-  --font-calistoga: "Calistoga", display;
+  --font-inter: var(--astro-inter), sans-serif;
+  --font-calistoga: var(--astro-calistoga), display;
 
   --text-min: 1rem;
   --text-level-base: clamp(1rem, 0.9628rem + 0.1802vi, 1.125rem);
