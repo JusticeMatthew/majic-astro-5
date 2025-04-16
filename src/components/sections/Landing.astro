@@ -5,13 +5,17 @@ import Button from "$/components/atoms/Button.astro";
 <section
   class="container flex min-h-lvh flex-col items-center justify-center text-center">
   <h2
-    class="font-calistoga text-level-6 z-10 my-4 max-w-[20ch] text-pretty drop-shadow sm:my-6">
+    class="font-calistoga text-level-6 z-10 my-4 max-w-[20ch] text-pretty sm:my-6">
     Building <span class="flashing-text-still sm:text-light sm:bg-none">
       beautiful
     </span> websites
     <span class="inline max-sm:hidden"
       >for
-      <span class="flashing-text drop-shadow-xl">amazing</span> businesses</span
+      <span
+        id="amazing"
+        class="flashing-text motion-reduce:flashing-text-still drop-shadow-xl"
+        >amazing</span
+      > businesses</span
     >
   </h2>
   <p
@@ -35,3 +39,16 @@ import Button from "$/components/atoms/Button.astro";
     </Button>
   </div>
 </section>
+
+<style>
+  h2 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-display: swap;
+    will-change: transform;
+    transform: translateZ(0);
+
+    & #amazing {
+      text-shadow: none;
+    }
+  }
+</style>
