@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig, envField } from "astro/config";
+import { defineConfig, fontProviders, envField } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import solidJs from "@astrojs/solid-js";
 import sitemap from "@astrojs/sitemap";
@@ -28,32 +28,15 @@ export default defineConfig({
   experimental: {
     fonts: [
       {
-        provider: "local",
+        provider: fontProviders.google(),
         name: "Calistoga",
         cssVariable: "--astro-calistoga",
-        fallbacks: ["Calistoga"],
-        variants: [
-          {
-            weight: 400,
-            style: "normal",
-            display: "swap",
-            src: ["./src/assets/fonts/Calistoga.woff2"],
-          },
-        ],
       },
       {
-        provider: "local",
+        provider: fontProviders.google(),
         name: "Inter",
         cssVariable: "--astro-inter",
-        fallbacks: ["Inter"],
-        variants: [
-          {
-            weight: "400 900",
-            style: "normal",
-            display: "swap",
-            src: ["./src/assets/fonts/Inter.woff2"],
-          },
-        ],
+        weights: ["400 800"],
       },
     ],
   },
