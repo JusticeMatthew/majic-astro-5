@@ -8,7 +8,7 @@ import ui from "@studiocms/ui";
 
 // https://astro.build/config
 export default defineConfig({
-  site: "http://majicwebdesign.vercel.app",
+  site: "http://majicwebdesign.com",
   integrations: [
     solidJs(),
     sitemap(),
