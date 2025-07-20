@@ -33,7 +33,7 @@ export default function MobileNav(props: MobileNavProps) {
       <button
         onClick={handleMenuToggle}
         aria-label="nav menu"
-        class="p-3 active:scale-95">
+        class="p-2 active:scale-95">
         {icons().menuIcon}
       </button>
       <aside
