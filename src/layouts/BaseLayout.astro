@@ -1,7 +1,6 @@
 ---
 import "$/styles/globals.css";
 import { Font } from "astro:assets";
-import { ClientRouter } from "astro:transitions";
 import { ScrollObserver } from "astro-scroll-observer";
 import Header from "$/molecules/Header.astro";
 
@@ -44,7 +43,6 @@ const ogDescription =
       cssVariable="--astro-inter"
       preload={[{ weight: 400, style: "normal" }]}
     />
-    <ClientRouter />
     <ScrollObserver />
 
     <script>
@@ -57,25 +55,6 @@ const ogDescription =
 
       Observer.start();
     </script>
-    <!-- <script>
-      // Calculate scrollbar width and set it as a CSS variable
-      const scrollbarWidth =
-        window.innerWidth - document.documentElement.clientWidth;
-      document.documentElement.style.setProperty(
-        "--scrollbar-width",
-        scrollbarWidth + "px",
-      );
-
-      // Update on resize
-      window.addEventListener("resize", () => {
-        const scrollbarWidth =
-          window.innerWidth - document.documentElement.clientWidth;
-        document.documentElement.style.setProperty(
-          "--scrollbar-width",
-          scrollbarWidth + "px",
-        );
-      });
-    </script> -->
   </head>
 
   <body>
