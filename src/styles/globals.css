@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tailwindcss-intersect";
-/* Test */
+/* Testing */
 
 @theme {
   --default-font-family: var(--astro-inter);
